@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 3 Marketing Mix · Form-Filling Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  .hero {
+    background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #16a34a 100%);
+    color: white;
+    padding: 36px 36px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(194, 65, 12, 0.25);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero h1 { font-size: 28px; margin-bottom: 8px; position: relative; z-index: 1;}
+  .hero p { font-size: 15px; opacity: 0.92; position: relative; z-index: 1; max-width: 720px;}
+  .hero-tag { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; }
+
+  .summary-box {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+    border: 2px solid #ca8a04;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .summary-box h2 { color: #78350f; font-size: 18px; margin-bottom: 10px; }
+  .summary-box p { color: #92400e; font-size: 14px; }
+  .summary-box strong { color: #422006; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: #e5e7eb;
+    padding: 6px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    color: #6b7280;
+    text-align: center;
+  }
+  .tab-btn.active.tone { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f; box-shadow: 0 2px 6px rgba(202, 138, 4, 0.3); }
+  .tab-btn.active.tops { background: linear-gradient(135deg, #c7d2fe, #818cf8); color: white; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3); }
+  .tab-btn.active.toho { background: linear-gradient(135deg, #86efac, #22c55e); color: white; box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3); }
+  .new-badge { display: inline-block; padding: 2px 8px; background: #16a34a; color: white; border-radius: 999px; font-size: 10px; margin-left: 6px; vertical-align: top; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .brand-panel { display: none; }
+  .brand-panel.active { display: block; }
+
+  .brand-header {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-header.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%); }
+  .brand-header.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%); }
+  .brand-header.toho { border-color: #86efac; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%); }
+  .brand-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .tag-new { background: #16a34a; color: white; }
+  .brand-header h2 { font-size: 26px; }
+  .brand-mission { font-size: 14px; color: #4b5563; margin-top: 4px; }
+
+  .field-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .field-header {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .field-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #c2410c, #ea580c);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .field-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+  .field-sub { font-size: 12px; color: #6b7280; margin-top: 2px;}
+  .field-body { padding: 18px 20px; }
+
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .input-row { grid-template-columns: 1fr; }
+  }
+  .input-label { font-size: 11px; color: #6b7280; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .input-box {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: white;
+    font-size: 16px;
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  .input-box.current { color: #6b7280; }
+  .input-box.new {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    font-weight: 700;
+    position: relative;
+  }
+  .input-box.new::after {
+    content: "✓ Use this";
+    position: absolute;
+    top: -10px; right: 8px;
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .input-box.empty {
+    border-color: #ef4444;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-weight: 700;
+  }
+  .input-box.empty::after {
+    content: "⚠ Must fill";
+    position: absolute;
+    top: -10px; right: 8px;
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .arrow-down { text-align: center; font-size: 20px; color: #6b7280; padding: 6px 0; }
+
+  .why-box {
+    background: #f0f9ff;
+    border-left: 3px solid #0284c7;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #075985;
+  }
+  .why-box strong { color: #0c4a6e; }
+  .why-box ul { padding-left: 20px; margin-top: 6px; }
+
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .segment-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .seg-cell {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    background: white;
+  }
+  .seg-cell.active-tone { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+  .seg-cell.active-tops { border-color: #6366f1; background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+  .seg-cell.active-toho { border-color: #22c55e; background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+  .seg-cell.zero { opacity: 0.5; background: #f9fafb; }
+  .seg-name { font-size: 12px; color: #6b7280; font-weight: 600; }
+  .seg-value { font-size: 22px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+  .seg-cell.active-tone .seg-value { color: #92400e; }
+  .seg-cell.active-tops .seg-value { color: #4338ca; }
+  .seg-cell.active-toho .seg-value { color: #166534; }
+  .seg-total {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+    color: #065f46;
+    font-weight: 700;
+  }
+  .seg-total .seg-value { color: #065f46; }
+
+  .radio-row { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+  .radio-option {
+    padding: 10px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .radio-option.selected {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+  }
+  .radio-option.selected::before { content: "● "; color: #10b981; }
+  .radio-option:not(.selected)::before { content: "○ "; color: #9ca3af; }
+
+  .perceptual-box {
+    background: #fef3c7;
+    border: 1px dashed #ca8a04;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 12px;
+  }
+  .perceptual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .budget-summary {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #10b981;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .budget-summary h2 { color: #065f46; font-size: 20px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #a7f3d0; }
+  th { background: rgba(255,255,255,0.5); font-weight: 700; color: #065f46; font-size: 12px; text-transform: uppercase; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.total td { background: rgba(255,255,255,0.7); font-weight: 700; color: #065f46; font-size: 15px; }
+
+  .checklist {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    border: 2px dashed #6366f1;
+    margin-top: 20px;
+  }
+  .checklist h2 { color: #4338ca; margin-bottom: 12px; }
+  .checklist ul { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0 8px 32px; position: relative; font-size: 14px; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 6px; top: 6px;
+    color: #6366f1;
+    font-size: 18px;
+  }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; }
+
+  .important-callout {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 4px solid #ca8a04;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: #78350f;
+  }
+  .important-callout strong { color: #422006; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · ROUND 3 · MARKETING MIX</div>
+    <h1>Round 3 Marketing Mix · Form-Filling Guide</h1>
+    <p>This is the breakthrough round: launching the new brand <strong>TOHO</strong> (POSHOP platform) to attack the Shoppers no-man's land, while scaling TONE production aggressively to stop two-round shortage bleeding. Triple-brand operations from here.</p>
+  </div>
+
+  <div class="summary-box">
+    <h2>⚡ Round 3 Marketing Mix — core thesis</h2>
+    <p><strong>"Three-brand offense: defend Savers (TONE), defend High Earners (TOPS), attack Shoppers (TOHO)."</strong> Marvels overtook us as #1 — they're investing heavily in MOST salesforce + MOVE advertising. We can't beat them by mirroring them; we beat them by adding a third revenue stream where they have nothing. TONE production must finally catch up to demand (180–200K real demand, was capped at 162K twice). TOPS holds price at $500 but gets more focused advertising. TOHO launches at $290 to slot into the Shoppers ideal point.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active tone" onclick="showBrand('tone')">🟡 TONE</button>
+    <button class="tab-btn tops" onclick="showBrand('tops')">🟣 TOPS</button>
+    <button class="tab-btn toho" onclick="showBrand('toho')">🟢 TOHO <span class="new-badge">NEW</span></button>
+  </div>
+
+  <!-- =================== TONE PANEL =================== -->
+  <div class="brand-panel active" id="tone-panel">
+    <div class="brand-header tone">
+      <span class="brand-tag tag-low">LOW-END · NOW INDUSTRY VOLUME LEADER 👑</span>
+      <h2>TONE</h2>
+      <div class="brand-mission">This round's mission: finally stop the production shortage, defend the Savers crown (32.6% share already), let TOHO take some of Shoppers off our hands.</div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · plan</div>
+          <div class="field-sub">P2 sold 162K (planned 135K, capped at +20%). Demand was ~180–200K, we lost sales. AGAIN.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">240,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">250,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why 250K:</strong> ① P2 estimated true demand 180–200K (capped at 162K); ② Market grows +16.5% → demand baseline 210–230K; ③ Even with TOHO siphoning some Shoppers, TONE's Savers stronghold continues to grow (Savers +18.4% next period); ④ ±20% range = 200K–300K — plenty of safety; ⑤ <strong>This is the THIRD production round — we cannot leave $4M+ on the table again.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · recommended retail</div>
+          <div class="field-sub">P2 price $235. Low-end now: MOST $225, ROCK $230, TONE $235, SOFT $240.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">$ 225</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">$ 230</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why $230 (not $225):</strong> ① We're already winning Savers (32.6% share) — no need to drop further; ② $225 matches MOST and triggers a destructive price war; ③ $230 ties ROCK and stays $5 above MOST — still competitive but preserves margin; ④ Estimated unit cost dropping to $48 → unit margin at $230 = ~$93 (vs $94 at $235, basically unchanged); ⑤ Save the pricing-war ammo for if MOST drops further.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · budget</div>
+          <div class="field-sub">P2 total: $1,534K. Experiment for TONE was invalid (production short).</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media (current)</div>
+            <div class="input-box current">$ 1,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research (current)</div>
+            <div class="input-box current">$ 134 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (current)</div>
+            <div class="input-box current">$ 1,534 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box new">$ 1,500 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box new">$ 150 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total</div>
+            <div class="input-box new">$ 1,650 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why slight bump (+$116K):</strong> ① TONE is now the volume leader — slight reinforcement keeps it there; ② Marvels' MOST ad spend was $1,680K (vs ours $1,590K) — match them; ③ Research at 9.1% — slightly above maintenance level, supports the Savers leadership; ④ We now have budget headroom ($12.4M total) — no need to squeeze TONE.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation</div>
+          <div class="field-sub">Refocus on Savers since TOHO is taking on Shoppers</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">5%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">25%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">70%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why this split (vs P2's 6/34/0/0/60):</strong>
+          <ul>
+            <li><strong>Savers 60% → 70%:</strong> our crown jewel — TONE's 32.6% share here is our biggest asset, defend hard</li>
+            <li><strong>Shoppers 34% → 25%:</strong> TOHO is now handling Shoppers (advertising 70% there). TONE only needs spill-over coverage</li>
+            <li><strong>Explorers 6% → 5%:</strong> dying segment (5.8% of market in 5 periods)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives</div>
+          <div class="field-sub">Default is None ✓ — keep it</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>Why None:</strong> ① P2 perceptual repositioning attempt produced ~0 movement (Design 1.5→1.5, Power 1.5→1.5) at 8.7% research — confirms research budget was insufficient and identical physical specs constrain perception movement; ② TONE is already 5.7 MDS units from Savers ideal — close enough; ③ Real repositioning needs POTONE2 R&D (teammate is launching) — save Research budget.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOPS PANEL =================== -->
+  <div class="brand-panel" id="tops-panel">
+    <div class="brand-header tops">
+      <span class="brand-tag tag-high">HIGH-END · PROFIT ENGINE · NOW #1 IN EXPLORERS</span>
+      <h2>TOPS 🌟</h2>
+      <div class="brand-mission">This round's mission: hold the $500 price line against SOLO's $499, double down on High Earners (where MOVE leads), and prep ground for POTOPS2 upgrade arriving next round.</div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · plan</div>
+          <div class="field-sub">P2 sold 131K (planned 130K, basically matched). HE growing +18.5% next period.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">180,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">180,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why 180K (keep default):</strong> ① P2 sold 131K — natural growth at +16.5% market + share gains = ~155K minimum; ② HE growth +18.5%, Professionals +13.3% — TOPS' homefield growing fast; ③ ±20% range 144K–216K — comfortable cushion; ④ Default is reasonable, no need to override; ⑤ Estimated cost dropping to $117 → unit margin still $193 even at $500 price.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · recommended retail</div>
+          <div class="field-sub">P2 price $500. High-end now: SOLO $499, ROLL $510, TOPS $500, MOVE $550.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">$ 500</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">$ 500</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why hold at $500:</strong> ① SOLO went to $499 and stole Pros leadership — chasing them to $498 starts a race to the bottom we can't win without product differentiation; ② $500 is still the second-cheapest high-end (only $1 above SOLO) — staying competitive on price; ③ The right answer to SOLO is product upgrade (POTOPS2 in Round 4), not price war; ④ MOVE at $550 captures HE on prestige — we'd lose that positioning if we cut further; ⑤ Unit margin $193 at $500 still excellent.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · budget</div>
+          <div class="field-sub">P2 total: $2,400K. Experiment showed +20% advertising = +$160K (no longer saturated!).</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media (current)</div>
+            <div class="input-box current">$ 2,200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research (current)</div>
+            <div class="input-box current">$ 200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (current)</div>
+            <div class="input-box current">$ 2,400 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box new">$ 2,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box new">$ 250 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total</div>
+            <div class="input-box new">$ 2,650 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why moderate increase (+$250K, +10%):</strong> ① Experiment confirmed advertising no longer saturated — moderate increase has positive ROI; ② MOVE outspent us ($3,790K vs $2,400K) and crushed value share — partial catch-up needed; ③ HE/Pros segments are higher-LTV, justify higher per-segment spend; ④ Research bumped to 9.4% to support future POTOPS2 positioning (when it ships, we'll need repositioning research).
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation</div>
+          <div class="field-sub">Slight shift toward High Earners</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">10%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">35%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">55%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why shift (vs P2's 10/0/40/50/0):</strong>
+          <ul>
+            <li><strong>HE 50% → 55%:</strong> MOVE leads HE at 26.4%, TOPS #2 at 23.6%. Close the gap.</li>
+            <li><strong>Pros 40% → 35%:</strong> SOLO leads at 29% with $499 — we won't beat them on this segment without POTOPS2. Don't waste budget; play defense.</li>
+            <li><strong>Explorers 10%:</strong> we lead here (18.1%) — modest holding investment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives</div>
+          <div class="field-sub">Default None — keep it</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>Why None:</strong> ① P2 attempt to push Battery 2.2→3.9 only got to 2.5 — same problem as TONE; ② POTOPS2 R&D project (teammate launching) will physically change Battery to 60h, then perception will follow naturally; ③ Forcing repositioning before product is ready creates a credibility mismatch.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOHO PANEL =================== -->
+  <div class="brand-panel" id="toho-panel">
+    <div class="brand-header toho">
+      <span class="brand-tag tag-new">NEW BRAND · TARGETING SHOPPERS NO-MAN'S LAND</span>
+      <h2>TOHO 🆕</h2>
+      <div class="brand-mission">First-ever third brand for Titans. Based on POSHOP platform (Features 7, Design 8, Battery 48, Display 23, Power 51, base cost $110). Targeting the Shoppers segment which has zero dedicated competitor brands and is growing +28.7% next period.</div>
+    </div>
+
+    <div class="important-callout">
+      ⚠️ <strong>All TOHO fields are currently $0/0 — every field below MUST be filled before submitting.</strong> The segment allocation in particular shows red "These decisions cannot be saved" warning until normalized to 100%.
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · plan</div>
+          <div class="field-sub">Brand new — 0 awareness at launch. Will rely on advertising to build demand.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box empty">0 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">50,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why 50K:</strong> ① Shoppers market in P3 = 265K, growing +28.7%; ② Realistic first-period new-brand capture = 10–15% of target segment = 26–40K from Shoppers + spillover from Savers (TONE buyers seeing the new option) = total 40–60K expected; ③ ±20% range = 40K–60K matches forecast nicely; ④ Inventory risk if we sell less is low: holding cost = 8% × $110 cost × leftover units (e.g., 10K leftover = ~$88K — acceptable cost of learning); ⑤ Underproduction risk would mean missed first-mover advantage on Shoppers — far costlier.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · recommended retail</div>
+          <div class="field-sub">Shoppers Price ideal (Semantic Scales) = 2.7 / 7. POSHOP base cost $110.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box empty">$ 0</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">$ 290</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why $290:</strong> ① Mid-tier positioning between low-end ($225–240) and high-end ($499–550); ② Estimated avg selling price ~$182 (after 30% distrib margin on Mass channel) → unit margin $72/unit; ③ Shoppers Price ideal of 2.7 on 1–7 scale maps to ~$250–290 actual; ④ Conjoint absent but Semantic Scales suggests Shoppers' Price utility falls off above ~$300; ⑤ Conservative: easier to drop price next round than raise; ⑥ Brand-new product must demonstrate value clearly — $290 says "premium quality at mid-tier price."
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · budget</div>
+          <div class="field-sub">New brand launch needs heavy awareness building. 0% awareness today.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media (current)</div>
+            <div class="input-box empty">$ 0 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research (current)</div>
+            <div class="input-box empty">$ 0 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (current)</div>
+            <div class="input-box empty">$ 0 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box new">$ 1,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box new">$ 200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total</div>
+            <div class="input-box new">$ 1,600 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why $1.6M (large for new brand):</strong> ① From-zero awareness needs heavy lift — handbook recommends substantial first-period launch budget; ② Research at 12.5% (vs 8% for established brands) — necessary because we ARE doing perceptual positioning (see below) and a new brand needs strong message quality; ③ Comparable: MOST as a competitor launch-level investment was $1,680K — match this scale; ④ Industry-wide Shoppers advertising = only $3.3M total — we'd grab a large share of voice with $1.4M alone; ⑤ Should drive awareness in Shoppers segment to 30–50% in one period.
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation</div>
+          <div class="field-sub">⚠️ Currently shows red error "These decisions cannot be saved" — must normalize to 100%</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-toho">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">5%</div>
+          </div>
+          <div class="seg-cell active-toho">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">70%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-toho">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">25%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why this allocation:</strong>
+          <ul>
+            <li><strong>Shoppers 70%:</strong> primary target — POSHOP specs sit closest to Shoppers ideal point on MDS (~7.7 distance vs nearest competitor ~16). Concentrate firepower.</li>
+            <li><strong>Savers 25%:</strong> POSHOP also has mid-tier appeal for price-conscious Savers who might upgrade. Cross-sell opportunity.</li>
+            <li><strong>Explorers 5%:</strong> some tech enthusiasts may find the mid-tier interesting — minimal but non-zero.</li>
+            <li><strong>Pros/HE 0%:</strong> too far below their performance/economy ideals.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives ⭐</div>
+          <div class="field-sub">For new brand launch, setting perception targets IS valuable</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option">None</div>
+          <div class="radio-option selected">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="perceptual-box">
+          <strong style="color: #78350f;">Recommended Semantic Scale targets:</strong>
+          <div class="perceptual-row">
+            <div>
+              <div class="input-label">Dimension 1</div>
+              <div class="input-box new" style="font-size: 14px;">Price · Target 2.7</div>
+            </div>
+            <div>
+              <div class="input-label">Dimension 2</div>
+              <div class="input-box new" style="font-size: 14px;">Proc. Power · Target 3.9</div>
+            </div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why set perceptual objectives for TOHO (unlike TONE/TOPS):</strong>
+          <ul>
+            <li><strong>New brand needs identity:</strong> 0 awareness means we're writing the perception narrative from scratch</li>
+            <li><strong>Both targets = Shoppers ideal:</strong> Price 2.7 and Power 3.9 are Shoppers' exact Semantic Scale ideal values — telling consumers "this brand is built for you"</li>
+            <li><strong>Research at 12.5% supports this:</strong> 10–15% is the handbook-recommended range for repositioning, fits perfectly</li>
+            <li><strong>Why these two dimensions (vs Display, Design, etc):</strong> Price has importance 10/10, Power has 5.8/10 — the two most important attributes to Shoppers' buying decision</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget Summary -->
+  <div class="budget-summary">
+    <h2>💰 Round 3 Marketing Mix Budget Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="num">P2 actual</th>
+          <th class="num">P3 plan</th>
+          <th class="num">Δ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TONE total advertising</td>
+          <td class="num">$1,534K</td>
+          <td class="num">$1,650K</td>
+          <td class="num"><span class="delta-up">+$116K</span></td>
+        </tr>
+        <tr>
+          <td>TOPS total advertising</td>
+          <td class="num">$2,400K</td>
+          <td class="num">$2,650K</td>
+          <td class="num"><span class="delta-up">+$250K</span></td>
+        </tr>
+        <tr>
+          <td>TOHO total advertising (NEW)</td>
+          <td class="num">$0</td>
+          <td class="num">$1,600K</td>
+          <td class="num"><span class="delta-up">+$1,600K</span></td>
+        </tr>
+        <tr class="total">
+          <td>Total advertising</td>
+          <td class="num">$3,934K</td>
+          <td class="num">$5,900K</td>
+          <td class="num"><span class="delta-up">+$1,966K (+50%)</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #065f46; font-size: 14px; margin-top: 12px;">
+      <strong>This round's budget is $12.4M</strong> (up from $8.6M, +44%). Even with $5.9M for advertising, there's $6.5M for R&D ($3–4M), salesforce expansion (+30 FTE ≈ $1M), and market research ($500K). Total should fit within budget — but coordinate with teammate (Yousef) on R&D budget. <strong>The −$2,740K overspend indicator we saw earlier is likely from default R&D / salesforce numbers — those need to be re-scoped.</strong>
+    </p>
+  </div>
+
+  <!-- Period 3 forecast -->
+  <div class="budget-summary" style="background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%); border-color: #ca8a04;">
+    <h2 style="color: #78350f;">🔮 Period 3 Performance Forecast (Marketing Mix only)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th class="num">TONE</th>
+          <th class="num">TOPS</th>
+          <th class="num">TOHO 🆕</th>
+          <th class="num">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Forecast volume</td>
+          <td class="num">220–250K</td>
+          <td class="num">155–180K</td>
+          <td class="num">40–55K</td>
+          <td class="num">415–485K</td>
+        </tr>
+        <tr>
+          <td>Unit margin</td>
+          <td class="num">~$94</td>
+          <td class="num">~$193</td>
+          <td class="num">~$72</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="total">
+          <td>Forecast CBM</td>
+          <td class="num">$20–23M</td>
+          <td class="num">$30–35M</td>
+          <td class="num">$3–4M</td>
+          <td class="num">$53–62M</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #92400e; font-size: 13px; margin-top: 10px;">
+      ⚠️ Marketing Mix forecast only — does NOT include R&D / salesforce / market research costs. Final EBT likely $35–42M (vs P2 $31M, +13–35%). SPI projected 1,500–1,650 (vs P2 1,424). Goal: catch Marvels' 1,586 SPI by P3, surpass by P4.
+    </p>
+  </div>
+
+  <!-- Action Checklist -->
+  <div class="checklist">
+    <h2>✅ Action Checklist (in order)</h2>
+    <ul>
+      <li>Log into Markstrat → Decide → Marketing Mix</li>
+      <li>Click <strong>TONE</strong> tab</li>
+      <li>Production: <strong>240000 → 250000</strong></li>
+      <li>Price: <strong>$225 → $230</strong></li>
+      <li>Media: <strong>$1,400 → $1,500</strong></li>
+      <li>Research: <strong>$134 → $150</strong></li>
+      <li>Segments: <strong>5 / 25 / 0 / 0 / 70</strong> (click Normalize to verify 100%)</li>
+      <li>Perceptual Objectives: <strong>None</strong> ✓ (already set)</li>
+      <li>Click <strong>TOPS</strong> tab</li>
+      <li>Production: <strong>180000</strong> (keep default)</li>
+      <li>Price: <strong>$500</strong> (keep default)</li>
+      <li>Media: <strong>$2,200 → $2,400</strong></li>
+      <li>Research: <strong>$200 → $250</strong></li>
+      <li>Segments: <strong>10 / 0 / 35 / 55 / 0</strong> (click Normalize)</li>
+      <li>Perceptual Objectives: <strong>None</strong> ✓ (already set)</li>
+      <li>Click <strong>TOHO</strong> tab — ALL fields are $0/0, must fill every one</li>
+      <li>Production: <strong>0 → 50000</strong></li>
+      <li>Price: <strong>$0 → $290</strong></li>
+      <li>Media: <strong>$0 → $1,400</strong></li>
+      <li>Research: <strong>$0 → $200</strong></li>
+      <li>Segments: <strong>5 / 70 / 0 / 0 / 25</strong> (must click Normalize — currently red!)</li>
+      <li>Perceptual Objectives: select <strong>Semantic Scales</strong></li>
+      <li>Dimension 1: <strong>Price, target 2.7</strong></li>
+      <li>Dimension 2: <strong>Proc. Power, target 3.9</strong></li>
+      <li>Top-right budget indicator: confirm <span class="pill" style="background: #d1fae5; color: #065f46;">GREEN ≥ 0</span> (if red, coordinate with teammate on R&D / salesforce cuts)</li>
+      <li>Open Errors & Warnings → fix any red errors before saving</li>
+      <li>Tell teammate Yousef: TOHO launches → coordinate R&D budget + salesforce allocation to TOHO (15 FTE recommended)</li>
+    </ul>
+  </div>
+
+  <footer>
+    Round 3 Marketing Mix Form-Filling Guide · Firm Titans · 2026-05-15<br>
+    Source data: Period 2 full report + Advertising/Commercial Team Experiments + POSHOP R&D specs<br>
+    Hit me with screenshots if any field looks off when filling
+  </footer>
+</div>
+
+<script>
+function showBrand(brand) {
+  document.querySelectorAll('.brand-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(brand + '-panel').classList.add('active');
+  document.querySelector('.tab-btn.' + brand).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
