@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 2 Marketing Mix · Form-Filling Guide</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #4f46e5 100%);
+    color: white;
+    padding: 36px 36px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.25);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero h1 { font-size: 28px; margin-bottom: 8px; position: relative; z-index: 1;}
+  .hero p { font-size: 15px; opacity: 0.92; position: relative; z-index: 1; max-width: 720px;}
+  .hero-tag { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; }
+
+  /* Quick summary box */
+  .summary-box {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+    border: 2px solid #ca8a04;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .summary-box h2 { color: #78350f; font-size: 18px; margin-bottom: 10px; }
+  .summary-box p { color: #92400e; font-size: 14px; }
+  .summary-box strong { color: #422006; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: #e5e7eb;
+    padding: 6px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #6b7280;
+    text-align: center;
+  }
+  .tab-btn.active.tone { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f; box-shadow: 0 2px 6px rgba(202, 138, 4, 0.3); }
+  .tab-btn.active.tops { background: linear-gradient(135deg, #c7d2fe, #818cf8); color: white; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3); }
+
+  /* Brand sections */
+  .brand-panel { display: none; }
+  .brand-panel.active { display: block; }
+
+  .brand-header {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-header.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%); }
+  .brand-header.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%); }
+  .brand-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .brand-header h2 { font-size: 26px; }
+  .brand-mission { font-size: 14px; color: #4b5563; margin-top: 4px; }
+
+  /* Field card */
+  .field-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .field-header {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .field-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .field-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+  .field-sub { font-size: 12px; color: #6b7280; margin-top: 2px;}
+  .field-body { padding: 18px 20px; }
+
+  /* Form input mimicry */
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .input-row { grid-template-columns: 1fr; }
+  }
+  .input-label { font-size: 11px; color: #6b7280; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .input-box {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: white;
+    font-size: 16px;
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  .input-box.current { color: #6b7280; }
+  .input-box.new {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    font-weight: 700;
+    position: relative;
+  }
+  .input-box.new::after {
+    content: "✓ Use this";
+    position: absolute;
+    top: -10px; right: 8px;
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .arrow-down { text-align: center; font-size: 20px; color: #6b7280; padding: 6px 0; }
+
+  /* Why explanation */
+  .why-box {
+    background: #f0f9ff;
+    border-left: 3px solid #0284c7;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #075985;
+  }
+  .why-box strong { color: #0c4a6e; }
+  .why-box ul { padding-left: 20px; margin-top: 6px; }
+
+  /* Segment allocation */
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .segment-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .seg-cell {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    background: white;
+  }
+  .seg-cell.active-tone { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+  .seg-cell.active-tops { border-color: #6366f1; background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+  .seg-cell.zero { opacity: 0.5; background: #f9fafb; }
+  .seg-name { font-size: 12px; color: #6b7280; font-weight: 600; }
+  .seg-value { font-size: 22px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+  .seg-cell.active-tone .seg-value { color: #92400e; }
+  .seg-cell.active-tops .seg-value { color: #4338ca; }
+  .seg-total {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+    color: #065f46;
+    font-weight: 700;
+  }
+  .seg-total .seg-value { color: #065f46; }
+
+  /* Perceptual Objectives */
+  .radio-row { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+  .radio-option {
+    padding: 10px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .radio-option.selected {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+  }
+  .radio-option.selected::before { content: "● "; color: #10b981; }
+  .radio-option:not(.selected)::before { content: "○ "; color: #9ca3af; }
+
+  /* Final budget summary */
+  .budget-summary {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #10b981;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .budget-summary h2 { color: #065f46; font-size: 20px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #a7f3d0; }
+  th { background: rgba(255,255,255,0.5); font-weight: 700; color: #065f46; font-size: 12px; text-transform: uppercase; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.total td { background: rgba(255,255,255,0.7); font-weight: 700; color: #065f46; font-size: 15px; }
+
+  /* Action checklist */
+  .checklist {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    border: 2px dashed #6366f1;
+    margin-top: 20px;
+  }
+  .checklist h2 { color: #4338ca; margin-bottom: 12px; }
+  .checklist ul { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0 8px 32px; position: relative; font-size: 14px; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 6px; top: 6px;
+    color: #6366f1;
+    font-size: 18px;
+  }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+  .delta-flat { color: #6b7280; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 8px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · ROUND 2 · MARKETING MIX</div>
+    <h1>Round 2 Marketing Mix · Form-Filling Guide</h1>
+    <p>This guide follows the exact field order of the Markstrat screen. Each field shows "current default → recommended value" with a one-paragraph rationale. Fill it in side-by-side with Markstrat — both brands should take ~5 minutes total.</p>
+  </div>
+
+  <!-- Quick Summary -->
+  <div class="summary-box">
+    <h2>⚡ Round 2 Marketing Mix — core thesis</h2>
+    <p><strong>"Scale up production, fine-tune prices, slash advertising research."</strong> Experiment data clearly shows advertising is saturated (+20% loses $60–130K), while both brands sold out and lost units in Period 1. So this round: ① Aggressively raise production to capture growth; ② TONE drops slightly to defend against Marvels, TOPS raises further to keep capturing high-end; ③ Cut ad research from 22–27% to ~8% (awareness-maintenance level), saving ~$1.4M to fund teammate's R&D launches and salesforce expansion.</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active tone" onclick="showBrand('tone')">🟡 TONE (low-end)</button>
+    <button class="tab-btn tops" onclick="showBrand('tops')">🟣 TOPS (high-end)</button>
+  </div>
+
+  <!-- =================== TONE PANEL =================== -->
+  <div class="brand-panel active" id="tone-panel">
+    <div class="brand-header tone">
+      <span class="brand-tag tag-low">LOW-END · SAVERS + SHOPPERS HOMEFRONT</span>
+      <h2>TONE</h2>
+      <div class="brand-mission">This round's mission: counter Marvels' MOST price cut, defend Savers share, and significantly raise production to capture +16.5% market growth.</div>
+    </div>
+
+    <!-- Production -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · plan</div>
+          <div class="field-sub">P1 actually sold 118,407 units (planned 110K, auto-adjusted to 118K) — sold out</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">110,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">145,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why 145K:</strong> ① P1's true demand exceeded 118K (auto-adjustment saved us); ② market growth next period +16.5% → just maintaining share requires ~138K; ③ TONE's small price drop should slightly grow share → 145K provides a safety buffer; ④ ±20% auto-adjustment range = 116K–174K, plenty of room; ⑤ <strong>biggest lesson from Round 1: conservative production = lost money.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · recommended retail</div>
+          <div class="field-sub">P1 price $245. Marvels cut MOST to $215, stealing Savers share.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">$ 245</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">$ 235</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why $235 (−4%):</strong> ① We're not entering a full price war (would crush margin if we matched $215); ② $235 still has $20 gap to MOST but undercuts ROCK $245 / SOFT $250; ③ Estimated unit cost is dropping to $54 (experience curve), so $235 retail still yields ~$92/unit margin — very healthy; ④ Within the 30% safe-change zone (only −4%), no negative market reaction triggered.
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertising -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · budget</div>
+          <div class="field-sub">P1 total: $2,200K (Media $1,600 + Research $600, research ratio 27%)</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box current">$ 1,600 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box current">$ 600 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (auto)</div>
+            <div class="input-box current">$ 2,200 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box new">$ 1,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box new">$ 120 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (auto)</div>
+            <div class="input-box new">$ 1,520 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why slash Research ($600 → $120, −80%):</strong> ① <strong>Advertising Experiment data: +20% advertising = −$60K</strong> → already saturated; ② P1 ran 27% research but <strong>didn't set any Perceptual Objectives</strong> → that money was wasted; ③ Current phase is "maintain awareness" — handbook recommends 4–8% research (120/1520 = 7.9%); ④ <strong>The $680K saved goes to R&D projects</strong> (teammate Yousef's responsibility).
+        </div>
+      </div>
+    </div>
+
+    <!-- Segment Allocation -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation · advertising distribution</div>
+          <div class="field-sub">Must sum to 100%</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">10%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">35%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">55%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why this split (vs P1's 10/40/0/0/50):</strong>
+          <ul>
+            <li><strong>Savers 50% → 55%:</strong> the segment most under attack by MOST — heavier defense needed</li>
+            <li><strong>Shoppers 40% → 35%:</strong> slightly reduced to free up budget for Savers (new brand TOFFEE will be the real Shoppers play in Round 3)</li>
+            <li><strong>Explorers 10%:</strong> floor coverage, but this segment is dying (8.5% of market in 5 periods)</li>
+            <li><strong>Pros + HE 0%:</strong> let TOPS handle high-end</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perceptual Objectives -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives</div>
+          <div class="field-sub">⚠️ Currently set to MDS - Economy / Performance −9, <strong>must be cleared</strong></div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>Why pick None:</strong> ① TONE's current MDS position (10, −10.9, −10.7) is <strong>already very close to Savers' ideal point</strong> (12, −10.3, −4.8) — no repositioning needed; ② Pushing toward Shoppers (7.4, 0, 2.8) is 17+ units away — advertising can't bridge that (that's what new brand TOFFEE is for); ③ No perceptual objective = research can drop to 8% without waste; ④ <strong>The current "Performance −9" setting is the wrong direction (pulling toward low performance) and must be cleared.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOPS PANEL =================== -->
+  <div class="brand-panel" id="tops-panel">
+    <div class="brand-header tops">
+      <span class="brand-tag tag-high">HIGH-END · PROS + HIGH EARNERS HOMEFRONT</span>
+      <h2>TOPS 🌟</h2>
+      <div class="brand-mission">This round's mission: capture HE +23.6% and Pros +18.4% explosive growth, raise price further to test high-end elasticity, sharply raise production to avoid hitting the cap again.</div>
+    </div>
+
+    <!-- Production -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · plan</div>
+          <div class="field-sub">P1 actually sold 97,823 units (planned 84K, <strong>hit the +20% auto-adjust cap at 97K</strong> — true demand was higher than 100K, sales lost)</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">84,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">130,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why 130K (+55%):</strong> ① P1 actual demand >100K (capped by auto-adjust ceiling, <strong>we lost sales</strong>); ② HE growth next period <strong>+23.6%</strong>, Pros <strong>+18.4%</strong> — TOPS' homefront is exploding; ③ We're raising price $520 → $540, unit margin +6%, so more volume = more profit; ④ ±20% range = 104K–156K, safe; ⑤ Estimated unit cost drops to $133 (vs P1 $143) — even more reason to scale.
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · recommended retail</div>
+          <div class="field-sub">P1 price $520. MOVE has gone to $550 (highest), ROLL $500, SOLO $510.</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">Current default</div>
+            <div class="input-box current">$ 520</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">Change to</div>
+            <div class="input-box new">$ 540</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why $540 (+3.8%):</strong> ① P1's +4% price hike not only didn't lose share but <strong>Volume Share +0.5pp, Value Share +1.3pp</strong> — proves elasticity at the high end is very low; ② HE's ideal Price = 5.9/7 (the highest), they want to pay more; ③ MOVE is at $550, $540 still isn't industry-highest; ④ Unit margin: ~$333 selling price − $133 cost = <strong>$200/unit (vs P1 $188, +6%)</strong>; ⑤ Volume +33% × margin +6% = contribution roughly +40% again.
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertising -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · budget</div>
+          <div class="field-sub">P1 total: $3,100K (Media $2,400 + Research $700, research ratio 22.6%)</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box current">$ 2,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box current">$ 700 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (auto)</div>
+            <div class="input-box current">$ 3,100 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media</div>
+            <div class="input-box new">$ 2,200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research</div>
+            <div class="input-box new">$ 200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total (auto)</div>
+            <div class="input-box new">$ 2,400 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why slash Research ($700 → $200, −71%):</strong> ① <strong>Experiment: TOPS +20% advertising = −$130K</strong> (more saturated than TONE); ② HE / Pros awareness is already <strong>75–81%</strong> — limited room to push further; ③ Pros + HE are high-quality buyers — they look at the actual product (which only changes once POTOPS2 ships in Round 3), not impulse-buy from ads; ④ 200/2400 = 8.3% maintains effectiveness; ⑤ <strong>$700K saved goes to R&D.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segment Allocation -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation · advertising distribution</div>
+          <div class="field-sub">Must sum to 100%</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">10%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">40%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">50%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>Why this split (vs P1's 20/0/40/40/0):</strong>
+          <ul>
+            <li><strong>HE 40% → 50%:</strong> next-period growth <strong>+23.6%</strong> (industry-fastest), bet here</li>
+            <li><strong>Pros 40%:</strong> hold, +18.4% growth next period</li>
+            <li><strong>Explorers 20% → 10%:</strong> this segment is only 8.5% of the market in 5 periods, scale down</li>
+            <li><strong>Shoppers + Savers 0%:</strong> let TONE handle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perceptual Objectives -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives</div>
+          <div class="field-sub">⚠️ Currently set to Semantic Scales · Battery / Design (and pulling in the wrong direction), <strong>must be cleared</strong></div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>Why pick None:</strong> ① The real TOPS upgrade comes from <strong>POTOPS2 R&D project</strong> (teammate is launching it — when it replaces TOPS in Round 3, physical attributes actually change to Battery 55h, Features 15); ② Forcing repositioning via ad research requires 10–15% spend with limited effect; ③ <strong>The current default has Battery slider at the low end and Design also low = completely backwards</strong> (we want to raise battery/design perception, not lower); must clear; ④ Not setting saves money for R&D.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget Summary -->
+  <div class="budget-summary">
+    <h2>💰 Round 2 Marketing Mix Budget Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="num">P1 actual</th>
+          <th class="num">P2 plan</th>
+          <th class="num">Δ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TONE Advertising Media</td>
+          <td class="num">$1,600K</td>
+          <td class="num">$1,400K</td>
+          <td class="num"><span class="delta-down">−$200K</span></td>
+        </tr>
+        <tr>
+          <td>TONE Advertising Research</td>
+          <td class="num">$600K</td>
+          <td class="num">$120K</td>
+          <td class="num"><span class="delta-down">−$480K</span></td>
+        </tr>
+        <tr>
+          <td>TOPS Advertising Media</td>
+          <td class="num">$2,400K</td>
+          <td class="num">$2,200K</td>
+          <td class="num"><span class="delta-down">−$200K</span></td>
+        </tr>
+        <tr>
+          <td>TOPS Advertising Research</td>
+          <td class="num">$700K</td>
+          <td class="num">$200K</td>
+          <td class="num"><span class="delta-down">−$500K</span></td>
+        </tr>
+        <tr class="total">
+          <td>Total advertising</td>
+          <td class="num">$5,300K</td>
+          <td class="num">$3,920K</td>
+          <td class="num"><span class="delta-down">−$1,380K</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #065f46; font-size: 14px; margin-top: 12px;">
+      <strong>Where the saved $1,380K goes:</strong> Yousef's R&D projects (PTOFFEE new brand + POTOPS2 upgrade + POTONE2 cost reduction) and salesforce expansion (Experiment shows +30 FTE on TOPS = +$1.7M contribution).
+    </p>
+  </div>
+
+  <!-- Estimated outcome -->
+  <div class="budget-summary" style="background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%); border-color: #ca8a04;">
+    <h2 style="color: #78350f;">🔮 Period 2 Performance Forecast (Marketing Mix only)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th class="num">TONE</th>
+          <th class="num">TOPS</th>
+          <th class="num">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Forecast volume</td>
+          <td class="num">145K</td>
+          <td class="num">130K</td>
+          <td class="num">275K (vs P1 216K, <span class="delta-up">+27%</span>)</td>
+        </tr>
+        <tr>
+          <td>Unit margin</td>
+          <td class="num">$92</td>
+          <td class="num">$200</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="total">
+          <td>Forecast CBM</td>
+          <td class="num">$13.3M</td>
+          <td class="num">$26.0M</td>
+          <td class="num">$39.3M (vs P1 $28.5M, <span class="delta-up">+38%</span>)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #92400e; font-size: 13px; margin-top: 10px;">
+      ⚠️ This is the Marketing Mix-only projection. Final profit will also subtract R&D investment, salesforce expansion, and market research costs. Assuming teammate's R&D ~$2.5M + 30 new FTEs ~$0.7M, expected EBT $24–27M (vs P1 $21.6M).
+    </p>
+  </div>
+
+  <!-- Action Checklist -->
+  <div class="checklist">
+    <h2>✅ Action Checklist (in order)</h2>
+    <ul>
+      <li>Log into Markstrat → Decide → Marketing Mix</li>
+      <li>Click <strong>TONE</strong> tab</li>
+      <li>Production: <strong>110000 → 145000</strong></li>
+      <li>Price: <strong>$245 → $235</strong></li>
+      <li>Media: <strong>$1,600 → $1,400</strong></li>
+      <li>Research: <strong>$600 → $120</strong></li>
+      <li>Segments: change to <strong>10 / 35 / 0 / 0 / 55</strong> (click "Normalize" to verify = 100%)</li>
+      <li>Perceptual Objectives: select <strong>"None"</strong> (clear the current MDS settings)</li>
+      <li>Click <strong>TOPS</strong> tab</li>
+      <li>Production: <strong>84000 → 130000</strong></li>
+      <li>Price: <strong>$520 → $540</strong></li>
+      <li>Media: <strong>$2,400 → $2,200</strong></li>
+      <li>Research: <strong>$700 → $200</strong></li>
+      <li>Segments: change to <strong>10 / 0 / 40 / 50 / 0</strong> (click "Normalize" to verify = 100%)</li>
+      <li>Perceptual Objectives: select <strong>"None"</strong> (clear the current Semantic settings)</li>
+      <li>Top-right budget indicator stays <span class="pill" style="background: #d1fae5; color: #065f46;">GREEN ≥ 0</span></li>
+      <li>Open Errors & Warnings → fix any red errors before saving</li>
+      <li>Tell teammate Yousef the saved $1,380K is now available for R&D / salesforce</li>
+    </ul>
+  </div>
+
+  <footer>
+    Round 2 Marketing Mix Form-Filling Guide · Firm Titans · 2026-05-08<br>
+    Source data: Period 1 full report + Advertising/Commercial Team Experiments<br>
+    Hit me with screenshots if anything looks off when filling
+  </footer>
+</div>
+
+<script>
+function showBrand(brand) {
+  document.querySelectorAll('.brand-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(brand + '-panel').classList.add('active');
+  document.querySelector('.tab-btn.' + brand).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

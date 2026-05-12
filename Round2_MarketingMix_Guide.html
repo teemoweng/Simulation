@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 2 Marketing Mix · 填表指南</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #4f46e5 100%);
+    color: white;
+    padding: 36px 36px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.25);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 260px; height: 260px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero h1 { font-size: 28px; margin-bottom: 8px; position: relative; z-index: 1;}
+  .hero p { font-size: 15px; opacity: 0.92; position: relative; z-index: 1; max-width: 720px;}
+  .hero-tag { display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; }
+
+  /* Quick summary box */
+  .summary-box {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+    border: 2px solid #ca8a04;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .summary-box h2 { color: #78350f; font-size: 18px; margin-bottom: 10px; }
+  .summary-box p { color: #92400e; font-size: 14px; }
+  .summary-box strong { color: #422006; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: #e5e7eb;
+    padding: 6px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #6b7280;
+    text-align: center;
+  }
+  .tab-btn.active.tone { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #78350f; box-shadow: 0 2px 6px rgba(202, 138, 4, 0.3); }
+  .tab-btn.active.tops { background: linear-gradient(135deg, #c7d2fe, #818cf8); color: white; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3); }
+
+  /* Brand sections */
+  .brand-panel { display: none; }
+  .brand-panel.active { display: block; }
+
+  .brand-header {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-header.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%); }
+  .brand-header.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%); }
+  .brand-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .brand-header h2 { font-size: 26px; }
+  .brand-mission { font-size: 14px; color: #4b5563; margin-top: 4px; }
+
+  /* Field card (mimics Markstrat UI) */
+  .field-card {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+  }
+  .field-header {
+    padding: 14px 20px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .field-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .field-title { font-size: 17px; font-weight: 700; color: #0f172a; }
+  .field-sub { font-size: 12px; color: #6b7280; margin-top: 2px;}
+  .field-body { padding: 18px 20px; }
+
+  /* Form input mimicry */
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .input-row { grid-template-columns: 1fr; }
+  }
+  .input-label { font-size: 11px; color: #6b7280; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .input-box {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: white;
+    font-size: 16px;
+    font-weight: 600;
+    color: #9ca3af;
+  }
+  .input-box.current { color: #6b7280; }
+  .input-box.new {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    font-weight: 700;
+    position: relative;
+  }
+  .input-box.new::after {
+    content: "✓ 这个值";
+    position: absolute;
+    top: -10px; right: 8px;
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .arrow-down { text-align: center; font-size: 20px; color: #6b7280; padding: 6px 0; }
+
+  /* Why explanation */
+  .why-box {
+    background: #f0f9ff;
+    border-left: 3px solid #0284c7;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #075985;
+  }
+  .why-box strong { color: #0c4a6e; }
+
+  /* Segment allocation */
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  @media (max-width: 700px) {
+    .segment-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .seg-cell {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    background: white;
+  }
+  .seg-cell.active-tone { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+  .seg-cell.active-tops { border-color: #6366f1; background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+  .seg-cell.zero { opacity: 0.5; background: #f9fafb; }
+  .seg-name { font-size: 12px; color: #6b7280; font-weight: 600; }
+  .seg-value { font-size: 22px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+  .seg-cell.active-tone .seg-value { color: #92400e; }
+  .seg-cell.active-tops .seg-value { color: #4338ca; }
+  .seg-total {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+    color: #065f46;
+    font-weight: 700;
+  }
+  .seg-total .seg-value { color: #065f46; }
+
+  /* Steps */
+  .steps {
+    counter-reset: stepc;
+    list-style: none;
+    padding: 0;
+  }
+  .steps li {
+    counter-increment: stepc;
+    padding: 12px 16px 12px 50px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 8px;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+  .steps li::before {
+    content: counter(stepc);
+    position: absolute;
+    left: 14px; top: 12px;
+    width: 26px; height: 26px;
+    background: #4f46e5;
+    color: white;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* Perceptual Objectives */
+  .radio-row { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+  .radio-option {
+    padding: 10px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  .radio-option.selected {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #065f46;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+  }
+  .radio-option.selected::before { content: "● "; color: #10b981; }
+  .radio-option:not(.selected)::before { content: "○ "; color: #9ca3af; }
+
+  /* Final budget summary */
+  .budget-summary {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border: 2px solid #10b981;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .budget-summary h2 { color: #065f46; font-size: 20px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #a7f3d0; }
+  th { background: rgba(255,255,255,0.5); font-weight: 700; color: #065f46; font-size: 12px; text-transform: uppercase; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.total td { background: rgba(255,255,255,0.7); font-weight: 700; color: #065f46; font-size: 15px; }
+
+  /* Action checklist */
+  .checklist {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    border: 2px dashed #6366f1;
+    margin-top: 20px;
+  }
+  .checklist h2 { color: #4338ca; margin-bottom: 12px; }
+  .checklist ul { list-style: none; padding: 0; }
+  .checklist li { padding: 8px 0 8px 32px; position: relative; font-size: 14px; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 6px; top: 6px;
+    color: #6366f1;
+    font-size: 18px;
+  }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+  .delta-flat { color: #6b7280; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 8px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · ROUND 2 · MARKETING MIX 决策</div>
+    <h1>Round 2 Marketing Mix 填表指南</h1>
+    <p>这份指南完全按照 Markstrat 屏幕的字段顺序组织。每个字段标出"当前默认值 → 建议值"，并解释原因。一边对照 Markstrat 一边填，应该 5 分钟内完成两个品牌的全部修改。</p>
+  </div>
+
+  <!-- Quick Summary -->
+  <div class="summary-box">
+    <h2>⚡ 本轮 Marketing Mix 核心思路</h2>
+    <p><strong>"提产 + 微调价格 + 大砍广告 research"。</strong>实验数据明确显示广告已饱和（+20% 会亏 $60–130K），而两个品牌都"产能爆仓"丢了销售。所以本轮：① 大幅提产抓增长；② TONE 微降回防 Marvels，TOPS 微涨继续抓高端；③ 把广告 research 从 22-27% 砍到 ~8%（维持知名度），节省 ~$1.4M 转给队友的 R&D 立项 + 销售队伍扩张。</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active tone" onclick="showBrand('tone')">🟡 TONE（低端）</button>
+    <button class="tab-btn tops" onclick="showBrand('tops')">🟣 TOPS（高端）</button>
+  </div>
+
+  <!-- =================== TONE PANEL =================== -->
+  <div class="brand-panel active" id="tone-panel">
+    <div class="brand-header tone">
+      <span class="brand-tag tag-low">低端 · Savers + Shoppers 主战场</span>
+      <h2>TONE</h2>
+      <div class="brand-mission">本轮使命：迎击 Marvels 的 MOST 降价，稳住 Savers 份额，同时大幅提产抓住市场增长 +16.5%。</div>
+    </div>
+
+    <!-- Production -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · 生产计划</div>
+          <div class="field-sub">P1 实际卖了 118,407 台（计划 110K，自动调整到 118K）— 已爆仓</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">当前默认</div>
+            <div class="input-box current">110,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">改成</div>
+            <div class="input-box new">145,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么 145K：</strong>① P1 真实需求超过 118K（自动调整救场）；② 市场下期增长 +16.5% → 单纯保份额需要 ~138K；③ TONE 微降价后份额可能小幅回升 → 145K 给安全垫；④ ±20% 自动调整范围 = 116K–174K，留足缓冲；⑤ <strong>市场最大教训：保守提产 = 丢钱</strong>。
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · 推荐零售价</div>
+          <div class="field-sub">P1 价格 $245。Marvels 把 MOST 砍到 $215 抢了 Savers 份额。</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">当前默认</div>
+            <div class="input-box current">$ 245</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">改成</div>
+            <div class="input-box new">$ 235</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么 $235（−4%）：</strong>① 不打全面价格战（不降到 $215 否则毁利润）；② $235 vs MOST 的 $215 仍有 $20 价差，但比 ROCK $245 / SOFT $250 更有竞争力；③ 单位成本估计降到 $54（经验曲线），$235 售价对应单位毛利 ~$92/台，仍然非常健康；④ 30% 涨跌的硬上限内（−4%），不会触发市场负面反应。
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertising -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · 广告预算</div>
+          <div class="field-sub">P1 广告总额 $2,200K（Media $1,600 + Research $600，研究比例 27%）</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media（媒介）</div>
+            <div class="input-box current">$ 1,600 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research（研究）</div>
+            <div class="input-box current">$ 600 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total（自动）</div>
+            <div class="input-box current">$ 2,200 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media（媒介）</div>
+            <div class="input-box new">$ 1,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research（研究）</div>
+            <div class="input-box new">$ 120 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total（自动）</div>
+            <div class="input-box new">$ 1,520 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么大砍 Research（$600 → $120，砍 80%）：</strong>① <strong>Advertising Experiment 数据明确：广告 +20% 亏 $60K</strong> → 已饱和；② P1 投了 27% research 但<strong>没设感知目标</strong> → 这笔钱完全浪费；③ 当前阶段是"维持知名度"，手册建议 4–8% research 即可（120/1520 = 7.9%）；④ <strong>节省 $680K 转给 R&D 项目</strong>（队友 Yousef 的部分）。
+        </div>
+      </div>
+    </div>
+
+    <!-- Segment Allocation -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation · 广告细分分配</div>
+          <div class="field-sub">必须加起来 = 100%</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">10%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">35%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tone">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">55%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么这么分（vs P1 的 10/40/0/0/50）：</strong>
+          <ul style="padding-left: 20px; margin-top: 6px;">
+            <li><strong>Savers 50% → 55%</strong>：被 MOST 攻击得最厉害的细分，要重兵防守</li>
+            <li><strong>Shoppers 40% → 35%</strong>：略减给 Savers 让位（新品牌 TOFFEE Round 3 上市后才是 Shoppers 主力）</li>
+            <li><strong>Explorers 10%</strong>：保持兜底，但这个细分在死（5 期后 8.5%）</li>
+            <li><strong>Pros + HE 各 0%</strong>：让 TOPS 全权处理高端</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perceptual Objectives -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives · 感知目标</div>
+          <div class="field-sub">⚠️ 当前默认设了 MDS - Economy / Performance −9，<strong>必须清除</strong></div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None（不设）</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>为什么选 None：</strong>① TONE 当前 MDS 位置 (10, −10.9, −10.7) <strong>已经非常接近 Savers 理想点</strong> (12, −10.3, −4.8)，无需重定位；② 想推向 Shoppers (7.4, 0, 2.8) 距离 17+ 单位，广告改不了（那是新品牌 TOFFEE 的活）；③ 不设感知目标 = 可以把 research 降到 8% 不浪费钱；④ <strong>当前 Performance −9 的设置是错的方向（往低性能拉），必须清除</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== TOPS PANEL =================== -->
+  <div class="brand-panel" id="tops-panel">
+    <div class="brand-header tops">
+      <span class="brand-tag tag-high">高端 · Pros + High Earners 主战场</span>
+      <h2>TOPS 🌟</h2>
+      <div class="brand-mission">本轮使命：抓住 HE +23.6% 与 Pros +18.4% 的爆炸性增长，进一步涨价测试高端弹性，大幅提产防止再次爆仓。</div>
+    </div>
+
+    <!-- Production -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">1</div>
+        <div>
+          <div class="field-title">Production · 生产计划</div>
+          <div class="field-sub">P1 实际卖了 97,823 台（计划 84K，<strong>触发了 +20% 自动调整上限到 97K</strong>—— 真实需求超过 100K，丢了销售）</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">当前默认</div>
+            <div class="input-box current">84,000 Units</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">改成</div>
+            <div class="input-box new">130,000 Units</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么 130K（+55%）：</strong>① P1 真实需求 >100K（被自动调整上限卡住，<strong>丢了销售</strong>）；② HE 下期增长 <strong>+23.6%</strong>，Pros <strong>+18.4%</strong> —— TOPS 主战场都在爆发；③ 我们涨价 $520 → $540，单位毛利 +6%，越多越好；④ ±20% 范围 = 104K–156K，安全；⑤ 单位成本估计降到 $133（vs P1 $143）—— 多产更划算。
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">2</div>
+        <div>
+          <div class="field-title">Price · 推荐零售价</div>
+          <div class="field-sub">P1 价格 $520。MOVE 已涨到 $550（最高），ROLL $500，SOLO $510。</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row" style="grid-template-columns: 1fr auto 1fr;">
+          <div>
+            <div class="input-label">当前默认</div>
+            <div class="input-box current">$ 520</div>
+          </div>
+          <div class="arrow-down" style="padding-top: 22px;">→</div>
+          <div>
+            <div class="input-label">改成</div>
+            <div class="input-box new">$ 540</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么 $540（+3.8%）：</strong>① P1 涨价 +4% 不仅没丢份额，<strong>Volume Share +0.5pp，Value Share +1.3pp</strong>—— 证明高端弹性极低；② HE 理想 Price = 5.9 / 7（最高），还想要更贵；③ MOVE 到了 $550，我们 $540 仍然不是行业最贵；④ 单位毛利：售价 ~$333 − 成本 $133 = <strong>$200/台（vs P1 $188，+6%）</strong>；⑤ 销量 +33% × 利润 +6% = 贡献再涨 ~40%。
+        </div>
+      </div>
+    </div>
+
+    <!-- Advertising -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">3</div>
+        <div>
+          <div class="field-title">Advertising · 广告预算</div>
+          <div class="field-sub">P1 广告总额 $3,100K（Media $2,400 + Research $700，研究比例 22.6%）</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media（媒介）</div>
+            <div class="input-box current">$ 2,400 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research（研究）</div>
+            <div class="input-box current">$ 700 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total（自动）</div>
+            <div class="input-box current">$ 3,100 k</div>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="input-row">
+          <div>
+            <div class="input-label">Media（媒介）</div>
+            <div class="input-box new">$ 2,200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Research（研究）</div>
+            <div class="input-box new">$ 200 k</div>
+          </div>
+          <div>
+            <div class="input-label">Total（自动）</div>
+            <div class="input-box new">$ 2,400 k</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么大砍 Research（$700 → $200，砍 71%）：</strong>① <strong>实验数据：TOPS 广告 +20% 亏 $130K</strong>（更饱和）；② HE / Pros 知名度已经 <strong>75–81%</strong>，再推空间很小；③ Pros + HE 是高质量受众，他们看产品本身（等 POTOPS2 上市才有效果），不靠广告冲动消费；④ 200/2400 = 8.3% 维持广告效果；⑤ <strong>节省 $700K 转给 R&D</strong>。
+        </div>
+      </div>
+    </div>
+
+    <!-- Segment Allocation -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">4</div>
+        <div>
+          <div class="field-title">Segment Allocation · 广告细分分配</div>
+          <div class="field-sub">必须加起来 = 100%</div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="segment-grid">
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Explorers</div>
+            <div class="seg-value">10%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Shoppers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">Professionals</div>
+            <div class="seg-value">40%</div>
+          </div>
+          <div class="seg-cell active-tops">
+            <div class="seg-name">High Earners</div>
+            <div class="seg-value">50%</div>
+          </div>
+          <div class="seg-cell zero">
+            <div class="seg-name">Savers</div>
+            <div class="seg-value">0%</div>
+          </div>
+          <div class="seg-cell seg-total">
+            <div class="seg-name">Total</div>
+            <div class="seg-value">100%</div>
+          </div>
+        </div>
+        <div class="why-box">
+          <strong>为什么这么分（vs P1 的 20/0/40/40/0）：</strong>
+          <ul style="padding-left: 20px; margin-top: 6px;">
+            <li><strong>HE 40% → 50%</strong>：下期增长 <strong>+23.6%</strong>（最快爆发），重点投</li>
+            <li><strong>Pros 40%</strong>：保持，下期增长 +18.4%</li>
+            <li><strong>Explorers 20% → 10%</strong>：这个细分 5 期后只剩 8.5%，缩减投入</li>
+            <li><strong>Shoppers + Savers 各 0%</strong>：让 TONE 处理</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perceptual Objectives -->
+    <div class="field-card">
+      <div class="field-header">
+        <div class="field-icon">5</div>
+        <div>
+          <div class="field-title">Perceptual Objectives · 感知目标</div>
+          <div class="field-sub">⚠️ 当前默认设了 Semantic Scales · Battery / Design（且方向错误，往低拉），<strong>必须清除</strong></div>
+        </div>
+      </div>
+      <div class="field-body">
+        <div class="radio-row">
+          <div class="radio-option selected">None（不设）</div>
+          <div class="radio-option">Semantic Scales</div>
+          <div class="radio-option">Multidimensional Scaling</div>
+        </div>
+        <div class="why-box">
+          <strong>为什么选 None：</strong>① 真正的 TOPS 升级靠 <strong>POTOPS2 R&D 项目</strong>完成（队友会立项，Round 3 替换 TOPS 时物理参数才真正变成 Battery 55h、Features 15）；② 用广告 research 强行重定位需要 10–15% 投入，效果有限；③ <strong>当前默认设的 Battery slider 在低端、Design 也低 = 完全反向</strong>（应该往高拉而不是低拉），必须清掉；④ 不设 = 省钱投 R&D。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget Summary -->
+  <div class="budget-summary">
+    <h2>💰 Round 2 Marketing Mix 预算汇总</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th class="num">P1 实际</th>
+          <th class="num">P2 计划</th>
+          <th class="num">变化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TONE 广告 Media</td>
+          <td class="num">$1,600K</td>
+          <td class="num">$1,400K</td>
+          <td class="num"><span class="delta-down">−$200K</span></td>
+        </tr>
+        <tr>
+          <td>TONE 广告 Research</td>
+          <td class="num">$600K</td>
+          <td class="num">$120K</td>
+          <td class="num"><span class="delta-down">−$480K</span></td>
+        </tr>
+        <tr>
+          <td>TOPS 广告 Media</td>
+          <td class="num">$2,400K</td>
+          <td class="num">$2,200K</td>
+          <td class="num"><span class="delta-down">−$200K</span></td>
+        </tr>
+        <tr>
+          <td>TOPS 广告 Research</td>
+          <td class="num">$700K</td>
+          <td class="num">$200K</td>
+          <td class="num"><span class="delta-down">−$500K</span></td>
+        </tr>
+        <tr class="total">
+          <td>广告总支出</td>
+          <td class="num">$5,300K</td>
+          <td class="num">$3,920K</td>
+          <td class="num"><span class="delta-down">−$1,380K</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #065f46; font-size: 14px; margin-top: 12px;">
+      <strong>节省的 $1,380K 转给：</strong>队友 Yousef 立项的 R&D 项目（PTOFFEE 新品牌 + POTOPS2 升级 + POTONE2 降本）+ 销售队伍扩张（实验显示 TOPS +30 人能多赚 $1.7M）。
+    </p>
+  </div>
+
+  <!-- Estimated outcome -->
+  <div class="budget-summary" style="background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%); border-color: #ca8a04;">
+    <h2 style="color: #78350f;">🔮 Period 2 业绩预测（仅 Marketing Mix 部分）</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th class="num">TONE</th>
+          <th class="num">TOPS</th>
+          <th class="num">合计</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>预测销量</td>
+          <td class="num">145K</td>
+          <td class="num">130K</td>
+          <td class="num">275K（vs P1 216K，<span class="delta-up">+27%</span>）</td>
+        </tr>
+        <tr>
+          <td>单位毛利</td>
+          <td class="num">$92</td>
+          <td class="num">$200</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="total">
+          <td>预测 CBM</td>
+          <td class="num">$13.3M</td>
+          <td class="num">$26.0M</td>
+          <td class="num">$39.3M（vs P1 $28.5M，<span class="delta-up">+38%</span>）</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #92400e; font-size: 13px; margin-top: 10px;">
+      ⚠️ 这只是 Marketing Mix 决策的预测。最终利润还要扣除 R&D 投入、销售队伍扩张、市场调研。如果队友 R&D 立项 $2.5M + 销售加 30 人 $0.7M，预计 EBT 仍可达 $24–27M（vs P1 $21.6M）。
+    </p>
+  </div>
+
+  <!-- Action Checklist -->
+  <div class="checklist">
+    <h2>✅ 操作清单（按顺序操作）</h2>
+    <ul>
+      <li>登录 Markstrat → Decide → Marketing Mix</li>
+      <li>点击 <strong>TONE</strong> 标签</li>
+      <li>Production: <strong>110000 → 145000</strong></li>
+      <li>Price: <strong>$245 → $235</strong></li>
+      <li>Media: <strong>$1,600 → $1,400</strong></li>
+      <li>Research: <strong>$600 → $120</strong></li>
+      <li>Segments: 改成 <strong>10 / 35 / 0 / 0 / 55</strong>（点 "Normalize" 按钮验证 = 100%）</li>
+      <li>Perceptual Objectives: 选择 <strong>"None"</strong>（清除当前的 MDS 设置）</li>
+      <li>点击 <strong>TOPS</strong> 标签</li>
+      <li>Production: <strong>84000 → 130000</strong></li>
+      <li>Price: <strong>$520 → $540</strong></li>
+      <li>Media: <strong>$2,400 → $2,200</strong></li>
+      <li>Research: <strong>$700 → $200</strong></li>
+      <li>Segments: 改成 <strong>10 / 0 / 40 / 50 / 0</strong>（点 "Normalize" 验证 = 100%）</li>
+      <li>Perceptual Objectives: 选择 <strong>"None"</strong>（清除当前的 Semantic 设置）</li>
+      <li>右上角剩余预算保持<span class="pill" style="background: #d1fae5; color: #065f46;">绿色 ≥ 0</span></li>
+      <li>点 Errors & Warnings 检查 → 无红色错误后保存</li>
+      <li>把节省的 $1,380K 告诉队友 Yousef 转去 R&D / 销售队伍</li>
+    </ul>
+  </div>
+
+  <footer>
+    Round 2 Marketing Mix 填表指南 · Firm Titans · 2026-05-08<br>
+    数据来源：Period 1 完整报告 + Advertising / Commercial Team Experiments<br>
+    填完有问题随时回来截图问 Claude
+  </footer>
+</div>
+
+<script>
+function showBrand(brand) {
+  document.querySelectorAll('.brand-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(brand + '-panel').classList.add('active');
+  document.querySelector('.tab-btn.' + brand).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

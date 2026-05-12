@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markstrat Round 1 · Firm T 行动计划</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: white;
+    padding: 44px 40px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.25);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .badge-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .badge.urgent { background: #dc2626; }
+  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1;}
+  .hero p { font-size: 15px; opacity: 0.92; position: relative; z-index: 1; max-width: 720px; }
+
+  /* Sections */
+  section { margin-bottom: 40px; }
+  .section-tag {
+    font-size: 12px;
+    color: #4f46e5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    margin-bottom: 14px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .stat {
+    background: white;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid #eef0f5;
+  }
+  .stat-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 24px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+  .stat-sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+  /* Brand cards */
+  .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  @media (max-width: 700px) { .brand-grid { grid-template-columns: 1fr; } }
+  .brand-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-card.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+  .brand-card.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); }
+  .brand-card h3 { font-size: 22px; }
+  .brand-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .brand-stats { font-size: 13px; color: #4b5563; margin-top: 10px; }
+  .brand-stats div { margin: 3px 0; }
+  .brand-stats strong { color: #0f172a; }
+
+  /* Insights */
+  .insight {
+    background: white;
+    border-left: 4px solid #4f46e5;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .insight.warning { border-left-color: #f59e0b; background: #fffbeb; }
+  .insight.success { border-left-color: #10b981; background: #ecfdf5; }
+  .insight.danger { border-left-color: #ef4444; background: #fef2f2; }
+  .insight-title { font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: #f9fafb; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.highlight td { background: #fef3c7; font-weight: 600; }
+  tr.muted td { color: #9ca3af; }
+
+  /* Action steps */
+  .action-step {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+  }
+  .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .step-number {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .step-number.done { background: linear-gradient(135deg, #10b981, #059669); }
+  .step-number.locked { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .step-title { font-size: 19px; font-weight: 700; color: #0f172a; }
+  .step-meta { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .step-status { margin-left: auto; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .status-now { background: #dbeafe; color: #1e40af; }
+  .status-locked { background: #fef3c7; color: #92400e; }
+  .status-skip { background: #f3f4f6; color: #6b7280; }
+
+  /* Code blocks */
+  .code {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-family: "SF Mono", Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+  .code .key { color: #fbbf24; }
+  .code .val { color: #86efac; }
+  .code .comment { color: #64748b; }
+
+  /* Log section */
+  .log-card {
+    background: #fef9c3;
+    border: 2px dashed #ca8a04;
+    border-radius: 14px;
+    padding: 24px 28px;
+  }
+  .log-card h2 { color: #713f12; }
+  .log-content {
+    background: white;
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-top: 14px;
+    font-family: "SF Mono", Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #374151;
+    white-space: pre-wrap;
+    border: 1px solid #fde68a;
+  }
+  .log-content strong { color: #0f172a; font-family: -apple-system, "PingFang SC", sans-serif; }
+  .copy-hint { font-size: 12px; color: #92400e; margin-top: 10px; font-style: italic; }
+
+  /* Misc */
+  .arrow { color: #7c3aed; font-weight: 700; }
+  .check { color: #10b981; font-weight: 700; }
+  .cross { color: #ef4444; font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; margin: 0 2px; }
+  ul.clean { list-style: none; padding: 0; }
+  ul.clean li { padding: 6px 0 6px 24px; position: relative; }
+  ul.clean li::before { content: "▸"; position: absolute; left: 0; color: #7c3aed; font-weight: 700; }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="badge-row">
+      <span class="badge">FIRM T · ROUND 1</span>
+      <span class="badge urgent">截止 5 月 1 日 19:00 BST</span>
+      <span class="badge">PERIOD 0 → PERIOD 1</span>
+    </div>
+    <h1>第 1 轮决策行动计划</h1>
+    <p>本文档分三部分：① 当前公司局势 + 市场洞察 ② 5 个决策屏幕的具体填写指南 ③ 用于最终报告的决策日志草稿。</p>
+  </div>
+
+  <!-- Section 1: 当前情况 -->
+  <section>
+    <div class="section-tag">PART 01 · CURRENT SITUATION</div>
+    <h2>你们公司当前的局势</h2>
+
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-label">公司代号</div><div class="stat-value">T</div></div>
+      <div class="stat"><div class="stat-label">SPI</div><div class="stat-value">1,000</div><div class="stat-sub">所有队伍齐平</div></div>
+      <div class="stat"><div class="stat-label">收入</div><div class="stat-value">$40M</div></div>
+      <div class="stat"><div class="stat-label">税前利润</div><div class="stat-value">$14M</div><div class="stat-sub">35% 净利率</div></div>
+      <div class="stat"><div class="stat-label">市占率</div><div class="stat-value">25%</div><div class="stat-sub">价值 & 销量同 25%</div></div>
+      <div class="stat"><div class="stat-label">剩余预算</div><div class="stat-value">$1.6M</div><div class="stat-sub">用于追加调整</div></div>
+    </div>
+
+    <div class="brand-grid">
+      <div class="brand-card tone">
+        <span class="brand-tag tag-low">低端 · 大众市场</span>
+        <h3>TONE</h3>
+        <div class="brand-stats">
+          <div>价格：<strong>$250</strong>　Base Cost：<strong>$70</strong>（最低可达 $62）</div>
+          <div>销量 <strong>103K</strong>　收入 <strong>$16M</strong>　贡献 <strong>$7M</strong></div>
+          <div>参数：18 features / Design 3 / Battery 75h / Display 25" / Power 12 GFlops</div>
+          <div style="margin-top: 8px;"><strong>主战场：</strong>Savers 24.8% + Shoppers 21.8%</div>
+        </div>
+      </div>
+      <div class="brand-card tops">
+        <span class="brand-tag tag-high">高端 · 商务专业</span>
+        <h3>TOPS</h3>
+        <div class="brand-stats">
+          <div>价格：<strong>$500</strong>　Base Cost：<strong>$169</strong>（最低可达 $145）</div>
+          <div>销量 <strong>79K</strong>　收入 <strong>$25M</strong>　贡献 <strong>$8M</strong></div>
+          <div>参数：13 features / Design 8 / Battery 40h / Display 40" / Power 75 GFlops</div>
+          <div style="margin-top: 8px;"><strong>主战场：</strong>Professionals 23.3% + High Earners 24.1%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insights -->
+  <section>
+    <div class="section-tag">KEY INSIGHTS · 三个最重要的判断</div>
+
+    <div class="insight">
+      <div class="insight-title">① 市场是完全对称的开局</div>
+      4 家公司（M / R-Rocket / S-Snipers / T-你们）拥有规格一模一样的 8 个品牌——4 个低端 + 4 个高端，只是名字不同。SPI 全是 1000。<strong>没有人有先发优势，胜负全看后续 6 轮</strong>。
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title">② 双品牌定位互补，已经覆盖 4 个细分</div>
+      TONE 主打 <span class="pill">Savers</span> <span class="pill">Shoppers</span>，TOPS 主打 <span class="pill">Professionals</span> <span class="pill">High Earners</span>。在每个细分里你们都是该价格档的"代表品牌"之一。Explorers 由两个品牌平分。
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title">③ ⭐ 未来 5 年市场会大变天 — 这是最值钱的发现</div>
+      <table>
+        <thead><tr><th>细分</th><th class="num">现在占比</th><th class="num">5 期后占比</th><th class="num">5 年平均增长</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td>Shoppers（TONE 强势）</td><td class="num">19%</td><td class="num">30% ⬆️</td><td class="num">+29.2% 🚀</td></tr>
+          <tr><td>Savers（TONE 强势）</td><td class="num">30%</td><td class="num">32%</td><td class="num">+18.9%</td></tr>
+          <tr><td>High Earners（TOPS 强势）</td><td class="num">12%</td><td class="num">13%</td><td class="num">+20.7%</td></tr>
+          <tr><td>Professionals（TOPS 强势）</td><td class="num">17%</td><td class="num">16%</td><td class="num">+15.7%</td></tr>
+          <tr class="muted"><td>Explorers（共享）</td><td class="num">22%</td><td class="num">8.5% ⬇️</td><td class="num">−2.8% 萎缩</td></tr>
+        </tbody>
+      </table>
+      <strong>战略含义：</strong>Shoppers 是未来最大金矿、TONE 战略地位会越来越重要；Explorers 在死，别投太多广告；High Earners 下期就要爆 +33.9%，TOPS 要立刻加码。
+    </div>
+  </section>
+
+  <!-- Part 2: Action Guide -->
+  <section>
+    <div class="section-tag">PART 02 · ACTION GUIDE</div>
+    <h2>5 个决策屏 · 具体怎么填</h2>
+  </section>
+
+  <!-- Step 1 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div>
+        <div class="step-title">Team Identity · 公司起名</div>
+        <div class="step-meta">必须 T 开头，≤8 字符，Round 1 后不可改</div>
+      </div>
+      <span class="step-status status-now">立刻填</span>
+    </div>
+    <p>和队友讨论选一个，建议候选：</p>
+    <ul class="clean">
+      <li><strong>TITAN</strong> — 巨人感，强势</li>
+      <li><strong>TEMPO</strong> — 节奏感，灵活</li>
+      <li><strong>TANDEM</strong> — 团队配合</li>
+      <li><strong>TREND</strong> — 领先潮流</li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number locked">2</div>
+      <div>
+        <div class="step-title">Marketing Mix · 营销组合</div>
+        <div class="step-meta">当前被队友 Yousef 锁住编辑中 — 联系他按下面参数填</div>
+      </div>
+      <span class="step-status status-locked">锁定中</span>
+    </div>
+
+    <table>
+      <thead><tr><th>决策项</th><th>TONE</th><th>TOPS</th></tr></thead>
+      <tbody>
+        <tr><td>生产计划（千台）</td><td><strong>110</strong>（防爆仓）</td><td><strong>90</strong>（接 HE 增长）</td></tr>
+        <tr><td>价格</td><td>$250 不变</td><td>$500 不变</td></tr>
+        <tr><td>广告媒介预算</td><td>沿用上期</td><td>沿用上期</td></tr>
+        <tr><td>广告 research %</td><td>4–8%</td><td>4–8%</td></tr>
+        <tr><td>感知目标</td><td>暂不设</td><td>暂不设</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 14px;">广告 segment 分配（必填，要加起来 = 100%）</h3>
+    <table>
+      <thead><tr><th>细分</th><th class="num">TONE</th><th class="num">TOPS</th></tr></thead>
+      <tbody>
+        <tr><td>Savers</td><td class="num">50%</td><td class="num">5%</td></tr>
+        <tr><td>Shoppers</td><td class="num">35%</td><td class="num">5%</td></tr>
+        <tr><td>Explorers</td><td class="num">10%</td><td class="num">20%</td></tr>
+        <tr><td>Professionals</td><td class="num">3%</td><td class="num">35%</td></tr>
+        <tr><td>High Earners</td><td class="num">2%</td><td class="num">35%</td></tr>
+        <tr class="highlight"><td>合计</td><td class="num">100%</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div>
+        <div class="step-title">Commercial Team · 销售队伍重新分配</div>
+        <div class="step-meta">总人数保持 60，跨渠道/品牌调整免费</div>
+      </div>
+      <span class="step-status status-now">立刻填</span>
+    </div>
+
+    <p style="margin-bottom: 10px;"><strong>当前（前任默认）：</strong>TONE 10/10/10，TOPS 10/10/10 — 完全没对齐购物习惯。</p>
+    <p><strong>建议改为：</strong></p>
+    <table>
+      <thead><tr><th>品牌</th><th class="num">Specialty</th><th class="num">Mass Merch.</th><th class="num">Online</th><th class="num">Total</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TONE</strong>（Savers+Shoppers）</td><td class="num">10</td><td class="num">15</td><td class="num">5</td><td class="num">30</td></tr>
+        <tr><td><strong>TOPS</strong>（Pros+High Earners）</td><td class="num">17</td><td class="num">8</td><td class="num">5</td><td class="num">30</td></tr>
+        <tr class="highlight"><td>TOTAL</td><td class="num">27</td><td class="num">23</td><td class="num">10</td><td class="num">60</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 10px; font-size: 13px; color: #6b7280;"><strong>逻辑：</strong>TONE 加重 Mass Merch（Savers 60% / Shoppers 43% 在那买）；TOPS 加重 Specialty（Pros 60% / HE 50% 在那买）。Online 在每个细分都只占 10–20%，5 人足够覆盖。</p>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div>
+        <div class="step-title">Market Research Studies · 市场调研采购</div>
+        <div class="step-meta">下一期才送达，决定第 2 轮你看到什么数据</div>
+      </div>
+      <span class="step-status status-now">立刻填</span>
+    </div>
+
+    <p><strong>已默认勾选 4 项（保留）：</strong></p>
+    <table>
+      <thead><tr><th>报告</th><th class="num">价格</th></tr></thead>
+      <tbody>
+        <tr><td><span class="check">✓</span> Consumer Survey (Sonites)</td><td class="num">$62,500</td></tr>
+        <tr><td><span class="check">✓</span> Consumer Panel (Sonites)</td><td class="num">$104,000</td></tr>
+        <tr><td><span class="check">✓</span> Distribution Panel (Sonites)</td><td class="num">$62,500</td></tr>
+        <tr><td><span class="check">✓</span> Market Forecast (Sonites)</td><td class="num">$20,750</td></tr>
+        <tr class="muted"><td>已勾选小计</td><td class="num">$249,750</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 12px;"><strong>额外勾选（重点 ⭐）：</strong></p>
+    <table>
+      <thead><tr><th>报告</th><th class="num">价格</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr><td><span class="check">✓</span> Semantic Scales (Sonites) ⭐</td><td class="num">$10,500</td><td>性价比之王，告诉你每个细分的理想产品参数</td></tr>
+        <tr><td><span class="check">✓</span> MDS (Sonites)</td><td class="num">$36,500</td><td>感知地图，定位策略必备</td></tr>
+        <tr><td><span class="check">✓</span> Benchmark (General)</td><td class="num">$31,250</td><td>跨公司对标，报告里画 BCG 用</td></tr>
+        <tr><td><span class="check">✓</span> Competitive Advertising (Sonites)</td><td class="num">$31,250</td><td>对手在每个品牌花了多少广告</td></tr>
+        <tr><td><span class="check">✓</span> Competitive Commercial Team (Sonites)</td><td class="num">$15,500</td><td>对手销售队伍怎么排</td></tr>
+        <tr class="highlight"><td>新增小计</td><td class="num">$125,000</td><td>合计 $374,750</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 12px;"><strong>不勾选：</strong></p>
+    <ul class="clean">
+      <li><span class="cross">✗</span> Conjoint Analysis ($36.5K) — 与 Semantic+MDS 重复，第 2 轮再补</li>
+      <li><span class="cross">✗</span> Advertising Experiment ($26K) / Commercial Team Experiment ($36.5K) — Round 1 不需要</li>
+      <li><span class="cross">✗</span> 全部 Vodite 报告（11 项）— 市场上没 Vodite，买了等于扔钱</li>
+    </ul>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number" style="background: linear-gradient(135deg, #6b7280, #4b5563);">5</div>
+      <div>
+        <div class="step-title">R&D Projects · 研发项目</div>
+        <div class="step-meta">本轮先不立项，等第 2 轮拿到 Semantic Scales / MDS 数据再做</div>
+      </div>
+      <span class="step-status status-skip">本轮跳过</span>
+    </div>
+    <p>第 2 轮拿到调研数据后，才能精准设计：</p>
+    <ul class="clean">
+      <li>POTONE2 — 朝 Shoppers 理想点优化（未来 5 年最大金矿）</li>
+      <li>POTOPS2 — 朝 High Earners 理想点优化（下期增长 +33.9%）</li>
+      <li>降本项目（cost-reduction R&D）— TONE base cost 71→62，TOPS base cost 169→145</li>
+    </ul>
+    <p style="margin-top: 8px; font-size: 13px; color: #6b7280;"><em>如果预算还有富余，可以本轮订一个 TONE 的 Feasibility Study（$100K）作为下轮立项的预算估算。但非必须。</em></p>
+  </div>
+
+  <!-- Final check -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number done">✓</div>
+      <div>
+        <div class="step-title">提交前最终检查</div>
+        <div class="step-meta">点 Errors & Warnings 图标 + 看预算</div>
+      </div>
+    </div>
+    <ul class="clean">
+      <li>右上角 <strong>+1 602 K$</strong> 必须保持绿色（≥ 0），变红就是超支</li>
+      <li>点左侧栏 <strong>Errors & Warnings</strong>（钟表/感叹号图标），红色错误必须修，黄色警告可忽略</li>
+      <li>点 <strong>Decisions Review</strong> 看一遍所有决策汇总</li>
+      <li>团队全部确认后再点最终提交按钮 — 提交后无法修改</li>
+    </ul>
+  </div>
+
+  <!-- Part 3: Decision Log -->
+  <section>
+    <div class="section-tag">PART 03 · DECISION LOG</div>
+    <h2>本轮决策日志（为最终报告准备）</h2>
+    <p style="color: #6b7280; margin-bottom: 14px;">把下面这段记到一个 Word/Notes 里。6 月写 2000 字报告时，这是你最值钱的素材——展示了你<strong>当时的判断</strong>和<strong>事后的复盘</strong>，正是评分要的"causal attribution"。</p>
+
+    <div class="log-card">
+      <h2 style="font-size: 18px; margin-bottom: 4px;">📓 Round 1 Decisions Log — Period 0 → Period 1</h2>
+      <p style="font-size: 13px; color: #92400e;">复制粘贴到笔记软件，每轮回来续写</p>
+
+      <div class="log-content"><strong>日期：</strong>2026-05-01
+<strong>提交回合：</strong>Round 1（决策影响 Period 1）
+<strong>团队成员：</strong>Teemo, Yousef Bin Junayd, ...
+
+<strong>━━ 战略基调 ━━</strong>
+4 家公司开局完全对称（产品规格、SPI、市占都一致），没有先发优势。我们决定采用**双品牌互补定位**：
+• TONE → 主攻当前及未来最大的 Savers + Shoppers
+• TOPS → 主攻高增长的 Professionals + High Earners
+本轮以"摸数据 + 不犯大错"为目标，不做激进改动。
+
+<strong>━━ 关键判断（基于 Period 0 数据）━━</strong>
+1. Market Forecast 显示 Shoppers 5 年内将从 19% 涨到 30%（+29.2% 年化），是未来最大金矿。
+2. Explorers 5 年萎缩到 8.5%（−2.8%），战略价值衰退，避免在该细分过度投入。
+3. High Earners 下期爆涨 +33.9%（5 期内 +20.7%），TOPS 要抓住。
+4. TONE 接近爆仓（销 103K / 产 103K），TOPS 留 1K 库存——产能调整成关键动作。
+
+<strong>━━ 本轮具体决策 ━━</strong>
+1. 公司命名：____________
+2. 生产：TONE 100→110K（+10%，应对 Shoppers/Savers 增长），TOPS 100→90K（消化库存 + 接 HE 增长）
+3. 价格：保持 $250 / $500（避免 Round 1 价格冲击）
+4. 广告：保持总预算，重新按"未来增长加权"分配——TONE 偏 Savers/Shoppers，TOPS 偏 Pros/HE
+5. 销售队伍：从均匀 10/10/10 改为按购物习惯——TONE 10/15/5，TOPS 17/8/5
+6. 市场调研：在原有 4 份基础上加 5 份——重点是 Semantic Scales（$10.5K）和 MDS（$36.5K），为 Round 2 R&D 立项铺垫
+7. R&D：本轮不立项，等 Round 2 拿到调研数据再做
+
+<strong>━━ 预测（下轮回来核对）━━</strong>
+• TONE 在 Shoppers/Savers 份额应保持或微涨
+• TOPS 受益于 HE 33.9% 增长，销量应反弹至 90K+
+• Net contribution 持平或微增（因为没大改广告/销售总预算）
+• SPI 应保持 1000 附近，竞争对手如果都在 Round 1 摸数据，不会拉开大差距
+
+<strong>━━ 待 Round 2 复盘 ━━</strong>
+□ 实际销量 vs 预测，差在哪？
+□ 哪个细分的购买意向意外上升/下降？
+□ 对手有没有提价/降价/换 R&D？
+□ Semantic Scales 数据出来后，TONE/TOPS 离哪个细分理想点最近 / 最远？
+</div>
+      <p class="copy-hint">💡 每轮收到结果后，回来填写"待 Round 2 复盘"那部分，然后开新一节"Round 2 Decisions Log"。</p>
+    </div>
+  </section>
+
+  <footer>
+    Round 1 行动计划 · Firm T · 2026-05-01<br>
+    完整背景见 CLAUDE_BRIEFING.md · 数据来源：Markstrat Period 0 报告
+  </footer>
+
+</div>
+</body>
+</html>
