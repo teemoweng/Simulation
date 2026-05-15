@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 3 Results & Analysis · Firm Titans</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: white;
+    padding: 48px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.25);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .hero-tag { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; font-weight: 600; }
+  .hero h1 { font-size: 36px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1;}
+  .hero p { font-size: 17px; opacity: 0.95; position: relative; z-index: 1; max-width: 720px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; position: relative; z-index: 1;}
+  .hero-stat { background: rgba(255,255,255,0.14); padding: 14px 18px; border-radius: 12px; }
+  .hero-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
+  .hero-stat-value { font-size: 24px; font-weight: 700; margin-top: 4px; }
+  .hero-stat-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  @media (max-width: 700px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 26px; }
+    .hero { padding: 32px 24px; }
+  }
+
+  section { margin-bottom: 36px; }
+  .section-tag {
+    font-size: 12px;
+    color: #2563eb;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  h2 { font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 14px; }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    margin-bottom: 14px;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: #f9fafb; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.us td { background: linear-gradient(90deg, #fef9c3 0%, #fef3c7 100%); font-weight: 600; }
+  tr.threat td { background: linear-gradient(90deg, #fee2e2 0%, #fecaca 100%); }
+
+  /* Ranking */
+  .ranking { display: grid; gap: 8px; margin: 14px 0; }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 60px 140px 1fr 100px 100px 100px;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+  }
+  .rank-row.us { border-color: #facc15; background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%); }
+  .rank-row.leader { border-color: #fca5a5; background: linear-gradient(90deg, #fff1f2 0%, #fee2e2 100%); }
+  .rank-num { font-size: 22px; font-weight: 700; color: #94a3b8; }
+  .rank-row.leader .rank-num { color: #dc2626; }
+  .rank-row.us .rank-num { color: #ca8a04; }
+  .rank-name { font-weight: 600; font-size: 16px; }
+  .rank-bar-container { background: #f3f4f6; height: 28px; border-radius: 6px; overflow: hidden; position: relative; }
+  .rank-bar { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 6px; }
+  .rank-bar.us { background: linear-gradient(90deg, #f59e0b, #ca8a04); }
+  .rank-bar.leader { background: linear-gradient(90deg, #ef4444, #dc2626); }
+  .rank-stat { font-size: 14px; text-align: right; font-variant-numeric: tabular-nums; }
+  .rank-stat strong { font-size: 16px; color: #0f172a; }
+  @media (max-width: 800px) {
+    .rank-row { grid-template-columns: 40px 1fr; gap: 10px; }
+    .rank-bar-container, .rank-stat { display: none; }
+  }
+
+  /* Brand cards */
+  .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 12px; }
+  @media (max-width: 900px) { .brand-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .brand-grid { grid-template-columns: 1fr; } }
+  .brand-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-card.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%); }
+  .brand-card.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%); }
+  .brand-card.toho { border-color: #a7f3d0; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 60%); }
+  .brand-card h3 { font-size: 24px; }
+  .brand-tag { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .tag-new { background: #10b981; color: white; }
+  .brand-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .brand-stat { padding: 10px 12px; background: rgba(255,255,255,0.6); border-radius: 8px; }
+  .brand-stat-label { font-size: 11px; color: #6b7280; text-transform: uppercase; }
+  .brand-stat-value { font-size: 18px; font-weight: 700; color: #0f172a; }
+  .brand-stat-sub { font-size: 11px; color: #6b7280; }
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+
+  /* Insights */
+  .insight {
+    background: white;
+    border-left: 5px solid #6366f1;
+    padding: 18px 24px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .insight.success { border-left-color: #10b981; background: #ecfdf5; }
+  .insight.warning { border-left-color: #f59e0b; background: #fffbeb; }
+  .insight.danger { border-left-color: #ef4444; background: #fef2f2; }
+  .insight.gold { border-left-color: #eab308; background: linear-gradient(90deg, #fefce8 0%, #fef9c3 100%); }
+  .insight.blue { border-left-color: #2563eb; background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%); }
+  .insight-icon { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: #6366f1; color: white; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; margin-right: 8px; vertical-align: middle; }
+  .insight.success .insight-icon { background: #10b981; }
+  .insight.warning .insight-icon { background: #f59e0b; }
+  .insight.danger .insight-icon { background: #ef4444; }
+  .insight.gold .insight-icon { background: #ca8a04; }
+  .insight.blue .insight-icon { background: #2563eb; }
+  .insight-title { font-weight: 700; color: #0f172a; font-size: 16px; margin-bottom: 6px; }
+  .insight-why { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 6px; margin-top: 8px; font-size: 14px; }
+  .insight-why strong { color: #1d4ed8; }
+
+  .pill { display: inline-block; padding: 2px 10px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; margin: 0 2px; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+
+  .action-list { counter-reset: alist; list-style: none; padding: 0; }
+  .action-list li {
+    counter-increment: alist;
+    background: white;
+    padding: 16px 20px 16px 60px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+  }
+  .action-list li::before {
+    content: counter(alist);
+    position: absolute;
+    left: 16px; top: 16px;
+    width: 30px; height: 30px;
+    background: linear-gradient(135deg, #1e3a5f, #2563eb);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+
+  .competitor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  @media (max-width: 700px) { .competitor-grid { grid-template-columns: 1fr; } }
+  .competitor-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+  .competitor-name { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .competitor-score { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+  .competitor-strategy { font-size: 14px; color: #4b5563; }
+
+  .key-quote {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+    border: 2px dashed #ca8a04;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    font-size: 17px;
+    color: #78350f;
+    font-weight: 500;
+  }
+  .key-quote strong { color: #422006; }
+
+  .alarm-box {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border: 2px solid #dc2626;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    color: #7f1d1d;
+  }
+  .alarm-box h3 { color: #7f1d1d; margin-bottom: 8px; }
+  .alarm-box strong { color: #450a0a; }
+
+  .swing-box {
+    background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+    border: 2px solid #059669;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    color: #064e3b;
+  }
+  .swing-box strong { color: #022c22; }
+
+  .vodite-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%);
+    border: 2px solid #2563eb;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    color: #1e3a5f;
+  }
+  .vodite-box strong { color: #1e3a5f; }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · ROUND 3 RECAP · PERIOD 2 → PERIOD 3</div>
+    <h1>Round 3: We Overtook Marvels — But Snipers Vaulted to #1 via Vodite</h1>
+    <p>Revenue grew to $79M (+22%), TOHO launched, and Marvels is now 101 SPI behind us. But Snipers' Vodite first-mover advantage (+552 SPI in one round) is the defining threat. Round 4 must launch our Vodite brand immediately.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">SPI Rank</div>
+        <div class="hero-stat-value">#2</div>
+        <div class="hero-stat-sub">1,539 (−177 vs Snipers)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">EBT</div>
+        <div class="hero-stat-value">$32.8M</div>
+        <div class="hero-stat-sub">+5.7% vs P2 (Vodite R&D cost)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Revenue</div>
+        <div class="hero-stat-value">$78.8M</div>
+        <div class="hero-stat-sub">+22.4%</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Est. Next Budget</div>
+        <div class="hero-stat-value">~$11.3M</div>
+        <div class="hero-stat-sub">After loan repayment ($1.8M)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Industry Standings -->
+  <section>
+    <div class="section-tag">PART 01 · INDUSTRY STANDINGS</div>
+    <h2>The Leaderboard Has Completely Reshuffled</h2>
+    <div class="ranking">
+      <div class="rank-row leader">
+        <div class="rank-num">🥇</div>
+        <div class="rank-name">Snipers ⚡</div>
+        <div class="rank-bar-container"><div class="rank-bar leader" style="width: 100%"></div></div>
+        <div class="rank-stat"><strong>1,716</strong><br>SPI (+552!)</div>
+        <div class="rank-stat"><strong>$95M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$41M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row us">
+        <div class="rank-num">🥈</div>
+        <div class="rank-name">Titans (us)</div>
+        <div class="rank-bar-container"><div class="rank-bar us" style="width: 89.7%"></div></div>
+        <div class="rank-stat"><strong>1,539</strong><br>SPI (+115)</div>
+        <div class="rank-stat"><strong>$79M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$33M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">🥉</div>
+        <div class="rank-name">Marvels</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width: 83.8%"></div></div>
+        <div class="rank-stat"><strong>1,438</strong><br>SPI (−148)</div>
+        <div class="rank-stat"><strong>$71M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$27M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">4</div>
+        <div class="rank-name">Rocket</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width: 82.2%; background: linear-gradient(90deg, #94a3b8, #64748b);"></div></div>
+        <div class="rank-stat"><strong>1,411</strong><br>SPI (+166)</div>
+        <div class="rank-stat"><strong>$76M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$32M</strong><br>Net Contrib.</div>
+      </div>
+    </div>
+
+    <div class="swing-box">
+      <strong>The Marvels reversal: a 263-point swing in one round.</strong> Period 2: Marvels led us by 162 SPI. Period 3: we lead Marvels by 101 SPI. What drove their fall: MOVE's $575 upgrade increased revenue but reduced volume share, MOST's value share slid −4pp, and their R&D spend hasn't shipped competitive products yet.
+    </div>
+
+    <div class="alarm-box">
+      <h3>🚨 SNIPERS +552 SPI — THE VODITE SHOCK</h3>
+      <p>Snipers went from 4th place (1,164 SPI) in Round 2 to 1st place (1,716 SPI) in one round. The cause is a dual engine: <strong>SESENEW</strong> (Vodite first mover, capturing 69% of a $70M market) + <strong>SOLO</strong> cost reduction (base cost $169 → $154, volume +49K). This is what Rogers' Diffusion of Innovation looks like in practice — Innovator segment captured = outsized SPI reward.</p>
+      <p style="margin-top: 8px;"><strong>Our Vodite R&D is in flight but not yet complete.</strong> Every round we delay launch is another round of lost Vodite market share.</p>
+    </div>
+  </section>
+
+  <!-- 2. Brand Performance -->
+  <section>
+    <div class="section-tag">PART 02 · BRAND PERFORMANCE</div>
+    <h2>TONE, TOPS & TOHO Breakdown</h2>
+
+    <div class="brand-grid">
+      <div class="brand-card tone">
+        <span class="brand-tag tag-low">TONE · LOW-END · SAVERS</span>
+        <h3>TONE</h3>
+        <p style="color: #78350f; font-size: 13px;">Volume leader in Savers; but now over-supplied</p>
+        <div class="brand-stats-grid">
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Sold</div>
+            <div class="brand-stat-value">186K</div>
+            <div class="brand-stat-sub" style="color: #d97706;">Plan 240K → auto-cut 192K</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Revenue</div>
+            <div class="brand-stat-value">$26.2M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+10% vs P2</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">CAM</div>
+            <div class="brand-stat-value">$14.5M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+15% vs P2</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Unit Cost</div>
+            <div class="brand-stat-value">$48</div>
+            <div class="brand-stat-sub"><span class="delta-up">−9% experience curve</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Share</div>
+            <div class="brand-stat-value">15.2%</div>
+            <div class="brand-stat-sub"><span class="delta-down">−0.6pp (market grew faster)</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Value Share</div>
+            <div class="brand-stat-value">9.2%</div>
+            <div class="brand-stat-sub"><span class="delta-down">−0.8pp</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-card tops">
+        <span class="brand-tag tag-high">TOPS · HIGH-END · PROFIT ENGINE 💰</span>
+        <h3>TOPS</h3>
+        <p style="color: #1e3a8a; font-size: 13px;">Value share #1 in industry; MOVE upgrade is a direct threat</p>
+        <div class="brand-stats-grid">
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Sold</div>
+            <div class="brand-stat-value">142K</div>
+            <div class="brand-stat-sub" style="color: #d97706;">Plan 180K → auto-cut 144K</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Revenue</div>
+            <div class="brand-stat-value">$43.9M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+8% vs P2</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">CAM</div>
+            <div class="brand-stat-value">$24.3M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+20% vs P2 🚀</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Unit Cost</div>
+            <div class="brand-stat-value">$119</div>
+            <div class="brand-stat-sub"><span class="delta-up">−6% experience curve</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Share</div>
+            <div class="brand-stat-value">11.6%</div>
+            <div class="brand-stat-sub"><span class="delta-down">−1.2pp</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Value Share</div>
+            <div class="brand-stat-value">16.0%</div>
+            <div class="brand-stat-sub"><span class="delta-down">−1.6pp (MOVE threat)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-card toho">
+        <span class="brand-tag tag-new">TOHO · NEW · SHOPPERS 🌱</span>
+        <h3>TOHO</h3>
+        <p style="color: #064e3b; font-size: 13px;">Successful launch — but sold out again, CAM still negative</p>
+        <div class="brand-stats-grid">
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Sold</div>
+            <div class="brand-stat-value">60K</div>
+            <div class="brand-stat-sub" style="color: #dc2626;">Plan 50K → auto-cap 60K → sold ALL ⚠</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Revenue</div>
+            <div class="brand-stat-value">$8.8M</div>
+            <div class="brand-stat-sub">First full period</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">CAM</div>
+            <div class="brand-stat-value" style="color: #dc2626;">−$1.95M</div>
+            <div class="brand-stat-sub">Normal for launch year</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Unit Cost</div>
+            <div class="brand-stat-value">$124</div>
+            <div class="brand-stat-sub">First-batch penalty; will fall fast</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Share</div>
+            <div class="brand-stat-value">4.9%</div>
+            <div class="brand-stat-sub">Shoppers potential ~20%+</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Value Share</div>
+            <div class="brand-stat-value">3.1%</div>
+            <div class="brand-stat-sub">Will grow with cost reduction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alarm-box">
+      <h3>🚨 TOHO SOLD OUT FOR THE SECOND CONSECUTIVE PERIOD</h3>
+      <p>Planned 50K → auto-capped at 60K → sold every unit. Markstrat's newsletter issued a <em>lost sales warning for TOHO</em> for the second time. Shoppers segment is currently ~265K and growing. TOHO captured only ~23% of potential demand. Round 4 production must be <strong>120K minimum</strong> — we must stop leaving Shoppers to competitors.</p>
+    </div>
+  </section>
+
+  <!-- 3. What worked -->
+  <section>
+    <div class="section-tag">PART 03 · WHAT WORKED — AND WHY</div>
+    <h2>4 Decisions That Delivered</h2>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>Overtook Marvels: +263 SPI swing in one period</div>
+      P2 we were 162 behind. P3 we are 101 ahead. Net turnaround: 263 SPI.
+      <div class="insight-why"><strong>Why it happened:</strong> Marvels bet on MOVE's $575 upgrade targeting Professionals — a valid move but one that raised their ASP while reducing volume traction. Simultaneously, our TOHO launch opened a new revenue stream, our commercial team expansion (to 160 FTE) widened distribution, and TOPS CAM grew +20%. Marvels' MOST also shed value share (−4pp). We didn't beat Marvels in a single area — we outperformed them on aggregate across four areas simultaneously.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>POTONECRP3 completed for just $100K — base cost $65</div>
+      Same TONE specs, base cost drops from $74 → $65 (−12%). Zero additional R&D needed.
+      <div class="insight-why"><strong>Why it matters:</strong> Switching TONE from POTONE to POTONECRP3 in Round 4 costs nothing and immediately reduces cost on every unit. With cumulative production of ~575K, each $1 of cost reduction saves ~$0.5M annually at current volumes. The POTONECRP3 switch also increases our price-war resilience — ROCK at $200 is pressuring TONE's Savers base, and a lower cost floor means we can respond without destroying margin.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>TOHO first-period launch: 60K sold, new revenue stream open</div>
+      Revenue $8.8M, 4.9% volume share, 38%/43%/32% channel coverage — all in the first period.
+      <div class="insight-why"><strong>Why it worked:</strong> The 160-FTE commercial team gave TOHO instant distribution muscle. A new brand normally struggles with coverage; TOHO's 38% Specialty and 43% Mass Merch first-period coverage matches what established brands took 2–3 rounds to build. The downside is supply — TOHO is selling every unit we make, which means the production floor has been the binding constraint, not demand.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>TOPS CAM hit $24.3M (+20%) — the company's profit engine is growing</div>
+      TOPS now generates 66% of company contribution. Value share #1 in industry at 16%.
+      <div class="insight-why"><strong>Why it worked:</strong> Experience curve (unit cost $127 → $119) combined with stable $500 pricing expanded margin per unit, while volume held at 142K. The −42% advertising cut in P2 did cause volume share to slip −1.2pp, but the salesforce upgrade and price positioning more than compensated in contribution terms. Round 4 needs to restore TOPS advertising — MOVE's upgrade now makes Professionals more contested.</div>
+    </div>
+  </section>
+
+  <!-- 4. What went wrong -->
+  <section>
+    <div class="section-tag">PART 04 · WHAT WENT WRONG — AND WHY</div>
+    <h2>4 Issues Round 4 Must Fix</h2>
+
+    <div class="insight danger">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 1: TOHO supply failure (2nd period in a row)</div>
+      Planned 50K, system auto-raised to 60K, still sold out. Lost sales warning issued again.
+      <div class="insight-why"><strong>Root cause:</strong> We continue to under-estimate Shoppers demand. The segment is ~265K in P3. TOHO's positioning (features 7, design 8 — closest to Shoppers' ideal) should be capturing 20%+ of the segment = ~53K+ from Shoppers alone, plus Savers overlap. Our 60K ceiling was never going to be enough.<br><br>
+      <strong>Round 4 fix:</strong> Plan TOHO at <strong>120K</strong>. The ±20% ceiling puts actual range at 96–144K. At 120K production, experience curve will push unit cost from $124 → ~$105, CAM should turn positive for the first time.</div>
+    </div>
+
+    <div class="insight danger">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 2: TONE and TOPS both over-produced (first inventory ever)</div>
+      TONE: planned 240K, auto-cut to 192K, sold 186K → 6K inventory. TOPS: planned 180K, auto-cut to 144K, sold 142K → 2K inventory.
+      <div class="insight-why"><strong>Root cause:</strong> We extrapolated last period's demand trajectory without accounting for market saturation signals. Sonite market grew +19% (P2→P3) but both TONE and TOPS lost share — competitors SOLO (+49K) and MOVE/ROLL absorbed more of the new demand. We over-planned based on market growth without adjusting for competitive share pressure.<br><br>
+      <strong>Round 4 fix:</strong> TONE plan ~210K, TOPS plan ~155–165K. Also note: ROCK's price drop to $200 will likely steal some TONE Savers volume in P4 — plan conservatively.</div>
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 3: Value share fell 4pp (28% → 24%) despite revenue growth</div>
+      Company volume share held at 30%, but value share dropped from 28% to 24%.
+      <div class="insight-why"><strong>Root cause:</strong> TOHO's low ASP ($146 average selling price vs $223 retail) drags company value share down. TOHO sold $8.8M on 60K units — a low-ASP launch. TONE at $141 ASP also pulls the mix lower. TOPS at $310 ASP is the only value-driver. As TOHO scales and matures, this should recover — but short-term it's a mix signal to watch.<br><br>
+      <strong>Watch for:</strong> If value share keeps falling in P4, it signals we're growing in low-margin segments while losing high-margin ground to MOVE and SOLO.</div>
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 4: Missed Vodite's entire first period — 0% of a $70M market</div>
+      Snipers (69%) and Rocket (31%) split the $70M Vodite market between them. We weren't there.
+      <div class="insight-why"><strong>Root cause:</strong> R&D was launched in P3 but isn't complete yet — Vodite projects typically require 2 periods. The decision to invest $8.6M in Vodite R&D in P3 was correct, but it means we can't launch until P4 at the earliest. The opportunity cost is significant: missing P3 Vodite = missing Innovators segment SPI.<br><br>
+      <strong>Round 4 imperative:</strong> If Vodite R&D shows as complete in the P4 R&D report, launch immediately. Target <strong>Early Adopters</strong> (not Innovators — Snipers has already claimed them). Do not wait for P5.</div>
+    </div>
+  </section>
+
+  <!-- 5. Critical signals -->
+  <section>
+    <div class="section-tag">PART 05 · THE TWO MOST IMPORTANT SIGNALS</div>
+    <h2>Round 4 Must Be Built Around These</h2>
+
+    <div class="insight gold">
+      <div class="insight-title"><span class="insight-icon">⭐</span>Signal 1: Snipers' Vodite monopoly is the single biggest SPI threat</div>
+      <table>
+        <thead><tr><th>Firm</th><th>Vodite Share</th><th>Vodite Revenue (~)</th><th>SPI Change</th></tr></thead>
+        <tbody>
+          <tr class="threat"><td>Snipers (SESENEW)</td><td>69%</td><td>~$48M</td><td>+552 🚀</td></tr>
+          <tr><td>Rocket</td><td>31%</td><td>~$22M</td><td>+166</td></tr>
+          <tr class="us"><td>Titans (us)</td><td>0%</td><td>$0</td><td>+115</td></tr>
+          <tr><td>Marvels</td><td>0%</td><td>$0</td><td>−148</td></tr>
+        </tbody>
+      </table>
+      <div class="insight-why"><strong>Implication:</strong> Vodite market is projected to grow faster than Sonites in every future period. Each period we remain absent, Snipers consolidates brand loyalty with Innovators and Early Adopters. When we enter in P4, Snipers will be the established incumbent — we need differentiated positioning (Early Adopters: price-sensitive but high-growth) and aggressive production from day one.</div>
+    </div>
+
+    <div class="insight gold">
+      <div class="insight-title"><span class="insight-icon">⭐</span>Signal 2: ROCK's $200 price is a direct missile aimed at TONE</div>
+      ROCK dropped from $499 → $200. TONE is at $225. Savers are the most price-sensitive segment in the market.
+      <div class="insight-why">
+        <strong>The threat model:</strong><br>
+        • Savers ideal price is in the $200–240 range. ROCK at $200 is at the floor of that range.<br>
+        • TONE at $225 is still competitive, but the $25 gap matters — Savers buy on price.<br>
+        • ROCK's base cost is $74 (same as TONE), so at $200 they're sacrificing margin to buy share.<br><br>
+        <strong>Our response options:</strong><br>
+        ① Switch TONE to POTONECRP3 ($65 base cost) — gives us room to hold price or cut it<br>
+        ② Hold TONE at $225 and let ROCK bleed margin — if they can't sustain $200 long-term, they'll have to raise<br>
+        ③ Cut TONE price to $215 — modest response, preserves margin, tests ROCK's commitment<br><br>
+        <strong>Recommended:</strong> Switch platform (free) + hold $225. Monitor TONE's Savers share in P4 results before committing to a price cut.
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Competitor profiles -->
+  <section>
+    <div class="section-tag">PART 06 · THE THREE COMPETITORS</div>
+    <h2>What They Did — and What It Means for Round 4</h2>
+    <div class="competitor-grid">
+      <div class="competitor-card" style="border-left: 4px solid #dc2626;">
+        <div class="competitor-name">⚡ Snipers (NEW #1)</div>
+        <div class="competitor-score">SPI 1,716 · +552 in one round · Vodite 69% + SOLO cost-reduced</div>
+        <div class="competitor-strategy">
+          <strong>What happened:</strong> SESENEW (Vodite) captured 69% of the brand-new $70M market. SOLO base cost dropped $169 → $154, volume jumped 113K → 162K. SPI formula rewarded both.<br><br>
+          <strong>Round 4 threat:</strong> SESENEW will deepen Early Adopter loyalty. SOLO will keep eroding Professionals share from TOPS. Snipers is now a two-front threat: Sonite premium and Vodite pioneer.<br><br>
+          <strong>How to respond:</strong> Don't fight SESENEW in Innovators — instead launch our Vodite for Early Adopters. Defend TOPS via advertising restoration (not price war).
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #ec4899;">
+        <div class="competitor-name">⬇ Marvels (fell to #3)</div>
+        <div class="competitor-score">SPI 1,438 · −148 SPI · MOVE upgraded, MOST sliding</div>
+        <div class="competitor-strategy">
+          <strong>What happened:</strong> MOVE upgrade (Features 15, Battery 72, Power 84, Price $575) is targeting Professionals and High Earners. Bold move — but MOST shed −4pp value share and MOST volume fell −21K. Their portfolio is top-heavy.<br><br>
+          <strong>Round 4 threat:</strong> MOVE at Power 84 is the most capable Professionals product now. If we don't upgrade TOPS' specs (Power/Battery), we risk losing Professionals to MOVE.<br><br>
+          <strong>How to respond:</strong> Initiate POTOPS upgrade R&D. Marvels' MOST slide gives us continued Savers room — don't need to change TONE strategy yet.
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #6366f1;">
+        <div class="competitor-name">🚀 Rocket (steady #4)</div>
+        <div class="competitor-score">SPI 1,411 · +166 · ROCK price war + Vodite 31%</div>
+        <div class="competitor-strategy">
+          <strong>What happened:</strong> ROCK dropped to $200 — a price-war move targeting Savers. ROLL held ground in high-end. Rocket's Vodite brand captured 31% of the $70M market (Early Adopter positioning likely).<br><br>
+          <strong>Round 4 threat:</strong> ROCK at $200 is the primary threat to TONE's Savers base. Rocket also has Vodite presence — if they expand, they'll compete with our launch directly.<br><br>
+          <strong>How to respond:</strong> TONE platform switch (free cost reduction) is the first defensive move. Then monitor ROCK share in P4 before committing to price response.
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #ca8a04;">
+        <div class="competitor-name">🦁 Titans (us)</div>
+        <div class="competitor-score">SPI 1,539 · #2 · 3-brand portfolio, Vodite R&D in flight</div>
+        <div class="competitor-strategy">
+          <strong>Current position:</strong> TOPS is the most efficient high-end brand by CAM ($24.3M). TONE holds volume leadership (186K). TOHO is supply-constrained but demand-validated. Vodite R&D investment of $8.6M is the most important in-flight asset.<br><br>
+          <strong>Round 4 strategy:</strong> ① Confirm Vodite R&D complete → launch immediately ② TOHO 120K ③ TONE switch to POTONECRP3 ④ Restore TOPS advertising ⑤ Stay disciplined on Sonite production (don't over-produce again)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Vodite -->
+  <section>
+    <div class="section-tag">PART 07 · THE VODITE IMPERATIVE</div>
+    <h2>Why Vodite Is the Highest-Priority Decision in Round 4</h2>
+    <div class="vodite-box">
+      <p><strong>The numbers:</strong> Vodite generated $70M in retail sales in its first period. Snipers captured $48M of that. Their SPI jumped +552. We got $0 and our SPI grew only +115.</p>
+      <p style="margin-top: 10px;"><strong>The projection:</strong> Vodite market will grow faster than Sonites in every future period (Rogers diffusion — Early Adopters and Early Majority are much larger than Innovators). The SPI gap between Vodite-present and Vodite-absent firms will compound each period.</p>
+      <p style="margin-top: 10px;"><strong>The decision rule:</strong> If Vodite R&D shows "Available: Period 4" in the P4 R&D report — launch the brand immediately. Budget ~$2M for Vodite launch marketing. Do not delay to P5 to "save budget" — that's the same mistake we made going into P3.</p>
+      <p style="margin-top: 10px;"><strong>Target segment:</strong> Early Adopters (not Innovators — Snipers owns that). Early Adopters are price-conscious but technology-curious. Position our Vodite brand at a slightly lower price than SESENEW with advertising targeting Early Adopters directly.</p>
+    </div>
+  </section>
+
+  <!-- 8. Round 4 Playbook -->
+  <section>
+    <div class="section-tag">PART 08 · ROUND 4 PLAYBOOK</div>
+    <h2>7 Priorities for the Team</h2>
+
+    <ol class="action-list">
+      <li>
+        <strong>Launch Vodite brand (if R&D complete) — #1 priority ⭐</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Check R&D Report first. If POTOVO (or equivalent Vodite platform) shows "Available: P4", launch immediately. Production ~40–60K, price just below SESENEW, advertising focused on Early Adopters. Budget ~$2M for launch. This is the highest-SPI move available to us.</span>
+      </li>
+      <li>
+        <strong>TOHO production: plan 120K — no more stockouts</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Two consecutive sell-outs = validated demand signal. Shoppers segment is ~265K. Plan 120K (ceiling 144K). Cost will drop from $124 → ~$105 at that volume. CAM should turn positive. The lost sales cost from underproduction far exceeds the inventory carrying cost of modest overproduction.</span>
+      </li>
+      <li>
+        <strong>Switch TONE to POTONECRP3 platform (free, immediate)</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">In Brand Portfolio decisions, change TONE's base project from POTONE to POTONECRP3. Same specs, base cost drops $74 → $65. This costs nothing in R&D and saves ~$9/unit × 186K units = ~$1.7M additional contribution per period. Also builds price-war resilience against ROCK at $200.</span>
+      </li>
+      <li>
+        <strong>TONE and TOPS production: dial back to actual demand</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">TONE: plan 210K (not 240K). TOPS: plan 155–165K (not 180K). With ROCK at $200, TONE demand may soften further in P4 — don't over-commit. Inventory costs money and signals poor planning in the BCG analysis.</span>
+      </li>
+      <li>
+        <strong>Restore TOPS advertising — Professionals are under attack</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">TOPS advertising was cut −42% in P2, and TOPS value share fell −1.6pp this period. MOVE (Power 84, Battery 72) is now the most technically capable Professionals product. Restore TOPS media budget to ~$1.5M and increase research allocation to 15% (target Professionals' MDS position).</span>
+      </li>
+      <li>
+        <strong>Initiate TOPS R&D upgrade — Power and Battery for Professionals</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">MOVE's upgrade makes TOPS' current specs (Power 75, Battery 40) look dated to Professionals. Start a POTOPS2 project targeting Power 80+, Battery 60+. Budget $1.5–2M. Will be available P5 — which is when the Professionals battle will be decisive.</span>
+      </li>
+      <li>
+        <strong>Monitor ROCK's price war impact on TONE — don't panic-cut</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">ROCK at $200 is a threat, but Rocket may not sustain it (their margin at $200 and $74 cost is thin). Wait for P4 Savers share data before cutting TONE price. Hold $225 for now — POTONECRP3 already gives us cost room. A reflexive price cut could trigger a race to the bottom that hurts everyone.</span>
+      </li>
+    </ol>
+
+    <div class="key-quote" style="margin-top: 20px;">
+      <strong>Round 4 theme: "Vodite entry + TOHO scale + Sonite defense."</strong> We have ~$11.3M budget (after loan repayment). The Snipers gap of 177 SPI is closable — but only if we enter Vodite immediately. Every period we're absent from Vodite is a period where Snipers widens the gap. TOHO at 120K will turn CAM-positive and open the Shoppers segment properly. TONE and TOPS need defensive tweaks, not transformations.
+    </div>
+  </section>
+
+  <footer>
+    Round 3 Recap · Firm Titans · 2026-05-15<br>
+    Source: Markstrat Period 3 full report · Built for team alignment<br>
+    Will be updated after Round 4 submission
+  </footer>
+
+</div>
+</body>
+</html>

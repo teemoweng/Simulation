@@ -46,6 +46,7 @@ Request `Round{N-1}_Final_Decisions.md` from Teemo. The submitted decisions may 
 
 **Step 2 — Process Results**
 Teemo provides raw results data (company P&L, market share, brand metrics, etc.). Organise and save as `Round{N}_Results.md`. Cover: SPI standings, brand CAM, production outcomes, competitive moves, key anomalies.
+→ After saving the `.md`, generate `Round{N}_Results_Analysis_EN.html` — the English HTML report summarising last round's results, what worked, what went wrong, and key signals. This is shared directly with teammates.
 
 **Step 3 — Process Market Research**
 Teemo provides raw market research data (Consumer Survey, Consumer Panel, Semantic Scales, MDS, experiments, etc.). Organise and save as `Round{N}_MarketResearch.md`. Cover: awareness, purchase intent, perceptual positions, ideal point drift, experiment results.
@@ -54,6 +55,10 @@ Teemo provides raw market research data (Consumer Survey, Consumer Panel, Semant
 Synthesise Steps 1–3. Produce:
 - `Round{N}_Decision_Analysis.md` — full analysis and rationale (5 modules: R&D → Brand Portfolio → Marketing Mix → Commercial Team → Market Research)
 - `Round{N}_Decision_Guide_EN.html` — fill-in guide for teammates (see Document Standards below)
+
+**Two HTML deliverables per round (both shared with teammates in English):**
+1. `Round{N}_Results_Analysis_EN.html` — recap of the previous round: what happened, what worked, what went wrong, signals for next round
+2. `Round{N}_Decision_Guide_EN.html` — fill-in decision guide for the current round's submissions
 
 ---
 
@@ -76,11 +81,12 @@ Synthesise Steps 1–3. Produce:
 All round files live in `round{N}/` subdirectories. Reference PDFs and evergreen docs live in `reference/`.
 
 ```
-round{N}/Round{N}_Final_Decisions.md       ← actual submitted decisions (source of truth)
-round{N}/Round{N}_Results.md               ← processed results data
-round{N}/Round{N}_MarketResearch.md        ← processed market research data
-round{N}/Round{N}_Decision_Analysis.md    ← analysis + rationale
-round{N}/Round{N}_Decision_Guide_EN.html  ← fill-in guide for team (English)
+round{N}/Round{N}_Final_Decisions.md           ← actual submitted decisions (source of truth)
+round{N}/Round{N}_Results.md                   ← processed results data (Chinese)
+round{N}/Round{N}_Results_Analysis_EN.html     ← results recap HTML for teammates (English) ← NEW
+round{N}/Round{N}_MarketResearch.md            ← processed market research data (Chinese)
+round{N}/Round{N}_Decision_Analysis.md         ← analysis + rationale (Chinese)
+round{N}/Round{N}_Decision_Guide_EN.html       ← fill-in decision guide for team (English)
 ```
 
 ---
