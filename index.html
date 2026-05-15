@@ -3,357 +3,630 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Markstrat Simulation · Teemo Weng</title>
+  <title>Markstrat Simulation · Team TITANS</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #003e74;
+      --blue-light: #e8f0fb;
+      --amber: #b45309;
+      --amber-light: #fef3c7;
+      --green: #15803d;
+      --green-light: #dcfce7;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f1f5f9;
+      --white: #ffffff;
+      --text: #0f172a;
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e8edf3 100%);
-      color: #1a2332;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-      padding: 60px 24px;
     }
 
-    .container { max-width: 980px; margin: 0 auto; }
-
-    header {
-      text-align: center;
-      margin-bottom: 56px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid #d8e0eb;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #003e74;
+    /* ── Top nav bar ── */
+    .topbar {
+      background: var(--blue);
       color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      font-size: 13px;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 20px; }
+    .topbar-brand { font-weight: 700; letter-spacing: 0.5px; font-size: 14px; }
+    .topbar-sep { opacity: 0.3; }
+    .topbar-meta { opacity: 0.75; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .topbar-chip {
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 3px 12px;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
     }
+    .topbar-chip.rank { background: #facc15; color: #422006; }
 
-    h1 {
-      font-size: 36px;
+    /* ── Hero ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
       font-weight: 700;
-      color: #003e74;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: #5a6b7f;
-      font-weight: 400;
-    }
-
-    .meta {
-      margin-top: 16px;
-      font-size: 13px;
-      color: #8095a8;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-    .section-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      color: #5a6b7f;
+      letter-spacing: 2px;
+      color: var(--muted);
       text-transform: uppercase;
-      margin-bottom: 16px;
-      padding-left: 4px;
-    }
-
-    .round-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 640px) {
-      .round-grid { grid-template-columns: 1fr; }
-      body { padding: 32px 16px; }
-      h1 { font-size: 28px; }
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid #e1e8f0;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      position: relative;
-    }
-
-    .card.live:hover {
-      transform: translateY(-2px);
-      border-color: #003e74;
-      box-shadow: 0 8px 24px rgba(0, 62, 116, 0.08);
-    }
-
-    .card.upcoming {
-      opacity: 0.55;
-      cursor: not-allowed;
-      background: #f8fafc;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin-bottom: 12px;
     }
+    .hero h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
 
-    .round-label {
+    /* Stats row */
+    .stats-row {
+      display: inline-flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .stat-cell {
+      padding: 14px 28px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      min-width: 120px;
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .stat-value { font-size: 22px; font-weight: 800; color: var(--text); margin-top: 2px; }
+    .stat-value.highlight { color: var(--blue); }
+    .stat-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    /* ── Progress timeline ── */
+    .timeline-wrap {
+      max-width: 860px;
+      margin: 36px auto 0;
+      padding: 0 32px;
+    }
+    .timeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+    .timeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+    .timeline-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .timeline-step.done:not(:last-child)::after { background: var(--blue); }
+    .timeline-step.active:not(:last-child)::after { background: var(--border); }
+    .timeline-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    .timeline-step.done .timeline-dot { background: var(--blue); border-color: var(--blue); color: white; }
+    .timeline-step.active .timeline-dot { background: var(--white); border-color: var(--blue); color: var(--blue); box-shadow: 0 0 0 4px rgba(0,62,116,0.12); }
+    .timeline-label { font-size: 11px; color: var(--muted); margin-top: 8px; font-weight: 600; }
+    .timeline-step.done .timeline-label { color: var(--blue); }
+    .timeline-step.active .timeline-label { color: var(--blue); font-weight: 700; }
+
+    /* ── Main content ── */
+    .main { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    /* Section label */
+    .section-label {
       font-size: 11px;
       font-weight: 700;
-      color: #003e74;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
     }
+    .section-label:first-child { margin-top: 0; }
 
-    .status {
-      font-size: 11px;
-      padding: 2px 10px;
-      border-radius: 10px;
-      font-weight: 600;
+    /* ── Round block ── */
+    .round-block {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 16px;
     }
-
-    .status.live {
-      background: #d4f4dd;
-      color: #1a7a3b;
-    }
-
-    .status.pending {
-      background: #fce8d6;
-      color: #b8651a;
-    }
-
-    .status.upcoming {
-      background: #e8edf3;
-      color: #6b7c8f;
-    }
-
-    .card-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: #1a2332;
-      margin-bottom: 6px;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: #6b7c8f;
-      line-height: 1.5;
-    }
-
-    .arrow {
-      position: absolute;
-      bottom: 20px;
-      right: 24px;
-      font-size: 18px;
-      color: #003e74;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .card.live:hover .arrow {
-      opacity: 1;
-    }
-
-    .extras {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid #e1e8f0;
-    }
-
-    .extras-list {
-      list-style: none;
-    }
-
-    .extras-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f4f9;
+    .round-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #f8fafc;
+    }
+    .round-header-left { display: flex; align-items: center; gap: 14px; }
+    .round-number {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--blue);
+      text-transform: uppercase;
+    }
+    .round-summary {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .round-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .round-tag.complete { background: var(--green-light); color: var(--green); }
+    .round-tag.active { background: #dbeafe; color: #1d4ed8; }
+    .round-tag.upcoming { background: #f1f5f9; color: var(--muted); }
+
+    .round-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .round-cards .doc-card:first-child {
+      border-right: 1px solid var(--border);
     }
 
-    .extras-list li:last-child { border-bottom: none; }
-
-    .extras-list a {
-      color: #003e74;
+    /* ── Document card ── */
+    .doc-card {
+      display: block;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
+      color: inherit;
+      padding: 20px 24px;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+    .doc-card.clickable:hover { background: #f8fafc; }
+    .doc-card.disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+
+    .doc-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .doc-type.results { color: var(--amber); }
+    .doc-type.decision { color: #2563eb; }
+    .doc-type-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+    .doc-type.results .doc-type-dot { background: var(--amber); }
+    .doc-type.decision .doc-type-dot { background: #2563eb; }
+
+    .doc-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .doc-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .doc-arrow {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #cbd5e1;
+      transition: color 0.15s, transform 0.15s;
+    }
+    .doc-card.clickable:hover .doc-arrow { color: var(--blue); transform: translateY(-50%) translateX(3px); }
+
+    .doc-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .doc-badge.live { background: var(--green-light); color: var(--green); }
+    .doc-badge.pending { background: #fef9c3; color: #92400e; }
+    .doc-badge.upcoming { background: #f1f5f9; color: var(--muted); }
+
+    /* ── Upcoming round (collapsed) ── */
+    .round-block.upcoming-round .round-cards {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .extras-list a:hover {
-      text-decoration: underline;
+    /* ── Reference section ── */
+    .ref-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
     }
+    .ref-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .ref-row:last-child { border-bottom: none; }
+    .ref-row:hover { background: #f8fafc; }
+    .ref-title { font-size: 14px; font-weight: 600; color: var(--blue); }
+    .ref-desc { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .ref-arrow { font-size: 14px; color: #cbd5e1; }
 
-    .extras-list .muted {
-      color: #a0aec0;
-      font-size: 14px;
+    /* ── Final report ── */
+    .report-block {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .report-block-left h3 { font-size: 18px; font-weight: 700; color: #78350f; }
+    .report-block-left p { font-size: 13px; color: #92400e; margin-top: 4px; }
+    .report-block-right {
+      font-size: 13px;
+      color: #92400e;
+      background: rgba(255,255,255,0.5);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
     footer {
       text-align: center;
-      margin-top: 56px;
-      padding-top: 32px;
-      border-top: 1px solid #d8e0eb;
+      padding: 32px;
+      border-top: 1px solid var(--border);
       font-size: 12px;
-      color: #8095a8;
+      color: var(--muted);
+      background: var(--white);
     }
+    footer a { color: var(--blue); text-decoration: none; }
 
-    footer a {
-      color: #003e74;
-      text-decoration: none;
+    @media (max-width: 640px) {
+      .topbar-right, .topbar-meta { display: none; }
+      .stats-row { flex-direction: column; width: 100%; }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-cell:last-child { border-bottom: none; }
+      .round-cards { grid-template-columns: 1fr; }
+      .round-cards .doc-card:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .main { padding: 32px 16px 60px; }
+      .hero { padding: 32px 16px 28px; }
+      .hero h1 { font-size: 26px; }
+      .timeline-wrap { padding: 0 16px; }
+      .report-block { flex-direction: column; gap: 14px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <header>
-      <div class="tag">IMPERIAL COLLEGE · ESB</div>
-      <h1>Markstrat Simulation</h1>
-      <p class="subtitle">Corporate Strategy &amp; Economics — Decision Log &amp; Analysis</p>
-      <p class="meta">Final Report Due · 8 June 2026</p>
-    </header>
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-brand">TITANS</span>
+      <span class="topbar-sep">|</span>
+      <span class="topbar-meta">Imperial College · ESB · Markstrat</span>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-chip rank">#2 · 1,539 SPI</span>
+      <span class="topbar-chip">Round 4 / 6</span>
+      <span class="topbar-chip">Due 8 Jun 2026</span>
+    </div>
+  </div>
 
-    <section>
-      <h2 class="section-title">Rounds</h2>
-      <div class="round-grid">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Corporate Strategy &amp; Economics Simulation</div>
+    <h1>Markstrat Decision Hub</h1>
+    <p class="hero-sub">Every round's results and decision guide in one place — for the whole team.</p>
 
-        <a href="round1/Round1_Action_Plan_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 1</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Action Plan</div>
-          <div class="card-desc">Strategic action plan for Round 1</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round1/Round1_Results_Analysis_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 1</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Results Analysis</div>
-          <div class="card-desc">Results review &amp; reflection</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round2/Round2_MarketingMix_Guide_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 2</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Decision Guide</div>
-          <div class="card-desc">Marketing mix strategy for Round 2</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round2/Round2_Results_Analysis_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 2</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Results Analysis</div>
-          <div class="card-desc">Results review &amp; reflection</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round3/Round3_MarketingMix_Guide_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 3</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Decision Guide</div>
-          <div class="card-desc">Marketing mix strategy guide for Round 3</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round3/Round3_Results_Analysis_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 3</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Results Analysis</div>
-          <div class="card-desc">Results review &amp; reflection</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round4/Round4_Decision_Guide_EN.html" class="card live">
-          <div class="card-header">
-            <span class="round-label">ROUND 4</span>
-            <span class="status live">Live</span>
-          </div>
-          <div class="card-title">Decision Guide</div>
-          <div class="card-desc">Full decision guide for Round 4</div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a href="round5/Round5_Decision_Guide_EN.html" class="card upcoming">
-          <div class="card-header">
-            <span class="round-label">ROUND 5</span>
-            <span class="status upcoming">Pending</span>
-          </div>
-          <div class="card-title">Decision Guide</div>
-          <div class="card-desc">Decision guide for Round 5</div>
-        </a>
-
-        <a href="round6/Round6_Decision_Guide_EN.html" class="card upcoming">
-          <div class="card-header">
-            <span class="round-label">ROUND 6 · FINAL</span>
-            <span class="status upcoming">Pending</span>
-          </div>
-          <div class="card-title">Decision Guide</div>
-          <div class="card-desc">Final-round decisions</div>
-        </a>
-
-        <a href="Final_Report.html" class="card upcoming">
-          <div class="card-header">
-            <span class="round-label">FINAL REPORT</span>
-            <span class="status upcoming">Pending</span>
-          </div>
-          <div class="card-title">2,000-Word Report</div>
-          <div class="card-desc">Coursework final report · Due 8 June</div>
-        </a>
-
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-label">Current Rank</div>
+        <div class="stat-value highlight">#2</div>
+        <div class="stat-sub">of 4 firms</div>
       </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Reference</h2>
-      <div class="extras">
-        <ul class="extras-list">
-          <li>
-            <a href="reference/Markstrat_Explained.html">Markstrat Mechanics Explained</a>
-            <span class="muted">overview &amp; key mechanics</span>
-          </li>
-        </ul>
+      <div class="stat-cell">
+        <div class="stat-label">SPI Score</div>
+        <div class="stat-value">1,539</div>
+        <div class="stat-sub">+115 last round</div>
       </div>
-    </section>
+      <div class="stat-cell">
+        <div class="stat-label">Gap to Leader</div>
+        <div class="stat-value">−177</div>
+        <div class="stat-sub">vs Snipers (1,716)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Rounds Left</div>
+        <div class="stat-value">2</div>
+        <div class="stat-sub">Rounds 5 &amp; 6</div>
+      </div>
+    </div>
+  </div>
 
-    <footer>
-      <p>Maintained by <a href="https://github.com/teemoweng">@teemoweng</a> · Imperial College Business School</p>
-      <p style="margin-top:6px;">Hosted on GitHub Pages</p>
-    </footer>
+  <!-- Progress timeline -->
+  <div class="timeline-wrap">
+    <div class="timeline">
+      <div class="timeline-step done">
+        <div class="timeline-dot">✓</div>
+        <div class="timeline-label">Round 1</div>
+      </div>
+      <div class="timeline-step done">
+        <div class="timeline-dot">✓</div>
+        <div class="timeline-label">Round 2</div>
+      </div>
+      <div class="timeline-step done">
+        <div class="timeline-dot">✓</div>
+        <div class="timeline-label">Round 3</div>
+      </div>
+      <div class="timeline-step active">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-label">Round 4 ←</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-label">Round 5</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">6</div>
+        <div class="timeline-label">Round 6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Completed rounds -->
+    <div class="section-label">Completed Rounds</div>
+
+    <!-- Round 1 -->
+    <div class="round-block">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 1</span>
+          <span class="round-summary">Established TONE &amp; TOPS · First SPI baseline set</span>
+        </div>
+        <span class="round-tag complete">Complete</span>
+      </div>
+      <div class="round-cards">
+        <a href="round1/Round1_Results_Analysis_EN.html" class="doc-card clickable">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 1 Recap</div>
+          <div class="doc-desc">P&L breakdown, market share, what worked and what didn't</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="round1/Round1_Action_Plan_EN.html" class="doc-card clickable">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 1 Action Plan</div>
+          <div class="doc-desc">Initial strategy, brand setup, resource allocation</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Round 2 -->
+    <div class="round-block">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 2</span>
+          <span class="round-summary">TONE became industry volume leader · Marvels overtook us by 162 SPI</span>
+        </div>
+        <span class="round-tag complete">Complete</span>
+      </div>
+      <div class="round-cards">
+        <a href="round2/Round2_Results_Analysis_EN.html" class="doc-card clickable">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 2 Recap</div>
+          <div class="doc-desc">+44% EBT, TONE #1 in volume, Marvels leapfrog, POSHOP R&D complete</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="round2/Round2_MarketingMix_Guide_EN.html" class="doc-card clickable">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 2 Decision Guide</div>
+          <div class="doc-desc">Marketing mix strategy, pricing, salesforce, R&D investments</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Round 3 -->
+    <div class="round-block">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 3</span>
+          <span class="round-summary">Overtook Marvels (+263 swing) · TOHO launched · Snipers vaulted to #1 via Vodite</span>
+        </div>
+        <span class="round-tag complete">Complete</span>
+      </div>
+      <div class="round-cards">
+        <a href="round3/Round3_Results_Analysis_EN.html" class="doc-card clickable">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 3 Recap</div>
+          <div class="doc-desc">3-brand portfolio live, Vodite threat, ROCK price war, Round 4 playbook</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+        <a href="round3/Round3_MarketingMix_Guide_EN.html" class="doc-card clickable">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 3 Decision Guide</div>
+          <div class="doc-desc">TOHO launch plan, Vodite R&D, salesforce expansion</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Active round -->
+    <div class="section-label">Current Round</div>
+
+    <!-- Round 4 -->
+    <div class="round-block">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 4</span>
+          <span class="round-summary">Vodite entry · TOHO scale-up · Sonite defense</span>
+        </div>
+        <span class="round-tag active">In Progress</span>
+      </div>
+      <div class="round-cards">
+        <div class="doc-card disabled">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 4 Recap</div>
+          <div class="doc-desc">Available after Round 4 results are released</div>
+          <div class="doc-badge pending">Pending</div>
+        </div>
+        <a href="round4/Round4_Decision_Guide_EN.html" class="doc-card clickable">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 4 Decision Guide</div>
+          <div class="doc-desc">Full 9-tab guide — R&D, brands, pricing, advertising, sales team</div>
+          <div class="doc-badge live">Live</div>
+          <span class="doc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Upcoming rounds -->
+    <div class="section-label">Upcoming Rounds</div>
+
+    <!-- Round 5 -->
+    <div class="round-block upcoming-round">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 5</span>
+          <span class="round-summary">Documents will appear here after Round 4 closes</span>
+        </div>
+        <span class="round-tag upcoming">Upcoming</span>
+      </div>
+      <div class="round-cards">
+        <div class="doc-card disabled">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 5 Recap</div>
+          <div class="doc-desc">Not yet available</div>
+          <div class="doc-badge upcoming">Upcoming</div>
+        </div>
+        <div class="doc-card disabled">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 5 Decision Guide</div>
+          <div class="doc-desc">Not yet available</div>
+          <div class="doc-badge upcoming">Upcoming</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 6 -->
+    <div class="round-block upcoming-round">
+      <div class="round-header">
+        <div class="round-header-left">
+          <span class="round-number">Round 6 · Final</span>
+          <span class="round-summary">Last round of the simulation</span>
+        </div>
+        <span class="round-tag upcoming">Upcoming</span>
+      </div>
+      <div class="round-cards">
+        <div class="doc-card disabled">
+          <div class="doc-type results"><span class="doc-type-dot"></span>Results Analysis</div>
+          <div class="doc-title">Round 6 Recap</div>
+          <div class="doc-desc">Not yet available</div>
+          <div class="doc-badge upcoming">Upcoming</div>
+        </div>
+        <div class="doc-card disabled">
+          <div class="doc-type decision"><span class="doc-type-dot"></span>Decision Guide</div>
+          <div class="doc-title">Round 6 Decision Guide</div>
+          <div class="doc-desc">Not yet available</div>
+          <div class="doc-badge upcoming">Upcoming</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final report -->
+    <div class="section-label">Final Deliverable</div>
+    <div class="report-block">
+      <div class="report-block-left">
+        <h3>Group Report · ≤ 2,000 Words</h3>
+        <p>Strategic analysis of all 6 rounds — BCG Matrix, STP, Rogers Diffusion, Experience Curve, Scenario Planning</p>
+      </div>
+      <div class="report-block-right">Due 8 June 2026 · 16:00 BST</div>
+    </div>
+
+    <!-- Reference -->
+    <div class="section-label">Reference</div>
+    <div class="ref-card">
+      <a href="reference/Markstrat_Explained.html" class="ref-row">
+        <div>
+          <div class="ref-title">Markstrat Mechanics Explained</div>
+          <div class="ref-desc">How the simulation works — segments, SPI, R&D, experience curve</div>
+        </div>
+        <span class="ref-arrow">→</span>
+      </a>
+    </div>
 
   </div>
+
+  <footer>
+    <p>Team TITANS · Imperial College Business School · ESB Programme 2026</p>
+    <p style="margin-top:6px;">Maintained by <a href="https://github.com/teemoweng">@teemoweng</a> · Hosted on GitHub Pages</p>
+  </footer>
+
 </body>
 </html>
