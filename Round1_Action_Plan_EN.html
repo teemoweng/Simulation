@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markstrat Round 1 · Firm T Action Plan</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: white;
+    padding: 44px 40px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.25);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .badge-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .badge.urgent { background: #dc2626; }
+  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1;}
+  .hero p { font-size: 15px; opacity: 0.92; position: relative; z-index: 1; max-width: 720px; }
+
+  /* Sections */
+  section { margin-bottom: 40px; }
+  .section-tag {
+    font-size: 12px;
+    color: #4f46e5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    margin-bottom: 14px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .stat {
+    background: white;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid #eef0f5;
+  }
+  .stat-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-value { font-size: 24px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+  .stat-sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+  /* Brand cards */
+  .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  @media (max-width: 700px) { .brand-grid { grid-template-columns: 1fr; } }
+  .brand-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-card.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+  .brand-card.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); }
+  .brand-card h3 { font-size: 22px; }
+  .brand-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .brand-stats { font-size: 13px; color: #4b5563; margin-top: 10px; }
+  .brand-stats div { margin: 3px 0; }
+  .brand-stats strong { color: #0f172a; }
+
+  /* Insights */
+  .insight {
+    background: white;
+    border-left: 4px solid #4f46e5;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .insight.warning { border-left-color: #f59e0b; background: #fffbeb; }
+  .insight.success { border-left-color: #10b981; background: #ecfdf5; }
+  .insight.danger { border-left-color: #ef4444; background: #fef2f2; }
+  .insight-title { font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: #f9fafb; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.highlight td { background: #fef3c7; font-weight: 600; }
+  tr.muted td { color: #9ca3af; }
+
+  /* Action steps */
+  .action-step {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+  }
+  .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .step-number {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .step-number.done { background: linear-gradient(135deg, #10b981, #059669); }
+  .step-number.locked { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .step-title { font-size: 19px; font-weight: 700; color: #0f172a; }
+  .step-meta { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .step-status { margin-left: auto; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .status-now { background: #dbeafe; color: #1e40af; }
+  .status-locked { background: #fef3c7; color: #92400e; }
+  .status-skip { background: #f3f4f6; color: #6b7280; }
+
+  /* Log section */
+  .log-card {
+    background: #fef9c3;
+    border: 2px dashed #ca8a04;
+    border-radius: 14px;
+    padding: 24px 28px;
+  }
+  .log-card h2 { color: #713f12; }
+  .log-content {
+    background: white;
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-top: 14px;
+    font-family: "SF Mono", Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #374151;
+    white-space: pre-wrap;
+    border: 1px solid #fde68a;
+  }
+  .log-content strong { color: #0f172a; font-family: -apple-system, "Helvetica Neue", sans-serif; }
+  .copy-hint { font-size: 12px; color: #92400e; margin-top: 10px; font-style: italic; }
+
+  /* Misc */
+  .arrow { color: #7c3aed; font-weight: 700; }
+  .check { color: #10b981; font-weight: 700; }
+  .cross { color: #ef4444; font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; margin: 0 2px; }
+  ul.clean { list-style: none; padding: 0; }
+  ul.clean li { padding: 6px 0 6px 24px; position: relative; }
+  ul.clean li::before { content: "▸"; position: absolute; left: 0; color: #7c3aed; font-weight: 700; }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="badge-row">
+      <span class="badge">FIRM T · ROUND 1</span>
+      <span class="badge urgent">DEADLINE 1 MAY · 19:00 BST</span>
+      <span class="badge">PERIOD 0 → PERIOD 1</span>
+    </div>
+    <h1>Round 1 Action Plan</h1>
+    <p>This document is in three parts: ① current company situation + market insights, ② concrete instructions for each of the 5 decision screens, ③ a decision-log draft to feed your final 2,000-word report.</p>
+  </div>
+
+  <!-- Section 1: Current situation -->
+  <section>
+    <div class="section-tag">PART 01 · CURRENT SITUATION</div>
+    <h2>Where Firm T Stands Today</h2>
+
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-label">Firm Code</div><div class="stat-value">T</div></div>
+      <div class="stat"><div class="stat-label">SPI</div><div class="stat-value">1,000</div><div class="stat-sub">All 4 firms tied at start</div></div>
+      <div class="stat"><div class="stat-label">Revenue</div><div class="stat-value">$40M</div></div>
+      <div class="stat"><div class="stat-label">EBT</div><div class="stat-value">$14M</div><div class="stat-sub">35% net margin · healthy</div></div>
+      <div class="stat"><div class="stat-label">Market Share</div><div class="stat-value">25%</div><div class="stat-sub">Both value & volume</div></div>
+      <div class="stat"><div class="stat-label">Budget Headroom</div><div class="stat-value">$1.6M</div><div class="stat-sub">For incremental moves</div></div>
+    </div>
+
+    <div class="brand-grid">
+      <div class="brand-card tone">
+        <span class="brand-tag tag-low">LOW-END · MASS MARKET</span>
+        <h3>TONE</h3>
+        <div class="brand-stats">
+          <div>Price: <strong>$250</strong>　Base cost: <strong>$70</strong> (min achievable: $62)</div>
+          <div>Sold <strong>103K</strong>　Revenue <strong>$16M</strong>　Contribution <strong>$7M</strong></div>
+          <div>Specs: 18 features / Design 3 / Battery 75h / Display 25" / Power 12 GFlops</div>
+          <div style="margin-top: 8px;"><strong>Stronghold:</strong> Savers 24.8% + Shoppers 21.8%</div>
+        </div>
+      </div>
+      <div class="brand-card tops">
+        <span class="brand-tag tag-high">HIGH-END · BUSINESS PROFESSIONAL</span>
+        <h3>TOPS</h3>
+        <div class="brand-stats">
+          <div>Price: <strong>$500</strong>　Base cost: <strong>$169</strong> (min achievable: $145)</div>
+          <div>Sold <strong>79K</strong>　Revenue <strong>$25M</strong>　Contribution <strong>$8M</strong></div>
+          <div>Specs: 13 features / Design 8 / Battery 40h / Display 40" / Power 75 GFlops</div>
+          <div style="margin-top: 8px;"><strong>Stronghold:</strong> Professionals 23.3% + High Earners 24.1%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insights -->
+  <section>
+    <div class="section-tag">KEY INSIGHTS · The 3 Things That Matter Most</div>
+
+    <div class="insight">
+      <div class="insight-title">① The starting position is perfectly symmetric</div>
+      All 4 firms (M / R-Rocket / S-Snipers / T-you) hold identical product specs across 8 brands — 4 low-end + 4 high-end, just renamed. SPI is 1,000 across the board. <strong>Nobody has a first-mover advantage. The next 6 rounds decide everything.</strong>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title">② Your two brands are already complementary — covering 4 of 5 segments</div>
+      TONE owns <span class="pill">Savers</span> <span class="pill">Shoppers</span>; TOPS owns <span class="pill">Professionals</span> <span class="pill">High Earners</span>. In each segment you're one of the price-tier reference brands. Explorers is shared across both.
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title">③ ⭐ The market will look very different in 5 years — your most valuable finding</div>
+      <table>
+        <thead><tr><th>Segment</th><th class="num">Today's share</th><th class="num">5-period share</th><th class="num">5-yr avg growth</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td>Shoppers (TONE strong)</td><td class="num">19%</td><td class="num">30% ⬆️</td><td class="num">+29.2% 🚀</td></tr>
+          <tr><td>Savers (TONE strong)</td><td class="num">30%</td><td class="num">32%</td><td class="num">+18.9%</td></tr>
+          <tr><td>High Earners (TOPS strong)</td><td class="num">12%</td><td class="num">13%</td><td class="num">+20.7%</td></tr>
+          <tr><td>Professionals (TOPS strong)</td><td class="num">17%</td><td class="num">16%</td><td class="num">+15.7%</td></tr>
+          <tr class="muted"><td>Explorers (shared)</td><td class="num">22%</td><td class="num">8.5% ⬇️</td><td class="num">−2.8% shrinking</td></tr>
+        </tbody>
+      </table>
+      <strong>Strategic implication:</strong> Shoppers is the future gold mine — TONE's strategic value will only grow. Stop over-investing in Explorers (it's dying). High Earners explodes +33.9% next period — TOPS must capitalise immediately.
+    </div>
+  </section>
+
+  <!-- Part 2: Action Guide -->
+  <section>
+    <div class="section-tag">PART 02 · ACTION GUIDE</div>
+    <h2>5 Decision Screens · Exactly What to Enter</h2>
+  </section>
+
+  <!-- Step 1 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div>
+        <div class="step-title">Team Identity · Name Your Firm</div>
+        <div class="step-meta">Must start with T · ≤8 characters · Cannot be changed after Round 1</div>
+      </div>
+      <span class="step-status status-now">DO NOW</span>
+    </div>
+    <p>Pick one with the team — quick vote. Suggested candidates:</p>
+    <ul class="clean">
+      <li><strong>TITAN</strong> — bold, dominant feel</li>
+      <li><strong>TEMPO</strong> — pace, agility</li>
+      <li><strong>TANDEM</strong> — emphasises team unity</li>
+      <li><strong>TREND</strong> — leading, forward-looking</li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number locked">2</div>
+      <div>
+        <div class="step-title">Marketing Mix</div>
+        <div class="step-meta">Currently locked by Yousef Bin Junayd — message him with the values below</div>
+      </div>
+      <span class="step-status status-locked">LOCKED</span>
+    </div>
+
+    <table>
+      <thead><tr><th>Decision</th><th>TONE</th><th>TOPS</th></tr></thead>
+      <tbody>
+        <tr><td>Production plan (000s units)</td><td><strong>110</strong> (avoid stockout)</td><td><strong>90</strong> (catch HE growth)</td></tr>
+        <tr><td>Price</td><td>$250 — unchanged</td><td>$500 — unchanged</td></tr>
+        <tr><td>Advertising media budget</td><td>Carry over from Period 0</td><td>Carry over from Period 0</td></tr>
+        <tr><td>Advertising research %</td><td>4–8%</td><td>4–8%</td></tr>
+        <tr><td>Perceptual objectives</td><td>None this round</td><td>None this round</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 14px;">Advertising segment allocation (must sum to 100%)</h3>
+    <table>
+      <thead><tr><th>Segment</th><th class="num">TONE</th><th class="num">TOPS</th></tr></thead>
+      <tbody>
+        <tr><td>Savers</td><td class="num">50%</td><td class="num">5%</td></tr>
+        <tr><td>Shoppers</td><td class="num">35%</td><td class="num">5%</td></tr>
+        <tr><td>Explorers</td><td class="num">10%</td><td class="num">20%</td></tr>
+        <tr><td>Professionals</td><td class="num">3%</td><td class="num">35%</td></tr>
+        <tr><td>High Earners</td><td class="num">2%</td><td class="num">35%</td></tr>
+        <tr class="highlight"><td>Total</td><td class="num">100%</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div>
+        <div class="step-title">Commercial Team · Reallocate the Sales Force</div>
+        <div class="step-meta">Total headcount stays at 60 — cross-channel/brand reallocation is free</div>
+      </div>
+      <span class="step-status status-now">DO NOW</span>
+    </div>
+
+    <p style="margin-bottom: 10px;"><strong>Current (inherited from previous management):</strong> TONE 10/10/10, TOPS 10/10/10 — completely flat, ignoring shopping habits.</p>
+    <p><strong>Recommended allocation:</strong></p>
+    <table>
+      <thead><tr><th>Brand</th><th class="num">Specialty</th><th class="num">Mass Merch.</th><th class="num">Online</th><th class="num">Total</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TONE</strong> (Savers + Shoppers)</td><td class="num">10</td><td class="num">15</td><td class="num">5</td><td class="num">30</td></tr>
+        <tr><td><strong>TOPS</strong> (Pros + High Earners)</td><td class="num">17</td><td class="num">8</td><td class="num">5</td><td class="num">30</td></tr>
+        <tr class="highlight"><td>TOTAL</td><td class="num">27</td><td class="num">23</td><td class="num">10</td><td class="num">60</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 10px; font-size: 13px; color: #6b7280;"><strong>Logic:</strong> TONE leans into Mass Merch (Savers shop 60% there, Shoppers 43%); TOPS leans into Specialty (Professionals 60%, High Earners 50%). Online plays only 10–20% in any segment — 5 FTEs each is enough.</p>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div>
+        <div class="step-title">Market Research Studies · What to Order</div>
+        <div class="step-meta">Reports arrive next period — they shape what you can decide in Round 2</div>
+      </div>
+      <span class="step-status status-now">DO NOW</span>
+    </div>
+
+    <p><strong>Already pre-checked (keep all 4):</strong></p>
+    <table>
+      <thead><tr><th>Report</th><th class="num">Cost</th></tr></thead>
+      <tbody>
+        <tr><td><span class="check">✓</span> Consumer Survey (Sonites)</td><td class="num">$62,500</td></tr>
+        <tr><td><span class="check">✓</span> Consumer Panel (Sonites)</td><td class="num">$104,000</td></tr>
+        <tr><td><span class="check">✓</span> Distribution Panel (Sonites)</td><td class="num">$62,500</td></tr>
+        <tr><td><span class="check">✓</span> Market Forecast (Sonites)</td><td class="num">$20,750</td></tr>
+        <tr class="muted"><td>Subtotal (already checked)</td><td class="num">$249,750</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 12px;"><strong>Add these 5 (priority order):</strong></p>
+    <table>
+      <thead><tr><th>Report</th><th class="num">Cost</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><span class="check">✓</span> <strong>Semantic Scales (Sonites) ⭐</strong></td><td class="num">$10,500</td><td>Best value — gives you each segment's ideal product specs (the input for any R&D project)</td></tr>
+        <tr><td><span class="check">✓</span> MDS (Sonites)</td><td class="num">$36,500</td><td>Perceptual map — essential for positioning strategy</td></tr>
+        <tr><td><span class="check">✓</span> Benchmark (General)</td><td class="num">$31,250</td><td>Cross-firm financials — useful for the BCG matrix in your final report</td></tr>
+        <tr><td><span class="check">✓</span> Competitive Advertising (Sonites)</td><td class="num">$31,250</td><td>What rivals spent per brand — informs your defensive moves</td></tr>
+        <tr><td><span class="check">✓</span> Competitive Commercial Team (Sonites)</td><td class="num">$15,500</td><td>Cheap intel on rivals' sales-force structure</td></tr>
+        <tr class="highlight"><td>New subtotal</td><td class="num">$125,000</td><td>Grand total $374,750</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 12px;"><strong>Skip these:</strong></p>
+    <ul class="clean">
+      <li><span class="cross">✗</span> Conjoint Analysis ($36.5K) — overlaps with Semantic + MDS; revisit in Round 2 if needed</li>
+      <li><span class="cross">✗</span> Advertising Experiment ($26K) / Commercial Team Experiment ($36.5K) — not needed in Round 1</li>
+      <li><span class="cross">✗</span> <strong>All Vodite reports (11 in total)</strong> — no Vodites exist yet, buying them is wasted budget</li>
+    </ul>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number" style="background: linear-gradient(135deg, #6b7280, #4b5563);">5</div>
+      <div>
+        <div class="step-title">R&D Projects</div>
+        <div class="step-meta">Don't initiate any project this round — wait for Round 2 data</div>
+      </div>
+      <span class="step-status status-skip">SKIP THIS ROUND</span>
+    </div>
+    <p>Once Round 2 delivers Semantic Scales / MDS, you'll be able to design with precision:</p>
+    <ul class="clean">
+      <li>POTONE2 — re-target TONE toward the Shoppers ideal point (the largest growing segment)</li>
+      <li>POTOPS2 — re-target TOPS toward the High Earners ideal point (next-period +33.9% explosion)</li>
+      <li>Cost-reduction R&D — TONE base cost 71→62, TOPS base cost 169→145 → fatter margins later</li>
+    </ul>
+    <p style="margin-top: 8px; font-size: 13px; color: #6b7280;"><em>If budget allows, you could order one Feasibility Study ($100K) for TONE this round to size next round's R&D allocation. Optional — not required.</em></p>
+  </div>
+
+  <!-- Final check -->
+  <div class="action-step">
+    <div class="step-header">
+      <div class="step-number done">✓</div>
+      <div>
+        <div class="step-title">Final Pre-Submission Checks</div>
+        <div class="step-meta">Errors & Warnings + Budget overview</div>
+      </div>
+    </div>
+    <ul class="clean">
+      <li>Top-right <strong>+1 602 K$</strong> indicator must stay green (≥ 0). If it turns red, you're over budget.</li>
+      <li>Click the <strong>Errors & Warnings</strong> icon (bell / exclamation) on the left bar — fix any red errors. Yellow warnings can be ignored.</li>
+      <li>Click <strong>Decisions Review</strong> for a final summary of all entries.</li>
+      <li>Confirm with the team, then submit. <strong>Once submitted, no further edits.</strong></li>
+    </ul>
+  </div>
+
+  <!-- Part 3: Decision Log -->
+  <section>
+    <div class="section-tag">PART 03 · DECISION LOG</div>
+    <h2>Round 1 Decision Log (for the Final Report)</h2>
+    <p style="color: #6b7280; margin-bottom: 14px;">Copy the block below into your team's notes app. When you write the 2,000-word report in June, this material is gold — it captures both your <strong>contemporaneous reasoning</strong> and <strong>retrospective reconciliation</strong>, which is exactly the "causal attribution" the brief rewards.</p>
+
+    <div class="log-card">
+      <h2 style="font-size: 18px; margin-bottom: 4px;">📓 Round 1 Decisions Log — Period 0 → Period 1</h2>
+      <p style="font-size: 13px; color: #92400e;">Paste into your notes; come back each round to update.</p>
+
+      <div class="log-content"><strong>Date:</strong> 2026-05-01
+<strong>Round submitted:</strong> Round 1 (decisions affect Period 1)
+<strong>Team members:</strong> Teemo, Yousef Bin Junayd, ...
+
+<strong>━━ STRATEGIC PREMISE ━━</strong>
+All 4 firms start in a perfectly symmetric position (identical product specs, SPI, market share). No first-mover advantage exists. We chose a **complementary dual-brand strategy**:
+• TONE → owns the largest current and fastest-growing segments: Savers + Shoppers
+• TOPS → owns the highest-margin and fastest-growing high-tier segments: Professionals + High Earners
+Round 1 objective: gather data and avoid major errors — not maximise short-term performance.
+
+<strong>━━ KEY OBSERVATIONS (Period 0 data) ━━</strong>
+1. Market Forecast: Shoppers will grow from 19% to 30% of the market in 5 periods (+29.2% annualised) — the largest future opportunity.
+2. Explorers shrinks to 8.5% over 5 periods (−2.8% annualised) — strategic value declining; reduce spend there.
+3. High Earners surges +33.9% next period alone (+20.7% over 5 periods) — TOPS must capitalise.
+4. TONE near stockout (sold 103K against produced 103K); TOPS held 1K of inventory — production calibration is the highest-leverage tactical move.
+
+<strong>━━ DECISIONS THIS ROUND ━━</strong>
+1. Firm name: ____________
+2. Production: TONE 100→110K (+10% to absorb Shoppers/Savers growth); TOPS 100→90K (clear inventory + capture HE growth)
+3. Price: hold $250 / $500 (avoid Round 1 price shock)
+4. Advertising: total budget unchanged; reallocate by future-growth weighting — TONE leans Savers/Shoppers, TOPS leans Pros/HE
+5. Sales force: shifted from flat 10/10/10 to channel-aligned — TONE 10/15/5, TOPS 17/8/5
+6. Market research: kept the 4 default reports + added 5 (incl. Semantic Scales $10.5K and MDS $36.5K) to enable data-driven R&D in Round 2
+7. R&D: no project initiated this round — wait for Round 2 study data
+
+<strong>━━ PREDICTIONS (to be reconciled next round) ━━</strong>
+• TONE share in Shoppers/Savers should hold or tick up
+• TOPS volume should rebound past 90K thanks to High Earners +33.9% surge
+• Net contribution roughly flat — no big swings since aggregate ad/sales spend is unchanged
+• SPI should remain near 1,000; if rivals are also "feeling out" the data, no major divergence yet
+
+<strong>━━ TO RECONCILE IN ROUND 2 ━━</strong>
+□ Actual sales vs prediction — where did we miss?
+□ Which segment's purchase intentions moved unexpectedly?
+□ Did any rival raise/lower price or launch R&D?
+□ When Semantic Scales arrives: which of TONE/TOPS sits closest/farthest from each segment's ideal point?
+</div>
+      <p class="copy-hint">💡 After each round's results land, fill in the "TO RECONCILE" section above, then start a new "Round X Decisions Log" entry.</p>
+    </div>
+  </section>
+
+  <footer>
+    Round 1 Action Plan · Firm T · 2026-05-01<br>
+    Full project context: CLAUDE_BRIEFING.md · Source data: Markstrat Period 0 reports
+  </footer>
+
+</div>
+</body>
+</html>

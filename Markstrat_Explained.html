@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markstrat 项目通俗解释</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    padding: 56px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(79, 70, 229, 0.25);
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    right: 60px; bottom: -120px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero-tag { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 13px; letter-spacing: 1px; margin-bottom: 18px; }
+  .hero h1 { font-size: 38px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; position: relative; z-index: 1;}
+  .hero p { font-size: 17px; opacity: 0.94; position: relative; z-index: 1;}
+
+  /* Sections */
+  section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 14px;
+    color: #7c3aed;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 18px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    margin-bottom: 16px;
+  }
+
+  .lead {
+    font-size: 18px;
+    color: #4b5563;
+    background: #fff7ed;
+    border-left: 4px solid #f97316;
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  /* Two-column grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 700px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 28px; }
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border: 2px solid #eef0f5;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.07); }
+  .product-card.sonite { border-color: #c7d2fe; }
+  .product-card.vodite { border-color: #fbcfe8; }
+  .product-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; padding: 4px 10px; border-radius: 999px; display: inline-block; margin-bottom: 10px; }
+  .label-mature { background: #e0e7ff; color: #4338ca; }
+  .label-emerging { background: #fce7f3; color: #be185d; }
+  .product-card h3 { font-size: 22px; }
+  .analogy { background: #f9fafb; padding: 12px 16px; border-radius: 10px; margin-top: 14px; font-size: 14px; color: #4b5563; }
+  .analogy strong { color: #1f2937; }
+
+  /* Segments */
+  .segment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .segment {
+    background: white;
+    border: 1px solid #eef0f5;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 14px;
+  }
+  .segment-name { font-weight: 600; color: #4f46e5; margin-bottom: 4px; font-size: 15px; }
+  .segment-desc { color: #6b7280; }
+
+  /* Decisions */
+  .decision-list {
+    counter-reset: dlist;
+    list-style: none;
+  }
+  .decision-list li {
+    counter-increment: dlist;
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px 18px 64px;
+    margin-bottom: 10px;
+    position: relative;
+    border: 1px solid #eef0f5;
+  }
+  .decision-list li::before {
+    content: counter(dlist);
+    position: absolute;
+    left: 18px; top: 18px;
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .decision-list strong { color: #1f2937; }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    border-left: 3px solid #e5e7eb;
+    margin-top: 16px;
+  }
+  .timeline-item {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -41px; top: 6px;
+    width: 14px; height: 14px;
+    background: #4f46e5;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #4f46e5;
+  }
+  .timeline-item.deadline::before { background: #ef4444; box-shadow: 0 0 0 2px #ef4444; }
+  .timeline-date { font-weight: 600; color: #4f46e5; font-size: 14px; }
+  .timeline-item.deadline .timeline-date { color: #ef4444; }
+  .timeline-desc { color: #4b5563; font-size: 15px; margin-top: 4px; }
+
+  /* SPI gauge */
+  .spi-card {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 100%);
+    border: 1px solid #a7f3d0;
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+  .spi-card h3 { color: #065f46; }
+  .spi-factors { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; }
+  .spi-factor { background: white; padding: 14px; border-radius: 10px; border: 1px solid #d1fae5; }
+  .spi-factor-name { font-weight: 600; color: #065f46; font-size: 14px; }
+  .spi-factor-desc { color: #6b7280; font-size: 13px; margin-top: 4px; }
+
+  /* Tips */
+  .tip {
+    background: white;
+    border-left: 4px solid #f59e0b;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .tip-title { font-weight: 600; color: #92400e; margin-bottom: 4px; }
+
+  /* Report */
+  .report-card {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+  .report-card h2 { color: #78350f; }
+  .key-quote {
+    background: white;
+    padding: 18px 22px;
+    border-radius: 10px;
+    font-style: italic;
+    color: #78350f;
+    margin: 14px 0;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .arrow { color: #7c3aed; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">CORPORATE STRATEGY · IMPERIAL ESB</div>
+    <h1>Markstrat 项目<br>用一杯咖啡的时间搞懂</h1>
+    <p>你和队友被一家"假装的"电子产品公司聘为市场营销老板。接下来 6 年（6 个回合），你们要打败 3 家竞争对手，把公司股价做到最高。</p>
+  </div>
+
+  <!-- Section 1: 大白话概述 -->
+  <section>
+    <div class="section-title">01 一句话总览</div>
+    <h2>这到底是个什么任务？</h2>
+    <div class="lead">
+      Markstrat 就像一台"商业飞行模拟器"——你在虚拟世界里管理一家电子产品公司，做错决策不会真的破产，但分数会反映出你做得好不好。<br><br>
+      <strong>真正的考点不是你赢没赢，而是你能不能解释清楚为什么。</strong>
+    </div>
+  </section>
+
+  <!-- Section 2: 你卖什么 -->
+  <section>
+    <div class="section-title">02 你卖什么产品</div>
+    <h2>两类"假"电子产品</h2>
+    <p style="color: #6b7280; margin-bottom: 16px;">教授故意编造了两个不存在的产品名字，免得你被"我熟悉手机怎么卖"这种偏见干扰。你必须老老实实从数据里学。</p>
+    <div class="grid-2">
+      <div class="product-card sonite">
+        <span class="product-label label-mature">已成熟</span>
+        <h3>Sonite</h3>
+        <p style="color: #4b5563; font-size: 15px;">市场已经存在多年，5 个品牌正在销售，消费者熟悉这类产品。开局你已经有 <strong>2 个 Sonite 品牌</strong>在卖。</p>
+        <div class="analogy">
+          <strong>类比：</strong>笔记本电脑 / 平板 / 数码相机这种成熟数码产品。<br>
+          <strong>5 个核心参数：</strong>处理性能、屏幕尺寸、设计指数、电池续航、功能数。
+        </div>
+      </div>
+      <div class="product-card vodite">
+        <span class="product-label label-emerging">未上市</span>
+        <h3>Vodite</h3>
+        <p style="color: #4b5563; font-size: 15px;">游戏开始时<strong>市场上还没有任何 Vodite 产品</strong>。要做的话先花 $5–10M 研发出第一台原型，但起飞了可能是金矿。</p>
+        <div class="analogy">
+          <strong>类比：</strong>2007 年还没出来的智能手机 / 现在的 AR 眼镜 / Vision Pro。<br>
+          <strong>5 个核心参数：</strong>分辨率、能效、碳足迹、连接性、应用数。
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <h3 style="color: #4f46e5;">那 MOST、MOVE 这些是啥？</h3>
+      <p style="color: #4b5563;">是<strong>品牌名</strong>，跟 iPhone、Galaxy、ThinkPad 一个意思。命名规则：</p>
+      <ul style="margin-top: 10px; padding-left: 24px; color: #4b5563;">
+        <li>第 1 个字母 = 你公司代号（M / R / S / T / L / N）</li>
+        <li>第 2 个字母 = 产品类别：<strong>O</strong> = Sonite，<strong>E</strong> = Vodite</li>
+        <li>后面 4 个字母随你起</li>
+      </ul>
+      <p style="margin-top: 10px; color: #4b5563;">所以 <strong>MOST</strong> = M 公司的 Sonite 品牌，<strong>MEGA</strong> = M 公司的 Vodite 品牌。</p>
+    </div>
+  </section>
+
+  <!-- Section 3: 你的客户 -->
+  <section>
+    <div class="section-title">03 你的客户是谁</div>
+    <h2>消费者分成不同的"族群"</h2>
+    <p style="color: #6b7280; margin-bottom: 16px;">每个族群偏好和钱包都不一样。你必须挑几个去主攻——想讨好所有人 = 谁也讨好不了。</p>
+
+    <div class="card">
+      <h3 style="color: #4f46e5;">Sonite 市场（5 个细分）</h3>
+      <div class="segment-grid">
+        <div class="segment"><div class="segment-name">Explorers 探索者</div><div class="segment-desc">技术发烧友，要性能强，价格敏感</div></div>
+        <div class="segment"><div class="segment-name">Shoppers 购物者</div><div class="segment-desc">货比三家，要性价比</div></div>
+        <div class="segment"><div class="segment-name">Professionals 专业人士</div><div class="segment-desc">商务用，要高品质易用</div></div>
+        <div class="segment"><div class="segment-name">High Earners 高收入</div><div class="segment-desc">有钱要面子，看品牌</div></div>
+        <div class="segment"><div class="segment-name">Savers 省钱党</div><div class="segment-desc">最大群体，图便宜</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #be185d;">Vodite 市场（3 个细分 · 创新扩散理论）</h3>
+      <div class="segment-grid">
+        <div class="segment"><div class="segment-name">Innovators 创新者</div><div class="segment-desc">第一批尝鲜的，收入高</div></div>
+        <div class="segment"><div class="segment-name">Early Adopters 早期采用者</div><div class="segment-desc">意见领袖，影响力大</div></div>
+        <div class="segment"><div class="segment-name">Followers 跟随者</div><div class="segment-desc">最大群体，等大家买了再买</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 每年的决策 -->
+  <section>
+    <div class="section-title">04 每年要做的事</div>
+    <h2>每个回合你要拍板的 5 类决策</h2>
+    <ol class="decision-list">
+      <li><strong>品牌组合</strong> — 哪个品牌升级？哪个停产？要不要推新品牌？要不要进 Vodite 这个新市场？</li>
+      <li><strong>研发项目</strong> — 跟 R&D 部门下单："给我开发一个性能 80、续航 60 小时、成本 $100 的新机器"，给一笔预算，最快下一年交货。</li>
+      <li><strong>营销组合（每个品牌单独）</strong> — 生产多少台、定多少钱、广告预算多少、投给哪几个客户群、卖点是什么。</li>
+      <li><strong>销售队伍</strong> — 雇多少销售员，分别派去专卖店、大卖场、网店各多少人，给哪个品牌站台。</li>
+      <li><strong>市场调研</strong> — 花钱买报告，看消费者怎么想、对手在搞什么、市场未来怎么变。</li>
+    </ol>
+  </section>
+
+  <!-- Section 5: 怎么算赢 -->
+  <section>
+    <div class="section-title">05 怎么算赢</div>
+    <h2>SPI 是终极考分</h2>
+    <div class="spi-card">
+      <h3>股价指数（Share Price Index）</h3>
+      <p style="color: #047857; margin-top: 6px;">这个分数综合下面 4 个指标。又赚钱、又卖得多、又增长快、又能持续创新 <span class="arrow">→</span> SPI 高 <span class="arrow">→</span> 你赢。</p>
+      <div class="spi-factors">
+        <div class="spi-factor"><div class="spi-factor-name">净利润</div><div class="spi-factor-desc">你赚了多少钱</div></div>
+        <div class="spi-factor"><div class="spi-factor-name">市场份额</div><div class="spi-factor-desc">你占了多少市场</div></div>
+        <div class="spi-factor"><div class="spi-factor-name">收入增长</div><div class="spi-factor-desc">收入有没有持续增长</div></div>
+        <div class="spi-factor"><div class="spi-factor-name">R&D 项目</div><div class="spi-factor-desc">完成了多少有用的研发</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: 时间线 -->
+  <section>
+    <div class="section-title">06 时间线</div>
+    <h2>关键日期都在这里</h2>
+    <div class="card">
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">5 月 1 日</div><div class="timeline-desc">第 1 轮决策 · 第一次教练答疑</div></div>
+        <div class="timeline-item"><div class="timeline-date">5 月 8 日</div><div class="timeline-desc">第 2 轮 · 讲座 2：用 R&D 锁定客户</div></div>
+        <div class="timeline-item"><div class="timeline-date">5 月 12 / 15 日</div><div class="timeline-desc">第 3、4 轮决策</div></div>
+        <div class="timeline-item"><div class="timeline-date">5 月 19 日</div><div class="timeline-desc">讲座 3：回顾与反思</div></div>
+        <div class="timeline-item"><div class="timeline-date">5 月 20 / 22 日</div><div class="timeline-desc">第 5、6 轮决策（最后两轮）</div></div>
+        <div class="timeline-item"><div class="timeline-date">5 月 26 日</div><div class="timeline-desc">讲座 4：冠军日（Champions Day）</div></div>
+        <div class="timeline-item deadline"><div class="timeline-date">6 月 8 日 · 16:00 BST</div><div class="timeline-desc"><strong>最终报告提交截止</strong>（Insendi）</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: 最终报告 -->
+  <section>
+    <div class="section-title">07 重头戏</div>
+    <div class="report-card">
+      <h2>最终报告才占 70%</h2>
+      <p style="color: #78350f; margin-bottom: 8px;"><strong>2000 字以内</strong>，双倍行距，字号 12，封面+目录+附录+参考文献都不计字数。评分：结构与逻辑 40%，论证质量 60%。</p>
+      <div class="key-quote">"Performance does not matter; understanding matters."<br>—— 课程任务书原话</div>
+      <p style="color: #78350f;">就算 SPI 一般，只要你能把"为什么这么干、哪里失算、为什么失算"讲明白，照样能拿高分。反过来，赢了但说不清楚，依然丢分。</p>
+      <h3 style="margin-top: 18px; color: #78350f;">报告里推荐用的框架</h3>
+      <p style="color: #78350f; margin-top: 6px;">BCG 矩阵 · Porter 五力 · 先发优势 · SWOT · STP（细分-目标-定位） · 创新扩散理论 · 现金流风险</p>
+      <h3 style="margin-top: 18px; color: #78350f;">最关键的习惯</h3>
+      <p style="color: #78350f; margin-top: 6px;"><strong>每轮决策完立刻记 3 件事：</strong>① 我们做了什么决策、为什么；② 当时哪个数据/调研支撑了这个决策；③ 我们预测会发生什么。下一轮拿到结果再补：实际发生了什么、和预测的差距在哪。<strong>这些差距就是报告的金矿。</strong></p>
+    </div>
+  </section>
+
+  <!-- Section 8: 5 个建议 -->
+  <section>
+    <div class="section-title">08 实战建议</div>
+    <h2>给团队的 5 条 Tips</h2>
+    <div class="tip">
+      <div class="tip-title">1. 第一轮别瞎改</div>
+      <div>先用免费的 4 个调研（Consumer Survey、Consumer Panel、Distribution Panel、Market Forecast）摸清楚市场。看清楚再动手，比第一轮就大刀阔斧重要得多。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">2. Vodite 进不进、什么时候进，是最大的战略决策</div>
+      <div>先发优势真实存在，但前期没有感知图（要等市场上有 Vodite 品牌后才出），等于"摸黑"。早进 = 抢占创新者并塑造品类；晚进 = 风险低但份额可能被锁死。这道题值得团队专门开会讨论。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">3. 提前 2-3 期看消费者偏好的演化</div>
+      <div>消费者的"理想点"会缓慢漂移。R&D 至少要 1 期才完成。你今天瞄准今天的理想点，等产品上市时市场已经走了。<strong>瞄前面，不瞄当下。</strong></div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">4. 别忽视"降本研发"</div>
+      <div>累计产量上去了，可以启动一个同样规格但更低 base cost 的研发项目，能大幅改善毛利。这是很多队伍忽略的杠杆。</div>
+    </div>
+    <div class="tip">
+      <div class="tip-title">5. 边玩边写报告草稿</div>
+      <div>不要等 6 轮全打完才回头记账——细节早就忘了。每轮 30 分钟记录一次决策与反思，最后整合远比从零写省力。</div>
+    </div>
+  </section>
+
+  <footer>
+    Markstrat 项目快速理解指南 · 由 Claude 整理 · 课程：Corporate Strategy and Economics Simulation, Imperial ESB
+  </footer>
+
+</div>
+</body>
+</html>

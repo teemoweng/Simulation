@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 2 Results & Analysis · Firm Titans</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.7;
+    color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+    color: white;
+    padding: 48px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(194, 65, 12, 0.25);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -100px; top: -100px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero-tag { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; font-weight: 600; }
+  .hero h1 { font-size: 36px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1;}
+  .hero p { font-size: 17px; opacity: 0.95; position: relative; z-index: 1; max-width: 720px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; position: relative; z-index: 1;}
+  .hero-stat { background: rgba(255,255,255,0.14); padding: 14px 18px; border-radius: 12px; }
+  .hero-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
+  .hero-stat-value { font-size: 24px; font-weight: 700; margin-top: 4px; }
+  .hero-stat-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  @media (max-width: 700px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 26px; }
+    .hero { padding: 32px 24px; }
+  }
+
+  section { margin-bottom: 36px; }
+  .section-tag {
+    font-size: 12px;
+    color: #c2410c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 14px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    margin-bottom: 14px;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: #f9fafb; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.us td { background: linear-gradient(90deg, #fef9c3 0%, #fef3c7 100%); font-weight: 600; }
+
+  /* Ranking */
+  .ranking { display: grid; gap: 8px; margin: 14px 0; }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 60px 140px 1fr 100px 100px 100px;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+  }
+  .rank-row.us { border-color: #facc15; background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%); }
+  .rank-row.leader { border-color: #f9a8d4; background: linear-gradient(90deg, #fdf2f8 0%, #fbcfe8 100%); }
+  .rank-num { font-size: 22px; font-weight: 700; color: #94a3b8; }
+  .rank-row.leader .rank-num { color: #be185d; }
+  .rank-row.us .rank-num { color: #ca8a04; }
+  .rank-name { font-weight: 600; font-size: 16px; }
+  .rank-bar-container { background: #f3f4f6; height: 28px; border-radius: 6px; overflow: hidden; position: relative; }
+  .rank-bar { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 6px; }
+  .rank-bar.us { background: linear-gradient(90deg, #f59e0b, #ca8a04); }
+  .rank-bar.leader { background: linear-gradient(90deg, #ec4899, #be185d); }
+  .rank-stat { font-size: 14px; text-align: right; font-variant-numeric: tabular-nums; }
+  .rank-stat strong { font-size: 16px; color: #0f172a; }
+  @media (max-width: 800px) {
+    .rank-row { grid-template-columns: 40px 1fr; gap: 10px; }
+    .rank-bar-container, .rank-stat { display: none; }
+  }
+
+  /* Brand cards */
+  .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  @media (max-width: 700px) { .brand-grid { grid-template-columns: 1fr; } }
+  .brand-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    border: 2px solid #eef0f5;
+  }
+  .brand-card.tone { border-color: #fde68a; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 60%); }
+  .brand-card.tops { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 60%); }
+  .brand-card h3 { font-size: 24px; }
+  .brand-tag { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .tag-low { background: #fbbf24; color: #78350f; }
+  .tag-high { background: #6366f1; color: white; }
+  .brand-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .brand-stat { padding: 10px 12px; background: rgba(255,255,255,0.6); border-radius: 8px; }
+  .brand-stat-label { font-size: 11px; color: #6b7280; text-transform: uppercase; }
+  .brand-stat-value { font-size: 18px; font-weight: 700; color: #0f172a; }
+  .brand-stat-sub { font-size: 11px; color: #6b7280; }
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+
+  /* Insights */
+  .insight {
+    background: white;
+    border-left: 5px solid #6366f1;
+    padding: 18px 24px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .insight.success { border-left-color: #10b981; background: #ecfdf5; }
+  .insight.warning { border-left-color: #f59e0b; background: #fffbeb; }
+  .insight.danger { border-left-color: #ef4444; background: #fef2f2; }
+  .insight.gold { border-left-color: #eab308; background: linear-gradient(90deg, #fefce8 0%, #fef9c3 100%); }
+  .insight-icon { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: #6366f1; color: white; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; margin-right: 8px; vertical-align: middle; }
+  .insight.success .insight-icon { background: #10b981; }
+  .insight.warning .insight-icon { background: #f59e0b; }
+  .insight.danger .insight-icon { background: #ef4444; }
+  .insight.gold .insight-icon { background: #ca8a04; }
+  .insight-title { font-weight: 700; color: #0f172a; font-size: 16px; margin-bottom: 6px; }
+  .insight-why { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 6px; margin-top: 8px; font-size: 14px; }
+  .insight-why strong { color: #4338ca; }
+
+  .pill { display: inline-block; padding: 2px 10px; background: #eef2ff; color: #4338ca; border-radius: 999px; font-size: 12px; font-weight: 600; margin: 0 2px; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+
+  .action-list { counter-reset: alist; list-style: none; padding: 0; }
+  .action-list li {
+    counter-increment: alist;
+    background: white;
+    padding: 16px 20px 16px 60px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    position: relative;
+  }
+  .action-list li::before {
+    content: counter(alist);
+    position: absolute;
+    left: 16px; top: 16px;
+    width: 30px; height: 30px;
+    background: linear-gradient(135deg, #c2410c, #ea580c);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+  }
+
+  .competitor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+  @media (max-width: 700px) { .competitor-grid { grid-template-columns: 1fr; } }
+  .competitor-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+  .competitor-name { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .competitor-score { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+  .competitor-strategy { font-size: 14px; color: #4b5563; }
+
+  .market-map {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin: 14px 0;
+  }
+  .map-svg { width: 100%; height: auto; max-height: 460px; }
+
+  .key-quote {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+    border: 2px dashed #ca8a04;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    font-size: 17px;
+    color: #78350f;
+    font-weight: 500;
+  }
+  .key-quote strong { color: #422006; }
+
+  .alarm-box {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    border: 2px solid #dc2626;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    color: #7f1d1d;
+  }
+  .alarm-box h3 { color: #7f1d1d; margin-bottom: 8px; }
+  .alarm-box strong { color: #450a0a; }
+
+  footer {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · ROUND 2 RECAP · PERIOD 1 → PERIOD 2</div>
+    <h1>Round 2: Strong Growth · But Marvels Just Overtook Us</h1>
+    <p>EBT jumped to $31M (+44%), revenue grew to $64M (+30%), TONE became the volume leader of the entire industry. But Marvels reversed past us to #1 with a 162-point SPI lead. Round 3 must respond.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">SPI Rank</div>
+        <div class="hero-stat-value">#2</div>
+        <div class="hero-stat-sub">1,424 (−162 vs Marvels)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">EBT</div>
+        <div class="hero-stat-value">$31.0M</div>
+        <div class="hero-stat-sub">+44% vs P1</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Revenue</div>
+        <div class="hero-stat-value">$64.4M</div>
+        <div class="hero-stat-sub">+30%</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Next Period Budget</div>
+        <div class="hero-stat-value">$12.4M</div>
+        <div class="hero-stat-sub">+44% headroom</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Industry Standings -->
+  <section>
+    <div class="section-tag">PART 01 · INDUSTRY STANDINGS</div>
+    <h2>Where the Four Firms Stand (End of Period 2)</h2>
+    <div class="ranking">
+      <div class="rank-row leader">
+        <div class="rank-num">🥇</div>
+        <div class="rank-name">Marvels</div>
+        <div class="rank-bar-container"><div class="rank-bar leader" style="width: 100%"></div></div>
+        <div class="rank-stat"><strong>1,586</strong><br>SPI</div>
+        <div class="rank-stat"><strong>$70M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$35M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row us">
+        <div class="rank-num">🥈</div>
+        <div class="rank-name">Titans (us)</div>
+        <div class="rank-bar-container"><div class="rank-bar us" style="width: 89.8%"></div></div>
+        <div class="rank-stat"><strong>1,424</strong><br>SPI</div>
+        <div class="rank-stat"><strong>$64M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$31M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">🥉</div>
+        <div class="rank-name">Rocket</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width: 78.5%"></div></div>
+        <div class="rank-stat"><strong>1,245</strong><br>SPI</div>
+        <div class="rank-stat"><strong>$51M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$22M</strong><br>Net Contrib.</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">4</div>
+        <div class="rank-name">Snipers</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width: 73.4%; background: linear-gradient(90deg, #94a3b8, #64748b);"></div></div>
+        <div class="rank-stat"><strong>1,164</strong><br>SPI</div>
+        <div class="rank-stat"><strong>$48M</strong><br>Revenue</div>
+        <div class="rank-stat"><strong>$20M</strong><br>Net Contrib.</div>
+      </div>
+    </div>
+    <div class="key-quote">
+      <strong>Marvels just leapfrogged us into #1 — gap of 162 SPI is real but closable.</strong> Their strategy: MOST price increased to $225, MOVE held at $550, salesforce expanded to 134 FTE (44 more than us), and R&D investment of $4.6M. They're running a "triple-edged attack" — price + sales + R&D. Snipers is also stepping up advertising significantly (+$2.5M).
+    </div>
+  </section>
+
+  <!-- 2. Brand performance -->
+  <section>
+    <div class="section-tag">PART 02 · BRAND PERFORMANCE</div>
+    <h2>TONE & TOPS Breakdown</h2>
+    <div class="brand-grid">
+      <div class="brand-card tone">
+        <span class="brand-tag tag-low">TONE · LOW-END · INDUSTRY VOLUME LEADER 👑</span>
+        <h3>TONE</h3>
+        <p style="color: #78350f; font-size: 13px;">Now #1 in Savers (31.4% purchase intent, 32.6% panel share)</p>
+        <div class="brand-stats-grid">
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume</div>
+            <div class="brand-stat-value">162K</div>
+            <div class="brand-stat-sub" style="color: #dc2626;">⚠ Hit +20% auto cap (lost sales)</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Revenue</div>
+            <div class="brand-stat-value">$23.8M</div>
+            <div class="brand-stat-sub">37% of company</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Contribution (CAM)</div>
+            <div class="brand-stat-value">$12.6M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+52% vs P1</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Unit Cost</div>
+            <div class="brand-stat-value">$53</div>
+            <div class="brand-stat-sub"><span class="delta-up">−10% (experience curve)</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Share</div>
+            <div class="brand-stat-value">15.8%</div>
+            <div class="brand-stat-sub"><span class="delta-up">+2.0pp (industry #1)</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Value Share</div>
+            <div class="brand-stat-value">10.0%</div>
+            <div class="brand-stat-sub"><span class="delta-up">+0.8pp</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card tops">
+        <span class="brand-tag tag-high">TOPS · HIGH-END · PROFIT ENGINE 💰</span>
+        <h3>TOPS 🌟</h3>
+        <p style="color: #1e3a8a; font-size: 13px;">Now #1 in Explorers (18.1%), lost Pros to SOLO ($499)</p>
+        <div class="brand-stats-grid">
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume</div>
+            <div class="brand-stat-value">131K</div>
+            <div class="brand-stat-sub" style="color: #059669;">vs plan 130K (matched)</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Revenue</div>
+            <div class="brand-stat-value">$40.6M</div>
+            <div class="brand-stat-sub">63% of company</div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Contribution (CAM)</div>
+            <div class="brand-stat-value">$20.3M</div>
+            <div class="brand-stat-sub"><span class="delta-up">+48% vs P1 🚀</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Unit Cost</div>
+            <div class="brand-stat-value">$127</div>
+            <div class="brand-stat-sub"><span class="delta-up">−11% (experience curve)</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Volume Share</div>
+            <div class="brand-stat-value">12.8%</div>
+            <div class="brand-stat-sub"><span class="delta-up">+1.4pp</span></div>
+          </div>
+          <div class="brand-stat">
+            <div class="brand-stat-label">Value Share</div>
+            <div class="brand-stat-value">17.6%</div>
+            <div class="brand-stat-sub"><span class="delta-up">+1.0pp</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alarm-box">
+      <h3>🚨 OFFICIAL SHORTAGE WARNING</h3>
+      <p>Markstrat's system reported: <em>"Despite all the efforts made by the Production department, they were not able to fulfill all the orders for TONE this period. As a consequence, some potential sales of TONE have been lost."</em></p>
+      <p style="margin-top: 8px;"><strong>Estimated impact:</strong> True demand likely 180–200K; we shipped only 162K (the +20% auto-adjust ceiling from our 135K plan). <strong>Lost 20–40K units × $94 margin = $2–4M in foregone contribution.</strong></p>
+    </div>
+  </section>
+
+  <!-- 3. What worked -->
+  <section>
+    <div class="section-tag">PART 03 · WHAT WORKED — AND WHY</div>
+    <h2>The 5 Decisions That Delivered +44% EBT</h2>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>TONE became the industry's #1 brand by volume (162K)</div>
+      Beat MOST (150K, Marvels' star), captured 32.6% share in Savers (vs 26.1% MOST).
+      <div class="insight-why"><strong>Why it worked:</strong> Multi-layered strategy — ① price cut to $235 (vs MOST's $225 was no longer the cheapest), ② 60% advertising allocation to Savers (industry-highest in absolute dollars at $660K), ③ Mass Merch sales force of 28 (matching Marvels' 30), ④ Mass Merch coverage hit 48% (highest among all low-end brands). Marvels' MOST has 74 FTE on a single brand but only 38 in Mass — we beat them in the channel they should have owned.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>TOPS at $500 captured Explorers crown + held HE silver</div>
+      Volume +34% (98K → 131K), value share +1pp, contribution +48%.
+      <div class="insight-why"><strong>Why it worked:</strong> Dropped TOPS from $520 to $500 to directly attack ROLL ($510). Result: ROLL volume −13%, TOPS volume +33%. Took #1 in Explorers (18.1% intent vs MOVE 16.8%). The price cut was margin-accretive too — unit cost dropped $143 → $127 via experience curve, so per-unit margin actually grew $188 → $182 despite the lower price. Volume × margin = $20.3M contribution.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>POSHOP R&D completed on budget — Shoppers play ready</div>
+      Specs delivered: Features 7 / Design 8 / Battery 48 / Display 23 / Power 51. Base cost $110.
+      <div class="insight-why"><strong>Why it matters:</strong> POSHOP sits in the long-empty middle of the market — closer to Shoppers' ideal point (8.5, 1.6, 2.8) than any existing brand. Round 3 will launch a new brand on this platform, attacking a segment growing +28.7% next period and projected to be 30.6% of the market in 5 periods. No competitor has positioned here.</div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>Salesforce expansion (60 → 110) paid off massively</div>
+      Commercial costs +$1.1M produced +$10.6M increased contribution.
+      <div class="insight-why"><strong>Why it worked:</strong> Period 1 experiment data predicted TOPS +30 FTE = +$1.7M; we added 25 to TOPS and got proportional impact. Distribution coverage rose: TONE Mass 44%→48%, TOPS Specialty 43%→45%, all channels Online +4pp. <strong>Sales-force ROI per FTE = ~$210K of incremental contribution.</strong></div>
+    </div>
+
+    <div class="insight success">
+      <div class="insight-title"><span class="insight-icon">✓</span>Cut advertising 26% without losing share</div>
+      Advertising dropped from $5.3M to $3.9M; share went UP on both metrics.
+      <div class="insight-why"><strong>Why it worked:</strong> Period 1's experiment confirmed advertising was saturated. We cut research from 22-27% down to ~8% — saving $1.0M alone. The total $1.4M saved went into salesforce + R&D. Awareness still grew (TONE +1pp, TOPS +2pp average) because the spend that remained was concentrated in target segments.</div>
+    </div>
+  </section>
+
+  <!-- 4. What didn't work -->
+  <section>
+    <div class="section-tag">PART 04 · WHAT WENT WRONG — AND WHY</div>
+    <h2>4 Issues Round 3 Must Address</h2>
+
+    <div class="insight danger">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 1: TONE production crisis (2nd round in a row)</div>
+      Planned 135K, demand exceeded the auto-adjust ceiling of 162K. <strong>Lost an estimated $2–4M in contribution.</strong>
+      <div class="insight-why"><strong>Root cause:</strong> Underestimated demand acceleration. We knew P1 sold 118K with a 110K plan; we should have realized that with market growth +16.5% AND a price cut AND a stronger ad mix, demand could easily exceed 180K. We were anchored on the production-plan equals-sold-volume mental model — but the auto-adjust ceiling kept biting us.<br><br>
+      <strong>Round 3 fix:</strong> Plan TONE at <strong>200K minimum</strong> (probably 220K to be safe). The ±20% range would be 176–264K, accommodating any reasonable demand surprise.</div>
+    </div>
+
+    <div class="insight danger">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 2: Lost Professionals leadership to Snipers' SOLO</div>
+      SOLO dropped price $510→$499, lifted advertising massively, and took #1 in Pros (29.0% vs TOPS 25.6%).
+      <div class="insight-why"><strong>Root cause:</strong> We dropped TOPS to $500 to attack ROLL — but Snipers attacked TOPS at the same time with $499. Without a TOPS R&D upgrade (POTOPS2 was deferred), we couldn't differentiate on product, only on price. Snipers won the price race by $1.<br><br>
+      <strong>Round 3 fix:</strong> ① Launch POTOPS2 R&D to upgrade TOPS toward Pros' moving ideal (Power 5.7 ideal vs current perceived 5.5, Battery 4.9 ideal vs current 2.5). ② Consider taking TOPS back to $510 — competing on product, not price.</div>
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 3: Perceptual Objectives produced minimal movement</div>
+      Set TONE targets Design 3.8 and Power 2.4 — both perceptions actually moved 0.0 from 1.5. TOPS Battery target 3.9 only moved 2.2 → 2.5.
+      <div class="insight-why"><strong>Root cause:</strong> Advertising research budget was only 8.3-8.7% of total — the handbook recommends 10-15% for any meaningful repositioning. Also, ALL 8 brands have identical physical specs, so any perceptual repositioning is fighting against ground truth. Without R&D upgrade, advertising alone cannot move perception far.<br><br>
+      <strong>Round 3 fix:</strong> Either commit to repositioning (15% research budget + Perceptual Objectives), or abandon it and use R&D-driven physical changes. Mixed signals don't work.</div>
+    </div>
+
+    <div class="insight warning">
+      <div class="insight-title"><span class="insight-icon">!</span>Issue 4: R&D under-investment — we're falling behind</div>
+      Our R&D spend: $1.4M. Rocket: $8.7M. Snipers: $9.2M. Marvels: $4.6M.
+      <div class="insight-why"><strong>Why this is alarming:</strong> Rocket and Snipers are funding 6–7× more R&D than us. They're likely working on multiple Sonite upgrades AND/OR Vodite prototypes. The pipeline they're building will start shipping in Round 3–4. If we don't ramp R&D now, we'll face superior products from 2 of 3 competitors mid-game.<br><br>
+      <strong>Round 3 fix:</strong> Launch 2–3 R&D projects: POTOPS2 (TOPS upgrade), POTONE2 (TONE deeper into Savers ideal + cost reduction), and consider a Vodite Feasibility Study to keep options open.</div>
+    </div>
+  </section>
+
+  <!-- 5. Critical findings -->
+  <section>
+    <div class="section-tag">PART 05 · THE TWO MOST IMPORTANT SIGNALS</div>
+    <h2>Round 3 Must Be Built Around These</h2>
+
+    <div class="insight gold">
+      <div class="insight-title"><span class="insight-icon">⭐</span>Signal 1: The R&D arms race has begun</div>
+      <table>
+        <thead><tr><th>Firm</th><th>P2 R&D Spend</th><th>Hint</th></tr></thead>
+        <tbody>
+          <tr><td>Snipers</td><td>$9.2M</td><td>Possibly Vodite + multiple Sonite upgrades</td></tr>
+          <tr><td>Rocket</td><td>$8.7M</td><td>Same</td></tr>
+          <tr><td>Marvels</td><td>$4.6M</td><td>Likely 1–2 Sonite projects</td></tr>
+          <tr><td><strong>Titans (us)</strong></td><td><strong>$1.4M</strong></td><td>POSHOP only — way behind</td></tr>
+        </tbody>
+      </table>
+      <div class="insight-why"><strong>Implication:</strong> Rocket and Snipers are building product pipelines we cannot match unless we ramp up. With $12.4M next-period budget, we can comfortably allocate $3–4M to R&D this round. If we underspend again, Round 4 will see superior competitor products targeting our segments.</div>
+    </div>
+
+    <div class="insight gold">
+      <div class="insight-title"><span class="insight-icon">⭐</span>Signal 2: Shoppers is still wide-open territory</div>
+      Shoppers ideal point at (Economy 8.5, Performance 1.6, Convenience 2.8). Nearest brand: TONE at 16.4 units away. TOPS at 26.1 units. <strong>No one has positioned here.</strong>
+      <div class="insight-why">
+        <strong>Why this is still the biggest opportunity:</strong><br>
+        • Period 2 size: 206K (20% of market)<br>
+        • Next period: 265K (+28.7% — fastest growth)<br>
+        • 5-period projection: 582K (30.6% of market)<br><br>
+        Industry-wide ad spend on Shoppers in P2: just $3.3M (second-lowest). Competitors STILL haven't recognized this.<br><br>
+        <strong>Implication:</strong> POSHOP must launch as a new brand in Round 3 with aggressive production (50–80K), tight Shoppers-targeted marketing, and a competitive price (~$300–$320). We could grab 8–15% share of Shoppers in one round.
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Competitor profile -->
+  <section>
+    <div class="section-tag">PART 06 · THE THREE COMPETITORS</div>
+    <h2>What They're Doing — and How to Respond</h2>
+    <div class="competitor-grid">
+      <div class="competitor-card" style="border-left: 4px solid #ec4899;">
+        <div class="competitor-name">⚡ Marvels (NEW LEADER)</div>
+        <div class="competitor-score">SPI 1,586 · MOVE leads value share at 21.2%</div>
+        <div class="competitor-strategy">
+          <strong>Strategy:</strong> Triple-edged attack — MOST raised back to $225 but salesforce now 74 on it (industry-highest single-brand), MOVE held at $550 with $3.79M advertising (highest), MOVE has the only "Excellent" message quality.<br><br>
+          <strong>How to respond:</strong> Don't fight MOVE on its turf (HE). Instead, ① attack their MOST with POTONE2 upgrade (we already beat them in volume), ② enter Shoppers via POSHOP — Marvels has no mid-tier brand, ③ keep TOPS competitive on Pros via POTOPS2.
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #4f46e5;">
+        <div class="competitor-name">🚀 Rocket (sliding)</div>
+        <div class="competitor-score">SPI 1,245 · ROLL volume −13% (only brand to lose volume)</div>
+        <div class="competitor-strategy">
+          <strong>Strategy:</strong> Held prices essentially flat, lost share to aggressive competitors, but invested $8.7M in R&D — a major pipeline is coming. Reduced ad spend (4.5M vs 5.3M in P1).<br><br>
+          <strong>How to respond:</strong> Rocket is reloading. Whatever ships in Round 3–4 will be designed to recapture share. Watch for new Rocket brands or significant R upgrades. Don't get complacent on the segments we now lead.
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #6366f1;">
+        <div class="competitor-name">🎯 Snipers (the surprise)</div>
+        <div class="competitor-score">SPI 1,164 · SOLO now leads Pros at 29.0%</div>
+        <div class="competitor-strategy">
+          <strong>Strategy:</strong> The biggest pivot in the industry. Tripled advertising ($1.1M → $3.6M), dropped SOLO to $499, and grabbed Pros leadership from TOPS. R&D investment $9.2M (highest in industry).<br><br>
+          <strong>How to respond:</strong> Snipers is no longer the laggard. Their R&D pipeline is the most dangerous in the industry. Match them with R&D investment of our own. SOLO at $499 + heavy investment means we cannot win Pros on price — must win on product (POTOPS2).
+        </div>
+      </div>
+      <div class="competitor-card" style="border-left: 4px solid #ca8a04;">
+        <div class="competitor-name">🦁 Titans (us)</div>
+        <div class="competitor-score">SPI 1,424 · TONE is industry volume leader</div>
+        <div class="competitor-strategy">
+          <strong>Current position:</strong> Strong #2 with the industry's most efficient salesforce (TONE 55 FTE → 162K sold = 2.95K/FTE, industry-best). TOPS still the profit engine.<br><br>
+          <strong>Round 3 strategy:</strong> ① Launch POSHOP new brand for Shoppers ② Initiate POTOPS2 + POTONE2 R&D projects (+ optional Vodite Feasibility) ③ Scale production aggressively (TONE 200K+) ④ Match or exceed Marvels' 134 FTE salesforce ⑤ Spend the full $12.4M budget — no more leaving money on the table.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Map -->
+  <section>
+    <div class="section-tag">PART 07 · THE PERCEPTUAL MAP (PERIOD 2)</div>
+    <h2>The "No-Man's Land" Is Still Open</h2>
+    <div class="market-map">
+      <svg class="map-svg" viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg">
+        <rect x="50" y="20" width="600" height="400" fill="#fafafa" stroke="#e5e7eb"/>
+        <line x1="350" y1="20" x2="350" y2="420" stroke="#cbd5e1" stroke-width="1"/>
+        <line x1="50" y1="220" x2="650" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="650" y="240" font-size="13" fill="#64748b" text-anchor="end" font-weight="600">Economy →</text>
+        <text x="360" y="32" font-size="13" fill="#64748b" font-weight="600">↑ Performance</text>
+        <text x="50" y="240" font-size="11" fill="#94a3b8">−20</text>
+        <text x="640" y="240" font-size="11" fill="#94a3b8">+20</text>
+        <text x="358" y="30" font-size="11" fill="#94a3b8">+20</text>
+        <text x="358" y="418" font-size="11" fill="#94a3b8">−20</text>
+
+        <!-- High-end cluster: TOPS at (-13.6, 13.1) -->
+        <circle cx="146" cy="89" r="18" fill="#6366f1" opacity="0.85"/>
+        <text x="146" y="93" font-size="10" fill="white" text-anchor="middle" font-weight="700">TOPS</text>
+        <text x="146" y="73" font-size="9" fill="#4338ca" text-anchor="middle">High-end cluster</text>
+        <text x="146" y="120" font-size="9" fill="#475569" text-anchor="middle">MOVE/ROLL/SOLO</text>
+
+        <!-- Low-end cluster: TONE at (10.5, -10.2) -->
+        <circle cx="508" cy="322" r="18" fill="#f59e0b" opacity="0.85"/>
+        <text x="508" y="326" font-size="10" fill="white" text-anchor="middle" font-weight="700">TONE</text>
+        <text x="508" y="306" font-size="9" fill="#92400e" text-anchor="middle">Low-end cluster</text>
+        <text x="508" y="353" font-size="9" fill="#475569" text-anchor="middle">MOST/ROCK/SOFT</text>
+
+        <!-- Explorers (3.3, 13.6) -->
+        <circle cx="400" cy="84" r="10" fill="#3b82f6" opacity="0.5"/>
+        <text x="400" y="69" font-size="10" fill="#1e40af" text-anchor="middle">Explorers</text>
+        <text x="400" y="106" font-size="8" fill="#475569" text-anchor="middle">⬇ shrinking</text>
+
+        <!-- Shoppers (8.5, 1.6) - GAP -->
+        <circle cx="478" cy="204" r="22" fill="#eab308" opacity="0.7" stroke="#ca8a04" stroke-width="3" stroke-dasharray="4,2"/>
+        <text x="478" y="200" font-size="11" fill="#78350f" text-anchor="middle" font-weight="700">Shoppers</text>
+        <text x="478" y="216" font-size="9" fill="#92400e" text-anchor="middle">⭐ POSHOP target</text>
+        <text x="478" y="236" font-size="8" fill="#92400e" text-anchor="middle">+28.7% next period</text>
+
+        <!-- POSHOP estimated position - new! -->
+        <circle cx="430" cy="190" r="14" fill="#0891b2" opacity="0.85" stroke="white" stroke-width="2"/>
+        <text x="430" y="194" font-size="10" fill="white" text-anchor="middle" font-weight="700">POSHOP</text>
+        <text x="430" y="170" font-size="9" fill="#0c4a6e" text-anchor="middle">our new brand →</text>
+
+        <!-- Professionals (-10.5, 11.1) -->
+        <circle cx="193" cy="109" r="10" fill="#ec4899" opacity="0.5"/>
+        <text x="193" y="99" font-size="10" fill="#9d174d" text-anchor="middle">Professionals</text>
+        <text x="193" y="129" font-size="8" fill="#475569" text-anchor="middle">SOLO leads now</text>
+
+        <!-- High Earners (-12.4, 3.8) -->
+        <circle cx="164" cy="184" r="10" fill="#f97316" opacity="0.5"/>
+        <text x="164" y="174" font-size="10" fill="#9a3412" text-anchor="middle">High Earners</text>
+
+        <!-- Savers (12.1, -9.9) -->
+        <circle cx="531" cy="319" r="11" fill="#14b8a6" opacity="0.5"/>
+        <text x="531" y="303" font-size="10" fill="#115e59" text-anchor="middle">Savers</text>
+
+        <!-- TONE near Savers (short distance) -->
+        <line x1="508" y1="322" x2="531" y2="319" stroke="#10b981" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/>
+        <text x="525" y="345" font-size="10" fill="#059669" font-weight="600">5.7 ✓</text>
+
+        <text x="350" y="445" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="700">TONE is now hugging Savers' ideal · POSHOP will plug the Shoppers gap in Round 3</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 8. Round 3 actions -->
+  <section>
+    <div class="section-tag">PART 08 · ROUND 3 PLAYBOOK</div>
+    <h2>6 Recommendations for the Team</h2>
+
+    <ol class="action-list">
+      <li>
+        <strong>Launch the new brand on POSHOP platform ⭐ Top priority</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Brand name: "TOSHOP" or similar (T+O+...). Production 50–80K, price ~$320, target Shoppers + Savers cross. Marketing budget ~$1.5M. This is the Shoppers grab we've been planning since Round 2.</span>
+      </li>
+      <li>
+        <strong>Initiate POTOPS2 R&D — recapture Pros leadership</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Target Pros' moving ideal: Power 5.7, Display 5.6, Battery 4.9. Adjust specs to: Features 14, Design 7, Battery 60, Display 38, Power 80. Budget ~$1.5M. Ships Round 4.</span>
+      </li>
+      <li>
+        <strong>Initiate POTONE2 R&D — deeper Savers fit + cost reduction</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Push deeper into Savers ideal (Features 18→13, slightly lower Display) and cost down ($53 → ~$40). Budget ~$0.8M. This is both a defensive moat against Marvels and a future margin expansion.</span>
+      </li>
+      <li>
+        <strong>Production scaling: TONE 200K+, TOPS 150K+</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">Two rounds of TONE shortages = $4M+ lost. Plan TONE 200–220K to have +20% ceiling at 264K. TOPS demand will keep growing — plan 150K minimum.</span>
+      </li>
+      <li>
+        <strong>Salesforce: match or exceed Marvels' 134</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">From 110 → 140 FTE. Experiment showed TOPS +30 = +$1.15M. Allocate 35 new FTEs across TONE, TOPS, and new brand.</span>
+      </li>
+      <li>
+        <strong>Re-allocate advertising: TOPS can take a little more</strong><br>
+        <span style="font-size: 13px; color: #4b5563;">P2 experiment showed +20% TOPS advertising = +$160K (no longer saturated). Re-up TOPS to ~$2.7M total. TONE stay around $1.5M.</span>
+      </li>
+    </ol>
+
+    <div class="key-quote" style="margin-top: 20px;">
+      <strong>Team alignment: Round 3's theme is "Triple-product growth + R&D arms race response."</strong> We have $12.4M budget — use it fully. The Marvels lead is closable if we ramp R&D (which they're already doing) and capture Shoppers before anyone else realizes it's empty. Don't fight Marvels on their MOST homefront — beat them on aggregate by adding new revenue streams.
+    </div>
+  </section>
+
+  <footer>
+    Round 2 Recap · Firm Titans · 2026-05-15<br>
+    Source: Markstrat Period 2 full report · Built for team alignment<br>
+    Will be updated after Round 3 submission
+  </footer>
+
+</div>
+</body>
+</html>
