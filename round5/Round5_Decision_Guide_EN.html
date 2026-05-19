@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titans · Round 5 Decision Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f1f5f9;--card:#fff;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;
+  --blue:#1d4ed8;--blue-lt:#eff6ff;--orange:#ea580c;--orange-lt:#fff7ed;
+  --green:#16a34a;--green-lt:#f0fdf4;--red:#dc2626;--red-lt:#fef2f2;
+  --amber:#d97706;--amber-lt:#fffbeb;--purple:#7c3aed;--purple-lt:#f5f3ff;
+  --cyan:#0891b2;--cyan-lt:#ecfeff;
+  --savers:#16a34a;--pros:#1d4ed8;--he:#7c3aed;--shoppers:#d97706;
+  --exp:#dc2626;--inno:#0891b2;--adopt:#6d28d9;--follow:#65a30d;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+.hdr{background:var(--blue);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.18);flex-wrap:wrap;gap:8px}
+.hdr h1{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.hdr-meta{display:flex;gap:8px;font-size:12px;flex-wrap:wrap}
+.hdr-tag{background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px}
+.hdr-warn{background:#fbbf24;color:#78350f;font-weight:700}
+.hdr-ok{background:#22c55e;color:#052e16;font-weight:700}
+.tabs{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;display:flex;overflow-x:auto;position:sticky;top:49px;z-index:99}
+.tab{padding:11px 14px;border:none;background:none;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--muted);border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab:hover{color:var(--blue)}
+.tab.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle;position:relative;top:-1px}
+.pane{display:none;padding:22px;max-width:1100px;margin:0 auto}
+.pane.on{display:block}
+.card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:14px}
+.card-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+.card h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:760px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}.tabs{gap:0}}
+.fv{display:inline-block;background:var(--orange-lt);border:2px solid var(--orange);border-radius:8px;padding:6px 16px;font-size:28px;font-weight:800;color:var(--orange);letter-spacing:-.02em}
+.fv.xl{font-size:36px;padding:8px 22px}
+.fv.sm{font-size:17px;padding:5px 13px}
+.fv.purple{background:var(--purple-lt);border-color:var(--purple);color:var(--purple)}
+.fv.red{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.fv.cyan{background:var(--cyan-lt);border-color:var(--cyan);color:var(--cyan)}
+.fv.gray{background:#f1f5f9;border-color:#94a3b8;color:#475569}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;gap:3px}
+.up{background:var(--green-lt);color:var(--green)}
+.dn{background:var(--orange-lt);color:var(--orange)}
+.same{background:#f1f5f9;color:var(--muted)}
+.warn{background:var(--amber-lt);color:var(--amber)}
+.new{background:var(--purple-lt);color:var(--purple)}
+.info{background:var(--blue-lt);color:var(--blue)}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:11px 15px;border-radius:10px;margin-bottom:14px;font-size:13px}
+.alert-warn{background:var(--amber-lt);border:1px solid #fcd34d}
+.alert-info{background:var(--blue-lt);border:1px solid #93c5fd}
+.alert-danger{background:var(--red-lt);border:1px solid #fca5a5}
+.alert-purple{background:var(--purple-lt);border:1px solid #c4b5fd}
+.alert-ok{background:var(--green-lt);border:1px solid #86efac}
+.alert .ico{font-size:16px;margin-top:1px;flex-shrink:0}
+.alert h4{font-weight:700;font-size:13px;margin-bottom:2px}
+.alert p{font-size:12px;color:#374151}
+.sbar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-top:8px}
+.si{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3);overflow:hidden}
+.si span{white-space:nowrap;padding:0 4px;overflow:hidden;text-overflow:ellipsis}
+.slabels{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.slabel{display:flex;align-items:center;gap:4px;font-size:11px}
+.sdot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.cr{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:5px;flex-wrap:wrap}
+.cr strong{color:var(--text)}
+hr.dv{border:none;border-top:1px solid var(--border);margin:16px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{padding:7px 11px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border);background:#f8fafc}
+.tbl td{padding:9px 11px;border-bottom:1px solid var(--border)}
+.tbl tr:last-child td{border-bottom:none}
+.vc{font-weight:700;color:var(--orange);font-size:15px;text-align:center}
+.tr-total td{background:#f8fafc;font-weight:700;border-top:2px solid var(--border)}
+.bbar{display:flex;height:26px;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin:10px 0}
+.bseg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.tbar{background:var(--blue);color:#fff;border-radius:10px;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap;gap:10px}
+.tbar-lbl{font-size:13px;opacity:.85}
+.tbar-amt{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.pri{display:flex;gap:13px;align-items:flex-start;padding:11px 13px;border-radius:8px;border:1px solid var(--border);background:#fff;margin-bottom:8px}
+.pri-n{width:27px;height:27px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.pri h4{font-size:13px;font-weight:700;margin-bottom:2px}
+.pri p{font-size:12px;color:var(--muted)}
+.sc{border-radius:10px;padding:14px;border:1px solid var(--border);background:#fff}
+.sc-brand{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px}
+.sc-row{margin-bottom:5px}
+.sc-row .lbl{font-size:10px;color:var(--muted)}
+.sc-row .val{font-size:14px;font-weight:700;color:var(--orange)}
+.ci{display:flex;align-items:flex-start;gap:11px;padding:9px 11px;border-radius:8px;border:1px solid var(--border);background:#fff;margin-bottom:5px}
+.cb{width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
+.cb.y{background:var(--blue);color:#fff}
+.cb.py{background:var(--purple);color:#fff}
+.cb.n{background:#f1f5f9;border:1px solid var(--border);color:var(--muted)}
+.ci-cost{margin-left:auto;font-weight:600;font-size:12px;color:var(--orange);white-space:nowrap;padding-left:8px}
+.ci-cost.skip{color:var(--muted);text-decoration:line-through}
+.cg-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:14px 0 7px}
+.act-cell{background:var(--orange-lt);border:2px solid var(--orange);border-radius:8px;padding:5px 10px;font-weight:700;color:var(--orange);font-size:13px;display:inline-block}
+.act-cell.purple{background:var(--purple-lt);border-color:var(--purple);color:var(--purple)}
+.act-cell.cyan{background:var(--cyan-lt);border-color:var(--cyan);color:var(--cyan)}
+.act-cell.gray{background:#f1f5f9;border:1px solid var(--border);color:var(--muted);font-weight:600}
+.acc-blue{border-left:4px solid var(--blue)}
+.acc-purple{border-left:4px solid var(--purple)}
+.acc-cyan{border-left:4px solid var(--cyan)}
+.note{font-size:12px;color:var(--muted);font-style:italic;margin-top:6px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <h1>⚡ Titans · Round 5 Decision Guide</h1>
+  <div class="hdr-meta">
+    <span class="hdr-tag">Period 5 of 6</span>
+    <span class="hdr-tag">Inflation 4%</span>
+    <span class="hdr-tag hdr-ok">Budget $18,700K · Buffer $519K ✓</span>
+    <span class="hdr-tag">SPI #2 · 1,870 (−42 vs Snipers)</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab on" onclick="show('overview',this)">📋 Overview</button>
+  <button class="tab" onclick="show('rd',this)"><span class="dot" style="background:#1d4ed8"></span>R&amp;D</button>
+  <button class="tab" onclick="show('portfolio',this)"><span class="dot" style="background:#7c3aed"></span>Brand Portfolio</button>
+  <button class="tab" onclick="show('tone',this)"><span class="dot" style="background:#16a34a"></span>TONE</button>
+  <button class="tab" onclick="show('tops',this)"><span class="dot" style="background:#1d4ed8"></span>TOPS</button>
+  <button class="tab" onclick="show('toho',this)"><span class="dot" style="background:#d97706"></span>TOHO</button>
+  <button class="tab" onclick="show('terra',this)"><span class="dot" style="background:#7c3aed"></span>TERRA</button>
+  <button class="tab" onclick="show('techno',this)"><span class="dot" style="background:#0891b2"></span>TECHNO ❓</button>
+  <button class="tab" onclick="show('sales',this)">Sales Team</button>
+  <button class="tab" onclick="show('research',this)">Market Research</button>
+</nav>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="pane-overview" class="pane on">
+
+  <div class="alert alert-info">
+    <div class="ico">🎯</div>
+    <div><h4>Round 5 Mission: Close the 42-Point SPI Gap to Snipers</h4>
+    <p>Last round we leapt +331 SPI, mostly via TERRA's Vodite launch. Round 5 is when we can overtake. Budget is healthy ($18.7M · $5,810K of headroom), but the Vodite arms race has escalated — SESENEW jumped advertising from $2.1M to $5.4M. We must spend smart, not just spend more.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">P5 Budget Allocation Overview · Total $18,181K (out of $18,700K · $519K buffer)</div>
+    <div class="bbar">
+      <div class="bseg" style="width:54.4%;background:#ea580c;">Advertising $9,890K</div>
+      <div class="bseg" style="width:26.8%;background:#1d4ed8;">Sales Team $4,865K</div>
+      <div class="bseg" style="width:15.4%;background:#7c3aed;">R&D $2,800K</div>
+      <div class="bseg" style="width:3.4%;background:#16a34a;">Studies $626K</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;flex-wrap:wrap;gap:10px">
+      <span>Authorized: <strong style="color:var(--text)">$18,700K</strong></span>
+      <span>Advertising $9,890K · Sales $4,865K · R&D $2,800K · Studies $626K</span>
+      <span>Buffer: <strong style="color:var(--green)">$519K ✓</strong></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">6 Priority Actions This Round</div>
+    <div class="pri"><div class="pri-n">1</div><div><h4>🔬 Re-fund R&D — Three Sonites Projects Worth $2,800K</h4><p>P4 we spent $0 on Sonites R&D (Rocket spent $1.2M). MOVE upgraded Power to 84; TOPS still at 75. Launch POTOPS Cost Reduction ($300K · $2.7M/yr return), POTOPSV2 upgrade ($1,500K · Power 85), and POSHOPV2 upgrade ($1,000K · track Shoppers drift).</p></div></div>
+    <div class="pri"><div class="pri-n">2</div><div><h4>⬆️ TOHO Production Plan ≥ 180,000 — Don't Cap Ourselves Again</h4><p>P4 we planned 100K and sold out at 105K. Shoppers segment grows +35% next period. Production cap from prior period (~126K) — but plan high so the system maxes out, not cuts us off.</p></div></div>
+    <div class="pri"><div class="pri-n">3</div><div><h4>📈 Shift Advertising Toward TOPS — Experiment Shows 1.7x ROI</h4><p>P4 experiment: +20% TOPS ads = +$447K contribution. P4 we flat-lined all three Sonites brands at $1,310K. Raise TOPS to $1,955K and reallocate from TONE/TOHO.</p></div></div>
+    <div class="pri"><div class="pri-n">4</div><div><h4>🛡️ Defend TERRA — Raise Advertising to $2,875K</h4><p>SESENEW jumped from $2.1M to $5.4M ads. READ entered at $3.2M. MEME at $1.6M. If we hold TERRA at $1.9M, our 48% Vodite share will compress. Match the new battle, but smarter (split Innovators / Adopters 45/45).</p></div></div>
+    <div class="pri"><div class="pri-n">5</div><div><h4>👥 Expand Commercial Team to 200 FTE — Esp. TOHO Channel</h4><p>From 175 to 200 FTE (+$687K). Most of the +25 go to TOHO (which doubles production) and TECHNO (currently has 0). TOPS gains a few in Specialty to defend Pros.</p></div></div>
+    <div class="pri"><div class="pri-n">6</div><div><h4>🔬 Buy Two New Studies First Time: MDS and Commercial Team Experiment</h4><p>MDS for both markets ($83.5K) — validate TOPS positioning. Commercial Team Experiment ($41.75K) — verify whether 200 FTE is over- or under-sized. Cut 7 lower-value studies to fit ($268K savings).</p></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Key Numbers at a Glance — All 5 Brands</div>
+    <div class="g5">
+      <div class="sc" style="border-left:4px solid var(--savers)">
+        <div class="sc-brand" style="color:var(--savers)">TONE · Cash Cow</div>
+        <div class="sc-row"><span class="lbl">Production</span><div class="val">240,000</div></div>
+        <div class="sc-row"><span class="lbl">Price</span><div class="val">$215</div></div>
+        <div class="sc-row"><span class="lbl">Adv. Total</span><div class="val">$1,610K</div></div>
+        <div class="sc-row"><span class="lbl">Target</span><div class="val" style="font-size:12px">Savers 80%</div></div>
+      </div>
+      <div class="sc" style="border-left:4px solid var(--pros)">
+        <div class="sc-brand" style="color:var(--pros)">TOPS · Star</div>
+        <div class="sc-row"><span class="lbl">Production</span><div class="val">180,000</div></div>
+        <div class="sc-row"><span class="lbl">Price</span><div class="val">$499</div></div>
+        <div class="sc-row"><span class="lbl">Adv. Total</span><div class="val">$1,955K</div></div>
+        <div class="sc-row"><span class="lbl">Target</span><div class="val" style="font-size:12px">Pros 50% / HE 35%</div></div>
+      </div>
+      <div class="sc" style="border-left:4px solid var(--shoppers)">
+        <div class="sc-brand" style="color:var(--shoppers)">TOHO · Growth</div>
+        <div class="sc-row"><span class="lbl">Production</span><div class="val">180,000</div></div>
+        <div class="sc-row"><span class="lbl">Price</span><div class="val">$235</div></div>
+        <div class="sc-row"><span class="lbl">Adv. Total</span><div class="val">$1,725K</div></div>
+        <div class="sc-row"><span class="lbl">Target</span><div class="val" style="font-size:12px">Shoppers 90%</div></div>
+      </div>
+      <div class="sc" style="border-left:4px solid var(--inno)">
+        <div class="sc-brand" style="color:var(--inno)">TERRA · Defend</div>
+        <div class="sc-row"><span class="lbl">Production</span><div class="val">110,000</div></div>
+        <div class="sc-row"><span class="lbl">Price</span><div class="val">$740</div></div>
+        <div class="sc-row"><span class="lbl">Adv. Total</span><div class="val">$2,875K</div></div>
+        <div class="sc-row"><span class="lbl">Target</span><div class="val" style="font-size:12px">Inn 45 / Adop 45</div></div>
+      </div>
+      <div class="sc" style="border-left:4px solid var(--cyan)">
+        <div class="sc-brand" style="color:var(--cyan)">TECHNO · New ❓</div>
+        <div class="sc-row"><span class="lbl">Production</span><div class="val">50,000</div></div>
+        <div class="sc-row"><span class="lbl">Price</span><div class="val">$680</div></div>
+        <div class="sc-row"><span class="lbl">Adv. Total</span><div class="val">$1,725K</div></div>
+        <div class="sc-row"><span class="lbl">Target</span><div class="val" style="font-size:12px">Followers 80%</div></div>
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:14px">
+      <div class="ico">❓</div>
+      <div><h4>About TECHNO — Please Review</h4>
+      <p>TECHNO was already launched in the system (based on R&amp;D project PENT) before this guide was written. We weren't able to find PENT's physical specs in time, so the TECHNO numbers below are based on (a) its transfer cost of $266 visible in the panel, (b) the "target followers" intent stated in the portfolio, and (c) general Followers-segment characteristics. <strong>Whoever launched TECHNO — please double-check these and adjust if needed.</strong></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ R&D ═══════════════ -->
+<div id="pane-rd" class="pane">
+  <div class="alert alert-purple">
+    <div class="ico">🔬</div>
+    <div><h4>R&D Total: $2,800K · 3 Sonites Projects</h4>
+    <p>P4 we spent $0 on Sonites R&D. We need to catch up on cost-reduction AND specs — MOVE upgraded to Power 84 last round. PEINNOV remains shelved (free) for a possible 3rd Vodite in P6.</p></div>
+  </div>
+
+  <div class="card acc-purple">
+    <div class="card-label">① Cost Reduction Project — POTOPS</div>
+    <h3>Reduce TOPS unit cost from $179 to $160</h3>
+    <table class="tbl" style="margin-top:10px">
+      <tr><td>R&D screen</td><td><span class="act-cell purple">Start new cost reduction project → POTOPS</span></td></tr>
+      <tr><td>Project name</td><td><span class="act-cell gray">POTOPS</span> (select existing)</td></tr>
+      <tr><td>Budget allocated this period</td><td><span class="fv purple sm">$300 K</span></td></tr>
+      <tr><td>Expected return</td><td>$19/unit × 143K units = <strong>$2.7M/year</strong> · Payback &lt; 2 months</td></tr>
+    </table>
+  </div>
+
+  <div class="card acc-purple">
+    <div class="card-label">② New Sonites Project — POTOPSV2 (TOPS upgrade)</div>
+    <h3>Upgrade TOPS to defend Professionals against MOVE Power-84</h3>
+    <table class="tbl" style="margin-top:10px">
+      <tr><th>Field</th><th>Value</th><th>Why</th></tr>
+      <tr><td>Project name</td><td><span class="act-cell purple">POTOPSV2</span></td><td>Successor to POTOPS</td></tr>
+      <tr><td># Features</td><td><span class="fv purple sm">14</span></td><td>Closer to Pros ideal 4.7</td></tr>
+      <tr><td>Design</td><td><span class="fv purple sm">8</span></td><td>Maintain Pros perception</td></tr>
+      <tr><td>Battery (hr)</td><td><span class="fv purple sm">42</span></td><td>Slight bump</td></tr>
+      <tr><td>Display (inch)</td><td><span class="fv purple sm">41</span></td><td>Match Pros ideal 5.8</td></tr>
+      <tr><td>Proc. Power (GFlops)</td><td><span class="fv purple sm">85</span> ⭐</td><td>Match MOVE 84 · Pros ideal 6.1</td></tr>
+      <tr><td>Unit cost</td><td><span class="act-cell gray">○ Lowest possible</span></td><td>Default</td></tr>
+      <tr><td>Budget</td><td><span class="fv purple sm">$1,500 K</span></td><td>Run Online Query first to estimate</td></tr>
+    </table>
+    <div class="alert alert-info" style="margin-top:12px">
+      <div class="ico">💡</div>
+      <div><p><strong>Run an Online Query first</strong> (free, 5 remaining). If total budget required &gt; $2,000K, switch to Feasibility Study ($100K) and defer full project to P6.</p></div>
+    </div>
+  </div>
+
+  <div class="card acc-purple">
+    <div class="card-label">③ New Sonites Project — POSHOPV2 (TOHO upgrade)</div>
+    <h3>Track Shoppers ideal-point drift (Power 4.7, Display 4.7)</h3>
+    <table class="tbl" style="margin-top:10px">
+      <tr><th>Field</th><th>Value</th><th>Why</th></tr>
+      <tr><td>Project name</td><td><span class="act-cell purple">POSHOPV2</span></td><td>Successor to POSHOP</td></tr>
+      <tr><td># Features</td><td><span class="fv purple sm">8</span></td><td>Shoppers ideal 2.0 (lower perception)</td></tr>
+      <tr><td>Design</td><td><span class="fv purple sm">9</span></td><td>Shoppers ideal 5.2</td></tr>
+      <tr><td>Battery</td><td><span class="fv purple sm">50</span></td><td>Modest improvement</td></tr>
+      <tr><td>Display (inch)</td><td><span class="fv purple sm">32</span></td><td>Track Shoppers Display 4.7 ideal</td></tr>
+      <tr><td>Proc. Power</td><td><span class="fv purple sm">70</span></td><td>Match Shoppers Power 4.7 ideal</td></tr>
+      <tr><td>Unit cost</td><td><span class="act-cell gray">○ Lowest possible</span></td><td>Default</td></tr>
+      <tr><td>Budget</td><td><span class="fv purple sm">$1,000 K</span></td><td>Run Online Query first; if &gt; $1.5M, defer</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="border-left:4px solid #94a3b8">
+    <div class="card-label">Decisions NOT taken (intentional)</div>
+    <table class="tbl" style="margin-top:8px">
+      <tr><td><strong>Unshelve PEINNOV</strong></td><td><span class="badge same">SKIP</span></td><td>Budget priority. PEINNOV stays free on the shelf — re-evaluate in P6 if we want a 3rd Vodite SKU.</td></tr>
+      <tr><td><strong>New Vodite project</strong></td><td><span class="badge same">SKIP</span></td><td>TERRA + TECHNO already cover the Vodite market. Avoid over-fragmentation.</td></tr>
+    </table>
+  </div>
+
+  <div class="tbar">
+    <div>
+      <div class="tbar-lbl">R&D Total · 3 active projects · 0 shelved actions</div>
+      <div style="font-size:11px;opacity:.7;margin-top:2px">If Online Queries reveal POTOPSV2 or POSHOPV2 cost &gt; expected, reduce or defer to P6</div>
+    </div>
+    <div class="tbar-amt">$2,800 K</div>
+  </div>
+</div>
+
+<!-- ═══════════════ BRAND PORTFOLIO ═══════════════ -->
+<div id="pane-portfolio" class="pane">
+  <div class="alert alert-ok">
+    <div class="ico">✓</div>
+    <div><h4>All 5 brands kept on current base projects (no switches this round)</h4>
+    <p>TONE/TOPS/TOHO/TERRA all use the platforms they used in P4. TECHNO is the only new entry (already launched on PENT before this guide was prepared).</p></div>
+  </div>
+
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Brand</th><th>Market</th><th>P4 Base Project</th><th>P5 Operation</th><th>P5 Base Project</th></tr>
+      <tr><td><strong style="color:var(--savers)">TONE</strong></td><td>Sonites</td><td>POTONECRP3</td><td><span class="badge same">Maintained</span></td><td>POTONECRP3</td></tr>
+      <tr><td><strong style="color:var(--pros)">TOPS</strong></td><td>Sonites</td><td>POTOPS</td><td><span class="badge same">Maintained</span></td><td>POTOPS</td></tr>
+      <tr><td><strong style="color:var(--shoppers)">TOHO</strong></td><td>Sonites</td><td>POSHOP</td><td><span class="badge same">Maintained</span></td><td>POSHOP</td></tr>
+      <tr><td><strong style="color:var(--inno)">TERRA</strong></td><td>Vodites</td><td>PEINNO</td><td><span class="badge same">Maintained</span></td><td>PEINNO</td></tr>
+      <tr><td><strong style="color:var(--cyan)">TECHNO</strong></td><td>Vodites</td><td>—</td><td><span class="badge new">Launched</span></td><td>PENT</td></tr>
+    </table>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="ico">💡</div>
+    <div><h4>Why no portfolio switches?</h4>
+    <p>POTOPSV2 and POSHOPV2 are both being developed this round and will likely complete in P6. We should switch TOPS and TOHO to the upgraded platforms <strong>then</strong>, not now (specs aren't ready yet). POTONECRP3 from P4 is already at minimum cost, so TONE stays put.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════ TONE ═══════════════ -->
+<div id="pane-tone" class="pane">
+  <div class="alert alert-info">
+    <div class="ico" style="color:var(--savers)">●</div>
+    <div><h4>TONE · Savers Cash Cow · P4 CAM $13.2M (+102% vs P3)</h4>
+    <p>POTONECRP3 cost reduction is paying off massively. Savers segment grows +19.6% next period. ROCK at $200 and SOFT at $200 keep pressing price. Defend share, harvest profit.</p></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">① Production Plan</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Production Plan</td><td>220K (capped at 191K)</td><td class="vc"><span class="fv">240,000</span></td><td>P5 production cap ~229K. Plan high so system maxes out. <span class="badge up">+9%</span></td></tr>
+    </table>
+  </div>
+
+  <h3 style="margin:14px 0 8px">② Price</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Recommended Retail Price</td><td>$220</td><td class="vc"><span class="fv">$215</span></td><td>Savers price-perception ideal 2.1. ROCK $200 + SOFT $200 pressing. <span class="badge dn">−$5</span></td></tr>
+    </table>
+    <div class="cr">Unit margin estimate: Avg selling $138 − Transfer cost $49 = <strong>$89/unit</strong> × ~210K units = ~$18.7M contribution before marketing</div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">③ Advertising</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Media Budget</td><td>$1,113 K</td><td class="vc"><span class="fv sm">$1,400 K</span></td><td>Defend 31.3% Savers share. ROCK invests $710K in Savers, SOFT $1,300K. <span class="badge up">+26%</span></td></tr>
+      <tr><td>Research Budget</td><td>$197 K</td><td class="vc"><span class="fv sm">$210 K</span></td><td>15% ratio</td></tr>
+      <tr><td><strong>Total Advertising</strong></td><td>$1,310 K</td><td class="vc"><strong style="color:var(--orange)">$1,610 K</strong></td><td></td></tr>
+    </table>
+    <div class="cg-title">Segment Allocation (must sum to 100%)</div>
+    <div class="sbar">
+      <div class="si" style="width:80%;background:var(--savers)"><span>Savers 80%</span></div>
+      <div class="si" style="width:15%;background:var(--shoppers)"><span>Shop 15%</span></div>
+      <div class="si" style="width:5%;background:var(--exp)"><span>Exp 5%</span></div>
+    </div>
+    <div class="slabels">
+      <span class="slabel"><span class="sdot" style="background:var(--savers)"></span>Savers <strong>80%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--shoppers)"></span>Shoppers <strong>15%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--exp)"></span>Explorers <strong>5%</strong></span>
+    </div>
+    <p class="note">P4 was Savers 75 / Shoppers 20 / Explorers 5. Shifting +5pp to Savers because TOHO now handles Shoppers.</p>
+  </div>
+
+  <h3 style="margin:14px 0 8px">④ Perceptual Objectives</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Type</td><td><span class="act-cell">● Semantic Scales</span></td><td>P4 had Semantic Scales (Power 2.4 / Price 2.2)</td></tr>
+      <tr><td>Dimension 1</td><td><span class="fv sm">Proc. Power · 2.4</span></td><td>Maintain — close to Savers ideal 2.4</td></tr>
+      <tr><td>Dimension 2</td><td><span class="fv sm">Price · 2.1</span></td><td>Track Savers ideal 2.1 (was 2.2 in P4)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ TOPS ═══════════════ -->
+<div id="pane-tops" class="pane">
+  <div class="alert alert-info">
+    <div class="ico" style="color:var(--pros)">●</div>
+    <div><h4>TOPS · Star · P4 CAM $25.6M (62% of Sonites profit)</h4>
+    <p>Highest CAM brand. But Pros share 18.7% trails SOLO (25.6%) and MOVE (30.7%) — they outspend us 3x on advertising. MOVE upgraded Power to 84 last round. Goal: defend share through advertising now, regain leadership when POTOPSV2 ships in P6.</p></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">① Production Plan</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Production Plan</td><td>160K (sold 143K, +2K inventory used)</td><td class="vc"><span class="fv">180,000</span></td><td>Pros +9.2% · HE +14.4% next period <span class="badge up">+13%</span></td></tr>
+    </table>
+  </div>
+
+  <h3 style="margin:14px 0 8px">② Price</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Recommended Retail Price</td><td>$499</td><td class="vc"><span class="fv">$499</span></td><td>Maintain. MOVE just dropped to $500, SOLO/ROLL at $499. <span class="badge same">No change</span></td></tr>
+    </table>
+    <div class="cr">Unit margin: Avg selling $310 − Transfer $112 = <strong>$198/unit</strong> × ~165K = ~$32.7M contribution before marketing</div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">③ Advertising — ⭐ Highest Priority</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Media Budget</td><td>$1,113 K</td><td class="vc"><span class="fv sm">$1,700 K</span></td><td>P4 experiment: <strong>+20% ads = +$447K CAM (1.7x ROI)</strong>. SOLO spends $4,050K, MOVE $2,320K. <span class="badge up">+53%</span></td></tr>
+      <tr><td>Research Budget</td><td>$197 K</td><td class="vc"><span class="fv sm">$255 K</span></td><td>15% ratio</td></tr>
+      <tr><td><strong>Total Advertising</strong></td><td>$1,310 K</td><td class="vc"><strong style="color:var(--orange)">$1,955 K</strong></td><td></td></tr>
+    </table>
+    <div class="cg-title">Segment Allocation (must sum to 100%)</div>
+    <div class="sbar">
+      <div class="si" style="width:50%;background:var(--pros)"><span>Pros 50%</span></div>
+      <div class="si" style="width:35%;background:var(--he)"><span>High Earners 35%</span></div>
+      <div class="si" style="width:15%;background:var(--exp)"><span>Exp 15%</span></div>
+    </div>
+    <div class="slabels">
+      <span class="slabel"><span class="sdot" style="background:var(--pros)"></span>Professionals <strong>50%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--he)"></span>High Earners <strong>35%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--exp)"></span>Explorers <strong>15%</strong></span>
+    </div>
+    <p class="note">P4 was Pros 60 / HE 35 / Exp 5. We're lifting Explorers to 15% because TOPS holds 14.4% Explorers share that we shouldn't ignore. Slight dilution of Pros (still primary).</p>
+  </div>
+
+  <h3 style="margin:14px 0 8px">④ Perceptual Objectives</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Type</td><td><span class="act-cell">● Semantic Scales</span></td><td>(P4 was Price 5.8 / Battery 3.4 — wrong dimensions for Pros)</td></tr>
+      <tr><td>Dimension 1</td><td><span class="fv sm">Proc. Power · 5.8</span></td><td>Pros really care about Power (ideal 6.1)</td></tr>
+      <tr><td>Dimension 2</td><td><span class="fv sm">Display · 5.8</span></td><td>Pros ideal 5.8</td></tr>
+    </table>
+    <p class="note">P4 perceptual objectives were Price 5.8 and Battery 3.4 — neither matches what Professionals actually value. Pros care about Power and Display.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ TOHO ═══════════════ -->
+<div id="pane-toho" class="pane">
+  <div class="alert alert-ok">
+    <div class="ico" style="color:var(--shoppers)">●</div>
+    <div><h4>TOHO · Growth Engine · P4 CAM swung from −$1.95M to +$2.57M</h4>
+    <p>Shoppers share 27.9% (#1 in industry). Awareness still only 19% — biggest constraint. Shoppers segment growing +35% next period and +75% over 5 years. The lesson of P4: <strong>plan production HIGH, not low</strong>. The system will cap, but planning low caps US.</p></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">① Production Plan — ⚠️ Don't Repeat P4's Mistake</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Production Plan</td><td>100K (system produced 105K, sold all)</td><td class="vc"><span class="fv">180,000</span></td><td>P5 production cap ~126K from P4's 105K. <strong>Plan 180K so we max the cap.</strong> Shoppers +35% next period.</td></tr>
+    </table>
+    <div class="alert alert-warn" style="margin-top:10px">
+      <div class="ico">⚠️</div>
+      <div><p>P4 lesson: we planned 100K when guide said 120K — sold out at 105K. Same product-market fit, more demand we couldn't serve. <strong>This time, set the plan above where you think demand will land.</strong></p></div>
+    </div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">② Price</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Recommended Retail Price</td><td>$235</td><td class="vc"><span class="fv">$235</span></td><td>Perfect match to Shoppers ideal price-perception 2.5. Don't touch. <span class="badge same">No change</span></td></tr>
+    </table>
+    <div class="cr">Unit margin: Avg selling $146 − Transfer $93 = <strong>$53/unit</strong>. With POSHOP cost reduction (P6) drops further. Volume is the play here.</div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">③ Advertising</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Media Budget</td><td>$1,113 K</td><td class="vc"><span class="fv sm">$1,500 K</span></td><td>Awareness 19% is THE bottleneck. Must build. <span class="badge up">+35%</span></td></tr>
+      <tr><td>Research Budget</td><td>$197 K</td><td class="vc"><span class="fv sm">$225 K</span></td><td>15% ratio</td></tr>
+      <tr><td><strong>Total Advertising</strong></td><td>$1,310 K</td><td class="vc"><strong style="color:var(--orange)">$1,725 K</strong></td><td></td></tr>
+    </table>
+    <div class="cg-title">Segment Allocation (must sum to 100%)</div>
+    <div class="sbar">
+      <div class="si" style="width:90%;background:var(--shoppers)"><span>Shoppers 90%</span></div>
+      <div class="si" style="width:5%;background:var(--exp)"><span>Exp</span></div>
+      <div class="si" style="width:5%;background:var(--savers)"><span>Sav</span></div>
+    </div>
+    <div class="slabels">
+      <span class="slabel"><span class="sdot" style="background:var(--shoppers)"></span>Shoppers <strong>90%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--exp)"></span>Explorers <strong>5%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--savers)"></span>Savers <strong>5%</strong></span>
+    </div>
+    <p class="note">P4 was Shoppers 91 / Explorers 4 / Savers 5 — keep nearly identical, very minor adjustment.</p>
+  </div>
+
+  <h3 style="margin:14px 0 8px">④ Perceptual Objectives</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Type</td><td><span class="act-cell">● Semantic Scales</span></td><td>P4 was Power 4.5 / Display 4.5 — directionally right, just need to track drift</td></tr>
+      <tr><td>Dimension 1</td><td><span class="fv sm">Proc. Power · 4.7</span></td><td>Shoppers ideal Power up from 4.5 → 4.7</td></tr>
+      <tr><td>Dimension 2</td><td><span class="fv sm">Display · 4.7</span></td><td>Shoppers ideal Display up from 4.5 → 4.7</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ TERRA ═══════════════ -->
+<div id="pane-terra" class="pane">
+  <div class="alert alert-purple">
+    <div class="ico" style="color:var(--inno)">●</div>
+    <div><h4>TERRA · Vodite Lead · P4 CAM $10.8M, 47.6% value share</h4>
+    <p>The Vodite battle has escalated dramatically. SESENEW raised ads from $2.1M → $5.4M. READ entered at $3.2M. MEME at $1.6M. Total Vodite industry retail jumped to $106M with 4 active brands (5 after TECHNO). We have to spend to defend.</p></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">① Production Plan</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Production Plan</td><td>70K (sold all)</td><td class="vc"><span class="fv">110,000</span></td><td>Vodite market in fast expansion. P5 cap ~84K from 70K. Plan 110 so system maxes out.</td></tr>
+    </table>
+  </div>
+
+  <h3 style="margin:14px 0 8px">② Price</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Recommended Retail Price</td><td>$740</td><td class="vc"><span class="fv">$740</span></td><td>Maintain. SESENEW $750, MEME $725, READ $900. We're well positioned mid-range. <span class="badge same">No change</span></td></tr>
+    </table>
+    <div class="cr">Unit margin: Avg selling $455 − Transfer $223 = <strong>$232/unit</strong>. Very healthy.</div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">③ Advertising — ⚠️ Critical Defense</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P4 Actual</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Media Budget</td><td>$1,605 K</td><td class="vc"><span class="fv sm">$2,500 K</span></td><td>SESENEW spent <strong>$5,420K</strong> last round. If we stay at $1.6M, share will compress fast. <span class="badge up">+56%</span></td></tr>
+      <tr><td>Research Budget</td><td>$282 K</td><td class="vc"><span class="fv sm">$375 K</span></td><td>15% ratio</td></tr>
+      <tr><td><strong>Total Advertising</strong></td><td>$1,887 K</td><td class="vc"><strong style="color:var(--orange)">$2,875 K</strong></td><td></td></tr>
+    </table>
+    <div class="cg-title">Segment Allocation (must sum to 100%)</div>
+    <div class="sbar">
+      <div class="si" style="width:45%;background:var(--inno)"><span>Innovators 45%</span></div>
+      <div class="si" style="width:45%;background:var(--adopt)"><span>Adopters 45%</span></div>
+      <div class="si" style="width:10%;background:var(--follow)"><span>Foll 10%</span></div>
+    </div>
+    <div class="slabels">
+      <span class="slabel"><span class="sdot" style="background:var(--inno)"></span>Innovators <strong>45%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--adopt)"></span>Adopters <strong>45%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--follow)"></span>Followers <strong>10%</strong></span>
+    </div>
+    <p class="note">P4 was Innovators 60 / Adopters 30 / Followers 10. Adopters are entering the market in force this period — shift weight there. TECHNO will cover Followers separately.</p>
+  </div>
+
+  <h3 style="margin:14px 0 8px">④ Perceptual Objectives</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Type</td><td><span class="act-cell gray">● None</span></td><td>We're buying Vodite MDS this round; once data is in for P6 we can set MDS targets. For P5 focus on awareness.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ TECHNO ═══════════════ -->
+<div id="pane-techno" class="pane">
+  <div class="alert alert-warn">
+    <div class="ico">❓</div>
+    <div><h4>TECHNO — Please Review Before Submitting</h4>
+    <p>TECHNO was already launched (based on PENT) before this guide was prepared, and we couldn't track down PENT's physical specs in time. The numbers below are inferred from (a) the visible $266 transfer cost, (b) the "Follower segment" intent in the brand portfolio, and (c) general Followers behaviour. <strong>Whoever launched TECHNO — your call on whether these numbers match what you had in mind.</strong></p></div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">① Production Plan</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>System Default</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Production Plan</td><td>75,000</td><td class="vc"><span class="fv cyan">50,000</span></td><td>Followers segment is still small in P5. Conservative volume reduces inventory risk for a new brand.</td></tr>
+    </table>
+  </div>
+
+  <h3 style="margin:14px 0 8px">② Price</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>System Default</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Recommended Retail Price</td><td>$740</td><td class="vc"><span class="fv cyan">$680</span></td><td><strong>Differentiate from TERRA.</strong> Same price = cannibalisation. Followers are price-sensitive vs Innovators.</td></tr>
+    </table>
+    <div class="cr">Unit margin at $680: Avg selling $408 − Transfer $266 = <strong>$142/unit</strong>. Healthy.</div>
+    <div class="alert alert-info" style="margin-top:10px">
+      <div class="ico">💡</div>
+      <div><p>If PENT specs are significantly stronger than PEINNO (TERRA's project), you could justify keeping TECHNO at $740. If specs are similar, $680 is safer.</p></div>
+    </div>
+  </div>
+
+  <h3 style="margin:14px 0 8px">③ Advertising</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>System Default</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Media Budget</td><td>$1,700 K</td><td class="vc"><span class="fv cyan sm">$1,500 K</span></td><td>Modest launch budget for an untested follower brand. <span class="badge dn">−$200K</span></td></tr>
+      <tr><td>Research Budget</td><td>$300 K</td><td class="vc"><span class="fv cyan sm">$225 K</span></td><td>15% ratio</td></tr>
+      <tr><td><strong>Total Advertising</strong></td><td>$2,000 K</td><td class="vc"><strong style="color:var(--cyan)">$1,725 K</strong></td><td></td></tr>
+    </table>
+    <div class="cg-title">Segment Allocation (must sum to 100%)</div>
+    <div class="sbar">
+      <div class="si" style="width:80%;background:var(--follow)"><span>Followers 80%</span></div>
+      <div class="si" style="width:20%;background:var(--adopt)"><span>Adopters 20%</span></div>
+    </div>
+    <div class="slabels">
+      <span class="slabel"><span class="sdot" style="background:var(--follow)"></span>Followers <strong>80%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--adopt)"></span>Adopters <strong>20%</strong></span>
+      <span class="slabel"><span class="sdot" style="background:var(--inno)"></span>Innovators <strong>0%</strong></span>
+    </div>
+    <p class="note">System default was Followers 79 / Adopters 21 / Innovators 0 — directionally fine, slight rounding. Keeping Innovators at 0 so we don't cannibalise TERRA.</p>
+  </div>
+
+  <h3 style="margin:14px 0 8px">④ Perceptual Objectives</h3>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Field</th><th>P5 Plan</th><th>Why</th></tr>
+      <tr><td>Type</td><td><span class="act-cell gray">● None</span></td><td>Same logic as TERRA — wait for Vodite MDS data before setting MDS-based objectives.</td></tr>
+    </table>
+  </div>
+
+  <div class="alert alert-purple" style="margin-top:14px">
+    <div class="ico">🔍</div>
+    <div><h4>Questions for whoever launched TECHNO</h4>
+    <p>1. What are PENT's physical specs (Resolution / Energy / Carbon / Connectivity / Apps)?<br>
+    2. Is the intent to differentiate from TERRA on price (cheaper) or on positioning (different perceptual target)?<br>
+    3. Is 50K production conservative enough, or should we be more aggressive?</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════ SALES TEAM ═══════════════ -->
+<div id="pane-sales" class="pane">
+  <div class="alert alert-info">
+    <div class="ico">👥</div>
+    <div><h4>Commercial Team: 175 → 200 FTE (+25 · $687K)</h4>
+    <p>Mainly to staff TECHNO (currently has 0 people) and scale TOHO with its expanded production. Per-FTE cost in P5 is ~$23,870 + $3,581 hiring fee for new hires. Total operating cost ~$4,865K.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">P5 Sales Team Allocation</div>
+    <table class="tbl">
+      <tr><th>Brand</th><th>Specialty</th><th>Mass Merch</th><th>Online</th><th>Total</th><th>vs P4</th></tr>
+      <tr><td><strong style="color:var(--savers)">TONE</strong></td><td class="vc"><span class="fv sm">12</span></td><td class="vc"><span class="fv sm">33</span></td><td class="vc"><span class="fv sm">5</span></td><td><strong>50</strong></td><td><span class="badge same">−1</span></td></tr>
+      <tr><td><strong style="color:var(--pros)">TOPS</strong></td><td class="vc"><span class="fv sm">31</span></td><td class="vc"><span class="fv sm">13</span></td><td class="vc"><span class="fv sm">10</span></td><td><strong>54</strong></td><td><span class="badge up">+5</span></td></tr>
+      <tr><td><strong style="color:var(--shoppers)">TOHO</strong></td><td class="vc"><span class="fv sm">23</span></td><td class="vc"><span class="fv sm">25</span></td><td class="vc"><span class="fv sm">7</span></td><td><strong>55</strong></td><td><span class="badge up">+10</span></td></tr>
+      <tr><td><strong style="color:var(--inno)">TERRA</strong></td><td class="vc"><span class="fv sm">22</span></td><td class="vc"><span class="fv sm">5</span></td><td class="vc"><span class="fv sm">4</span></td><td><strong>31</strong></td><td><span class="badge up">+1</span></td></tr>
+      <tr><td><strong style="color:var(--cyan)">TECHNO</strong></td><td class="vc"><span class="fv cyan sm">3</span></td><td class="vc"><span class="fv cyan sm">4</span></td><td class="vc"><span class="fv cyan sm">3</span></td><td><strong>10</strong></td><td><span class="badge new">NEW +10</span></td></tr>
+      <tr class="tr-total"><td>TOTAL</td><td><strong>91</strong></td><td><strong>80</strong></td><td><strong>29</strong></td><td><strong>200</strong></td><td><span class="badge up">+25</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Channel Allocation Logic</div>
+    <table class="tbl">
+      <tr><th>Brand · Target Segment</th><th>Specialty mix</th><th>Mass mix</th><th>Online mix</th><th>Implication</th></tr>
+      <tr><td>TONE · Savers</td><td>23%</td><td><strong>62%</strong></td><td>15%</td><td>Heavy Mass weight is correct</td></tr>
+      <tr><td>TOPS · Pros / HE</td><td><strong>50%+</strong></td><td>25–28%</td><td>24%</td><td>Specialty is critical — adding 3 to defend Pros</td></tr>
+      <tr><td>TOHO · Shoppers</td><td>40%</td><td><strong>42%</strong></td><td>18%</td><td>Balanced — +3 Specialty, +5 Mass, +2 Online</td></tr>
+      <tr><td>TERRA · Innovators</td><td><strong>73%</strong></td><td>12%</td><td>15%</td><td>Specialty-heavy is right</td></tr>
+      <tr><td>TECHNO · Followers</td><td>33%</td><td><strong>42%</strong></td><td>25%</td><td>Roughly even, biased to Mass</td></tr>
+    </table>
+  </div>
+
+  <div class="tbar">
+    <div>
+      <div class="tbar-lbl">Commercial Team Total · 200 FTE</div>
+      <div style="font-size:11px;opacity:.7;margin-top:2px">200 × $23,870 operating + 25 × $3,581 hiring = ~$4,865K. Verify in panel after entering numbers.</div>
+    </div>
+    <div class="tbar-amt">$4,865 K</div>
+  </div>
+</div>
+
+<!-- ═══════════════ MARKET RESEARCH ═══════════════ -->
+<div id="pane-research" class="pane">
+  <div class="alert alert-info">
+    <div class="ico">🔬</div>
+    <div><h4>Market Research: $626K (cutting $268K from $894K default)</h4>
+    <p>System pre-checks all 21 studies for $894K. We're un-checking 7 lower-value items and adding 3 first-time studies (MDS Sonites + MDS Vodites + Commercial Team Experiment).</p></div>
+  </div>
+
+  <div class="cg-title">General Studies</div>
+  <div class="ci" style="background:var(--blue-lt)">
+    <div class="cb y">✓</div>
+    <div><div style="font-weight:600;font-size:13px">Industry Benchmarking</div>
+    <div style="font-size:11px;color:var(--muted)">Competitor P&L breakdown — essential</div></div>
+    <div class="ci-cost">$35,750</div>
+  </div>
+
+  <div class="cg-title">Sonites Market (8 of 10 kept)</div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Consumer Survey</div><div style="font-size:11px;color:var(--muted)">Awareness tracking, esp. TOHO</div></div><div class="ci-cost">$71,500</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Consumer Panel</div><div style="font-size:11px;color:var(--muted)">Brand share by segment</div></div><div class="ci-cost">$119,250</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Distribution Panel</div><div style="font-size:11px;color:var(--muted)">Channel coverage data already in Financial Report — skip</div></div><div class="ci-cost skip">$71,500</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Semantic Scales</div><div style="font-size:11px;color:var(--muted)">Ideal-point drift tracking</div></div><div class="ci-cost">$12,000</div></div>
+  <div class="ci" style="background:var(--purple-lt)"><div class="cb py">★</div><div><div style="font-weight:600;font-size:13px">Multidimensional Scaling (MDS) — NEW</div><div style="font-size:11px;color:var(--muted)">Validate TOPS positioning on Power dimension</div></div><div class="ci-cost">$41,750</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Market Forecast</div><div style="font-size:11px;color:var(--muted)">P4 forecast still valid — skip this round</div></div><div class="ci-cost skip">$23,750</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Competitive Advertising</div><div style="font-size:11px;color:var(--muted)">SOLO/MOVE spend on Pros</div></div><div class="ci-cost">$35,750</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Competitive Commercial Team</div><div style="font-size:11px;color:var(--muted)">Verify Snipers/Rocket sales force size</div></div><div class="ci-cost">$18,000</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Advertising Experiment</div><div style="font-size:11px;color:var(--muted)">Verify TOPS +ad ROI still 1.7x</div></div><div class="ci-cost">$29,750</div></div>
+  <div class="ci" style="background:var(--purple-lt)"><div class="cb py">★</div><div><div style="font-weight:600;font-size:13px">Commercial Team Experiment — NEW</div><div style="font-size:11px;color:var(--muted)">Validate whether 200 FTE is too many / too few</div></div><div class="ci-cost">$41,750</div></div>
+
+  <div class="cg-title">Vodites Market (5 of 10 kept)</div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Consumer Survey</div><div style="font-size:11px;color:var(--muted)">TERRA + TECHNO awareness</div></div><div class="ci-cost">$47,750</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Consumer Panel</div><div style="font-size:11px;color:var(--muted)">5-brand Vodite share split</div></div><div class="ci-cost">$83,500</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Distribution Panel</div><div style="font-size:11px;color:var(--muted)">Low priority — skip</div></div><div class="ci-cost skip">$59,750</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Semantic Scales</div><div style="font-size:11px;color:var(--muted)">Vodite ideal-point baseline</div></div><div class="ci-cost">$12,000</div></div>
+  <div class="ci" style="background:var(--purple-lt)"><div class="cb py">★</div><div><div style="font-weight:600;font-size:13px">Multidimensional Scaling (MDS) — NEW</div><div style="font-size:11px;color:var(--muted)">Position TERRA / TECHNO vs SESENEW / READ / MEME</div></div><div class="ci-cost">$41,750</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Market Forecast</div><div style="font-size:11px;color:var(--muted)">Low priority — skip</div></div><div class="ci-cost skip">$23,750</div></div>
+  <div class="ci" style="background:var(--blue-lt)"><div class="cb y">✓</div><div><div style="font-weight:600;font-size:13px">Competitive Advertising</div><div style="font-size:11px;color:var(--muted)">SESENEW's $5.4M spend breakdown — critical</div></div><div class="ci-cost">$35,750</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Competitive Commercial Team</div><div style="font-size:11px;color:var(--muted)">Low priority — skip</div></div><div class="ci-cost skip">$18,000</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Advertising Experiment</div><div style="font-size:11px;color:var(--muted)">TERRA only 1 period in — skip</div></div><div class="ci-cost skip">$29,750</div></div>
+  <div class="ci" style="background:#f8fafc"><div class="cb n">✗</div><div><div style="font-weight:600;font-size:13px;text-decoration:line-through">Commercial Team Experiment</div><div style="font-size:11px;color:var(--muted)">TERRA team still small — skip</div></div><div class="ci-cost skip">$41,750</div></div>
+
+  <div class="tbar">
+    <div>
+      <div class="tbar-lbl">Market Research Total · 14 studies (kept) · 7 skipped</div>
+      <div style="font-size:11px;opacity:.7;margin-top:2px">Saving $268K vs system default ($894K) to fund higher R&D and advertising</div>
+    </div>
+    <div class="tbar-amt">$626 K</div>
+  </div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('pane-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>
