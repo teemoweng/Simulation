@@ -1,6 +1,6 @@
 # Round 4 Final Decisions · Titans (T)
 
-> **来源：** `round5/DECISIONS REVIEW.md`（Markstrat 系统在 Period 4 期初生成的 Decision Review，记录的就是实际提交的所有决策）
+> **来源：** `round5/raw_reports/DECISIONS REVIEW.md`（Markstrat 系统在 Period 4 期初生成的 Decision Review，记录的就是实际提交的所有决策）
 > **预算分配：** Sonites $7,596K · Vodites $5,470K = **$13,066K**
 > 这一份是「真实提交」的快照，可能与 `Round4_Decision_Guide_EN.html` 推荐有出入——以下数字以系统记录为准。
 
@@ -146,4 +146,4 @@
 
 ---
 
-*提取于：2026-05-18 · 数据源：round5/DECISIONS REVIEW.md*
+*提取于：2026-05-18 · 数据源：round5/raw_reports/DECISIONS REVIEW.md*

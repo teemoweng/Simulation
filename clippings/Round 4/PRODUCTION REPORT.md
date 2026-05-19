@@ -1,0 +1,51 @@
+---
+title: "PRODUCTION REPORT"
+source: "https://markstrat7.stratxsimulations.com/Analyze/ProductionReport"
+author:
+published:
+created: 2026-05-15
+description:
+tags:
+  - "clippings"
+---
+## Production Report – Firm Titans – Period 3
+
+The report below provides with information on production levels and production costs for each of the brands marketed in Period 3.
+
+### Sales, Production and Inventory
+
+The chart below shows the units sold, the production level and inventory level for each of your brands at the end of Period 3. All numbers are given in thousands of units.
+
+<svg width="1272" height="250" aria-label="A chart." style="overflow: hidden;"><defs id="defs"><clipPath id="_ABSTRACT_RENDERER_ID_0"><rect x="133" y="48" width="1007" height="155"></rect></clipPath></defs><rect x="0" y="0" width="1272" height="250" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="414" y="21" width="444" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><rect x="414" y="21" width="96" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="start" x="447" y="32.9" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#222222">Units sold</text></g> <rect x="414" y="21" width="28" height="14" stroke="none" stroke-width="0" fill="#007dc3"></rect></g><g><rect x="533" y="21" width="103" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="start" x="566" y="32.9" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#222222">Production</text></g> <rect x="533" y="21" width="28" height="14" stroke="none" stroke-width="0" fill="#1f9199"></rect></g><g><rect x="659" y="21" width="199" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="start" x="692" y="32.9" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#222222">Inventory at end of period</text></g> <rect x="659" y="21" width="28" height="14" stroke="none" stroke-width="0" fill="#64cc27"></rect></g></g><g><rect x="133" y="48" width="1007" height="155" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(https://markstrat7.stratxsimulations.com/Analyze/ProductionReport#_ABSTRACT_RENDERER_ID_0)"><g><rect x="133" y="202" width="1007" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="133" y="164" width="1007" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="133" y="125" width="1007" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="133" y="87" width="1007" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="133" y="48" width="1007" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect></g><g><rect x="150" y="60" width="100" height="142" stroke="none" stroke-width="0" fill="#007dc3"></rect><rect x="486" y="94" width="100" height="108" stroke="none" stroke-width="0" fill="#007dc3"></rect><rect x="821" y="157" width="100" height="45" stroke="none" stroke-width="0" fill="#007dc3"></rect><rect x="251" y="55" width="100" height="147" stroke="none" stroke-width="0" fill="#1f9199"></rect><rect x="587" y="92" width="99" height="110" stroke="none" stroke-width="0" fill="#1f9199"></rect><rect x="922" y="157" width="100" height="45" stroke="none" stroke-width="0" fill="#1f9199"></rect><rect x="352" y="198" width="100" height="4" stroke="none" stroke-width="0" fill="#64cc27"></rect><rect x="687" y="201" width="100" height="1" stroke="none" stroke-width="0" fill="#64cc27"></rect><rect x="1023" y="202" width="100" height="0.5" stroke="none" stroke-width="0" fill="#64cc27"></rect></g><g><rect x="133" y="202" width="1007" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><rect x="200" y="60" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="536" y="94" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="871" y="157" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="301" y="55" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="636" y="92" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="972" y="157" width="1" height="0" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="402" y="186" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="737" y="189" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect></g></g><g></g><g><g><text text-anchor="middle" x="301.16666666666663" y="222.05" font-family="Ubuntu" font-size="13" stroke="none" stroke-width="0" fill="#222222">TONE</text></g> <g><text text-anchor="middle" x="636.5" y="222.05" font-family="Ubuntu" font-size="13" stroke="none" stroke-width="0" fill="#222222">TOPS</text></g> <g><text text-anchor="middle" x="971.8333333333333" y="222.05" font-family="Ubuntu" font-size="13" stroke="none" stroke-width="0" fill="#222222">TOHO</text></g> <g><text text-anchor="end" x="119" y="207.4" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#444444">0</text></g> <g><text text-anchor="end" x="119" y="168.9" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#444444">50</text></g> <g><text text-anchor="end" x="119" y="130.4" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#444444">100</text></g> <g><text text-anchor="end" x="119" y="91.9" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#444444">150</text></g> <g><text text-anchor="end" x="119" y="53.4" font-family="Ubuntu" font-size="14" stroke="none" stroke-width="0" fill="#444444">200</text></g></g> <g><g><g><text text-anchor="middle" x="200" y="70.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">186</text> <rect x="191.5" y="62" width="17" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><text text-anchor="middle" x="536" y="104.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">142</text> <rect x="527.5" y="96" width="17" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><text text-anchor="middle" x="871" y="167.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">60</text> <rect x="865.5" y="159" width="11" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><text text-anchor="middle" x="301" y="65.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">192</text> <rect x="292.5" y="57" width="17" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><text text-anchor="middle" x="636" y="102.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">144</text> <rect x="627.5" y="94" width="17" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><text text-anchor="middle" x="972" y="167.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#ffffff">60</text> <rect x="966.5" y="159" width="11" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="396.5" y="175.5" width="12" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="402" y="184.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#64cc27">6</text></g> <rect x="399" y="176" width="6" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="731.5" y="178.5" width="12" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="737" y="187.5" font-family="Ubuntu" font-size="10" stroke="none" stroke-width="0" fill="#64cc27">2</text></g><rect x="734" y="179" width="6" height="10" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g></g></g><g></g></svg>
+
+|  | Units sold | Production | Inventory at end of period |
+| --- | --- | --- | --- |
+| TONE | 185.522 | 192 | 6.478 |
+| TOPS | 141.754 | 144 | 2.246 |
+| TOHO | 60 | 60 | 0 |
+
+Despite all the efforts made by the Production department, they were not able to fullfill all the orders for TOHO this period. As a consequence, some potential sales of TOHO have been lost.
+
+The table below provides you with additional details such as planned production versus the actual one, and the inventory levels at the beginning and at the end of Period 3. All numbers are given in thousands of units.
+
+|  | TONE  Sonites | TOPS  Sonites | TOHO  Sonites |
+| --- | --- | --- | --- |
+| Units sold | 186 | 142 | 60 |
+| Production Plan (your decision) | 240 | 180 | 50 |
+| Production | 192 | 144 | 60 |
+| Inventory at beginning of period | 0 | 0 | 0 |
+| Inventory at end of period | 6 | 2 | 0 |
+
+### Unit Cost, COGS and Inventory Holding Cost
+
+The table below shows the unit transfer cost for each of your marketed brands. The “current“ unit cost is the cost of the most recently produced units, while the “average” unit cost takes into account the units that were in your inventory at the beginning of the period. Unit transfer costs are given in $; units sold in thousands of units. COGS (Cost of Goods Sold) are equal to “Units sold” x “Average unit transfer cost”. COGS are given in thousands of $. Finally, this table shows the costs incurred for holding your inventory (storage cost, cost of capital, …). Inventory holding cost is equal to: “Units in inventory” x “Average unit transfer cost” x 8%. It is given in thousands of $.
+
+|  | TONE  Sonites | TOPS  Sonites | TOHO  Sonites |
+| --- | --- | --- | --- |
+| Cumulative project production | 574,974 | 452,394 | 60,000 |
+| Current unit transfer cost | 48 | 119 | 124 |
+| Average unit transfer cost | 48 | 119 | 124 |
+| Units sold | 186 | 142 | 60 |
+| COGS | 8,987 | 16,816 | 7,440 |
+| Inventory at end of period | 6 | 2 | 0 |
+| Inventory holding cost | 25 | 21 | 0 |

@@ -1,6 +1,6 @@
 # Round 4 Market Research · Titans
 
-> **数据源：** `round5/CONSUMER SURVEY & PANEL.md` · `SEMANTIC SCALES.md` · `EXPERIMENTS - Markstrat.md` · `MARKET FORECAST.md` · `R&D REPORT.md`
+> **数据源：** `round5/raw_reports/CONSUMER SURVEY & PANEL.md` · `SEMANTIC SCALES.md` · `EXPERIMENTS - Markstrat.md` · `MARKET FORECAST.md` · `R&D REPORT.md`
 > **整理日期：** 2026-05-18
 
 ---
