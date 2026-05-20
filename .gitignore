@@ -1,1 +1,8 @@
 .DS_Store
+
+# Obsidian local-only state (not part of the project)
+_obsidian_context.md
+.obsidian/
+
+# Obsidian Web Clipper auto-saves (raw drafts kept locally; structured copies live under round*/raw_reports/)
+clippings/
