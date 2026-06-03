@@ -143,3 +143,8 @@ Validated across multiple rounds — treat as standing rules unless new data con
 - Experience Curve — cost reduction logic
 - Scenario Planning — cite Schoemaker (1995) for long-horizon decisions
 - Porter's Five Forces — Sonite vs Vodite competitive dynamics
+
+---
+
+*Schema 版本：v1.0 — 2026-05-20*
+*v1.0 初版：项目级 Claude 操作规则*

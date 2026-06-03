@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Results &amp; Post-Mortem · Firm Titans</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.7; color: #1f2937;
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%); min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    color: white; padding: 48px 40px; border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.3);
+    margin-bottom: 32px; position: relative; overflow: hidden;
+  }
+  .hero::after { content: ""; position: absolute; right: -100px; top: -100px; width: 320px; height: 320px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+  .hero-tag { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.18); border-radius: 999px; font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; font-weight: 600; }
+  .hero h1 { font-size: 36px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; position: relative; z-index: 1; }
+  .hero p { font-size: 17px; opacity: 0.95; position: relative; z-index: 1; max-width: 800px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; position: relative; z-index: 1; }
+  .hero-stat { background: rgba(255,255,255,0.12); padding: 14px 18px; border-radius: 12px; }
+  .hero-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
+  .hero-stat-value { font-size: 24px; font-weight: 700; margin-top: 4px; }
+  .hero-stat-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  @media (max-width: 700px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 26px; } .hero { padding: 32px 24px; } }
+
+  section { margin-bottom: 36px; }
+  .section-tag { font-size: 12px; color: #475569; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 6px; }
+  h2 { font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 14px; }
+  h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .card { background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid #eef0f5; margin-bottom: 14px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  th { background: #f9fafb; font-weight: 600; color: #374151; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.us td { background: linear-gradient(90deg, #fef9c3 0%, #fef3c7 100%); font-weight: 600; }
+  tr.threat td { background: linear-gradient(90deg, #fee2e2 0%, #fecaca 100%); }
+
+  .ranking { display: grid; gap: 8px; margin: 14px 0; }
+  .rank-row { display: grid; grid-template-columns: 60px 140px 1fr 100px 100px; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 12px; background: white; border: 1px solid #e5e7eb; }
+  .rank-row.us { border-color: #facc15; background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%); }
+  .rank-row.leader { border-color: #fca5a5; background: linear-gradient(90deg, #fff1f2 0%, #fee2e2 100%); }
+  .rank-num { font-size: 22px; font-weight: 700; color: #94a3b8; }
+  .rank-row.leader .rank-num { color: #dc2626; }
+  .rank-row.us .rank-num { color: #ca8a04; }
+  .rank-name { font-weight: 600; font-size: 16px; }
+  .rank-bar-container { background: #f3f4f6; height: 28px; border-radius: 6px; overflow: hidden; position: relative; }
+  .rank-bar { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 6px; }
+  .rank-bar.us { background: linear-gradient(90deg, #f59e0b, #ca8a04); }
+  .rank-bar.leader { background: linear-gradient(90deg, #ef4444, #dc2626); }
+  .rank-stat { font-size: 14px; text-align: right; font-variant-numeric: tabular-nums; }
+  .rank-stat strong { font-size: 16px; color: #0f172a; }
+  @media (max-width: 800px) { .rank-row { grid-template-columns: 40px 1fr; gap: 10px; } .rank-bar-container, .rank-stat { display: none; } }
+
+  /* trajectory */
+  .traj { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 18px 0; }
+  .traj-col { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 8px; text-align: center; }
+  .traj-period { font-size: 12px; color: #6b7280; font-weight: 600; }
+  .traj-spi { font-size: 20px; font-weight: 700; color: #0f172a; margin: 4px 0; }
+  .traj-rank { font-size: 12px; }
+  .traj-rank.r2 { color: #059669; font-weight: 700; }
+  .traj-rank.r3 { color: #dc2626; font-weight: 700; }
+  .traj-delta { font-size: 11px; color: #6b7280; }
+  .traj-col.peak { border-color: #059669; background: #ecfdf5; }
+  .traj-col.final { border-color: #dc2626; background: #fef2f2; }
+  @media (max-width: 700px) { .traj { grid-template-columns: repeat(3, 1fr); } }
+
+  .brand-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 12px; }
+  @media (max-width: 900px) { .brand-grid { grid-template-columns: 1fr; } }
+  .brand-card { background: white; border-radius: 16px; padding: 20px 24px; border: 2px solid #eef0f5; }
+  .brand-card h3 { font-size: 20px; }
+  .brand-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .brand-stat { padding: 8px 10px; background: #f8fafc; border-radius: 8px; }
+  .brand-stat-label { font-size: 11px; color: #6b7280; text-transform: uppercase; }
+  .brand-stat-value { font-size: 17px; font-weight: 700; color: #0f172a; }
+  .brand-stat-sub { font-size: 11px; color: #6b7280; }
+  .delta-up { color: #059669; font-weight: 700; }
+  .delta-down { color: #dc2626; font-weight: 700; }
+
+  .insight { background: white; border-left: 5px solid #6366f1; padding: 18px 24px; border-radius: 10px; margin-bottom: 12px; }
+  .insight.success { border-left-color: #10b981; background: #ecfdf5; }
+  .insight.warning { border-left-color: #f59e0b; background: #fffbeb; }
+  .insight.danger { border-left-color: #ef4444; background: #fef2f2; }
+  .insight.blue { border-left-color: #2563eb; background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%); }
+  .insight-title { font-weight: 700; color: #0f172a; font-size: 16px; margin-bottom: 6px; }
+  .insight-why { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 6px; margin-top: 8px; font-size: 14px; }
+  .insight-why strong { color: #1d4ed8; }
+
+  .key-quote { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border: 2px dashed #475569; border-radius: 14px; padding: 22px 26px; margin: 16px 0; font-size: 17px; color: #1e293b; font-weight: 500; }
+  .key-quote strong { color: #0f172a; }
+  .pm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  @media (max-width: 800px) { .pm-grid { grid-template-columns: 1fr; } }
+  .pm-card { border-radius: 14px; padding: 20px 24px; }
+  .pm-card.win { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 60%); border: 2px solid #059669; }
+  .pm-card.loss { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 60%); border: 2px solid #dc2626; }
+  .pm-card h3 { font-size: 16px; }
+  .pm-card.win h3 { color: #064e3b; }
+  .pm-card.loss h3 { color: #7f1d1d; }
+  .pm-card ul { margin: 8px 0 0 18px; font-size: 14px; }
+  .pm-card li { margin-bottom: 6px; }
+
+  .framework-tag { display:inline-block; padding:2px 9px; background:#1e293b; color:white; border-radius:6px; font-size:11px; font-weight:600; margin-right:4px; }
+
+  footer { text-align: center; color: #9ca3af; font-size: 13px; margin-top: 40px; padding-top: 24px; border-top: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">FIRM TITANS · FINAL RESULTS &amp; POST-MORTEM · PERIODS 1 → 6</div>
+    <h1>Final Standing: 3rd of 4 — A Sound #2 That Plateaued at the Finish</h1>
+    <p>We held second place for five straight periods and peaked at Period 4, just 42 points behind the leader. Then the engine stalled: Share Price Index fell two periods in a row while Snipers compounded a decisive lead and Marvels surged from behind to pass us on the final whistle. The fundamentals were never broken — cumulative EBT of $222M and a profitable book every period — but in the final third we stopped doing the things that had got us to #2.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Final Rank</div>
+        <div class="hero-stat-value">#3 / 4</div>
+        <div class="hero-stat-sub">SPI 1,707</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Peak (P4)</div>
+        <div class="hero-stat-value">#2</div>
+        <div class="hero-stat-sub">1,870 · −42 to leader</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">6-Period EBT</div>
+        <div class="hero-stat-value">$222M</div>
+        <div class="hero-stat-sub">Profitable every period</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Gap to Winner</div>
+        <div class="hero-stat-value">−960</div>
+        <div class="hero-stat-sub">Snipers ran to 2,667</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Ranking -->
+  <section>
+    <div class="section-tag">FINAL SPI RANKING · PERIOD 6</div>
+    <h2>Passed on the Last Whistle</h2>
+    <div class="ranking">
+      <div class="rank-row leader">
+        <div class="rank-num">#1</div>
+        <div class="rank-name">Snipers 🏆</div>
+        <div class="rank-bar-container"><div class="rank-bar leader" style="width:100%"></div></div>
+        <div class="rank-stat"><strong>2,667</strong></div>
+        <div class="rank-stat"><span class="delta-up">+495</span></div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">#2</div>
+        <div class="rank-name">Marvels</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width:65.2%"></div></div>
+        <div class="rank-stat"><strong>1,740</strong></div>
+        <div class="rank-stat"><span class="delta-up">+229</span></div>
+      </div>
+      <div class="rank-row us">
+        <div class="rank-num">#3</div>
+        <div class="rank-name">Titans (us)</div>
+        <div class="rank-bar-container"><div class="rank-bar us" style="width:64.0%"></div></div>
+        <div class="rank-stat"><strong>1,707</strong></div>
+        <div class="rank-stat"><span class="delta-down">−72</span></div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">#4</div>
+        <div class="rank-name">Rocket</div>
+        <div class="rank-bar-container"><div class="rank-bar" style="width:58.6%"></div></div>
+        <div class="rank-stat"><strong>1,563</strong></div>
+        <div class="rank-stat"><span class="delta-up">+64</span></div>
+      </div>
+    </div>
+    <div class="key-quote">
+      <strong>33 points.</strong> That is the margin by which Marvels overtook us in the final period — razor-thin after a season-long #2. The deeper story is above us: Snipers added another +495 to finish nearly 1,000 points clear. We didn't collapse; we coasted while two rivals accelerated.
+    </div>
+  </section>
+
+  <!-- Six-period trajectory -->
+  <section>
+    <div class="section-tag">THE WHOLE ARC · SPI BY PERIOD</div>
+    <h2>Five Periods at #2, One Period Too Many on Cruise Control</h2>
+    <div class="traj">
+      <div class="traj-col">
+        <div class="traj-period">PERIOD 1</div>
+        <div class="traj-spi">1,165</div>
+        <div class="traj-rank r2">#2</div>
+        <div class="traj-delta">baseline 1,000</div>
+      </div>
+      <div class="traj-col">
+        <div class="traj-period">PERIOD 2</div>
+        <div class="traj-spi">1,424</div>
+        <div class="traj-rank r2">#2</div>
+        <div class="traj-delta">+259</div>
+      </div>
+      <div class="traj-col">
+        <div class="traj-period">PERIOD 3</div>
+        <div class="traj-spi">1,539</div>
+        <div class="traj-rank r2">#2</div>
+        <div class="traj-delta">+115</div>
+      </div>
+      <div class="traj-col peak">
+        <div class="traj-period">PERIOD 4 ★</div>
+        <div class="traj-spi">1,870</div>
+        <div class="traj-rank r2">#2</div>
+        <div class="traj-delta">+331 · peak</div>
+      </div>
+      <div class="traj-col">
+        <div class="traj-period">PERIOD 5</div>
+        <div class="traj-spi">1,779</div>
+        <div class="traj-rank r2">#2</div>
+        <div class="traj-delta delta-down">−91</div>
+      </div>
+      <div class="traj-col final">
+        <div class="traj-period">PERIOD 6</div>
+        <div class="traj-spi">1,707</div>
+        <div class="traj-rank r3">#3</div>
+        <div class="traj-delta delta-down">−72 · passed</div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#475569;">The inflection is unmistakable: a four-period climb (+870 over P1–P4) followed by a two-period slide (−163 over P5–P6). The slide coincides exactly with the period we zeroed R&amp;D, over-extended into a second Vodite brand, and let costs run ahead of contribution.</p>
+  </section>
+
+  <!-- The SPI vs Profit paradox -->
+  <section>
+    <div class="section-tag">THE CENTRAL PARADOX</div>
+    <h2>Revenue and EBT Rose — Yet Our Standing Fell</h2>
+    <div class="card">
+      <table>
+        <thead><tr><th>Metric</th><th class="num">P4</th><th class="num">P5</th><th class="num">P6</th><th class="num">P4 → P6</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td class="num">$117.9M</td><td class="num">$118.8M</td><td class="num">$132.9M</td><td class="num"><span class="delta-up">+12.7%</span></td></tr>
+          <tr><td>EBT</td><td class="num">$46.8M</td><td class="num">$43.1M</td><td class="num">$47.2M</td><td class="num"><span class="delta-up">+0.9%</span></td></tr>
+          <tr><td>Contribution after marketing</td><td class="num">$52.1M</td><td class="num">$46.1M</td><td class="num">$49.4M</td><td class="num"><span class="delta-down">−5.3%</span></td></tr>
+          <tr class="threat"><td>Share Price Index</td><td class="num">1,870</td><td class="num">1,779</td><td class="num">1,707</td><td class="num"><span class="delta-down">−8.7%</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px; font-size:14px; color:#475569;">Our absolute results were fine — revenue grew double-digits and EBT ended marginally up. But contribution <em>flat-lined</em>, and SPI is a <strong>relative, forward-looking</strong> measure: a stock price reflects momentum versus rivals, not just this period's profit. While we held steady, Snipers' net contribution went $77M → $109M and Marvels' $42M → $57M. Standing still in a race where everyone else sprints is, mechanically, falling behind.</p>
+    </div>
+    <div class="insight blue">
+      <div class="insight-title">Why this is the most important lesson of the game</div>
+      <p>A team optimising for this-period profit would have called Periods 5–6 a success (EBT recovered, every brand profitable in P6). The simulation didn't, because SPI rewards <strong>compounding trajectory</strong>. The strategic takeaway — and the spine of our final report — is that defending a position requires the same investment intensity that built it. We switched from building to harvesting one round too early.</p>
+    </div>
+  </section>
+
+  <!-- Period 6 brand state -->
+  <section>
+    <div class="section-tag">PERIOD 6 · FINAL BRAND STATE</div>
+    <h2>Inventory Cleared, Prices Cut, Margins Surrendered</h2>
+    <div class="brand-grid">
+      <div class="brand-card">
+        <h3>TOPS · Sonites Premium</h3>
+        <div class="brand-stats-grid">
+          <div class="brand-stat"><div class="brand-stat-label">CAM</div><div class="brand-stat-value">$25.2M</div><div class="brand-stat-sub">Still the profit engine</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Price → </div><div class="brand-stat-value">$480</div><div class="brand-stat-sub">cut from $499</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Base Cost</div><div class="brand-stat-value">$193</div><div class="brand-stat-sub">vs SOLO $174 — never closed</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Value Share</div><div class="brand-stat-value">12%</div><div class="brand-stat-sub">flat</div></div>
+        </div>
+      </div>
+      <div class="brand-card">
+        <h3>TECHNO · Vodite Follower</h3>
+        <div class="brand-stats-grid">
+          <div class="brand-stat"><div class="brand-stat-label">CAM</div><div class="brand-stat-value">$7.1M</div><div class="brand-stat-sub">recovered (cleared glut)</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Sold / Made</div><div class="brand-stat-value">66K / 19K</div><div class="brand-stat-sub">sold P5 inventory down</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Price →</div><div class="brand-stat-value">$710</div><div class="brand-stat-sub">held</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Vodite Share</div><div class="brand-stat-value">16%</div><div class="brand-stat-sub">our best Vodite brand now</div></div>
+        </div>
+      </div>
+      <div class="brand-card">
+        <h3>TONE · Sonites Saver</h3>
+        <div class="brand-stats-grid">
+          <div class="brand-stat"><div class="brand-stat-label">CAM</div><div class="brand-stat-value">$8.9M</div><div class="brand-stat-sub">down from $11.9M</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Price →</div><div class="brand-stat-value">$200</div><div class="brand-stat-sub">cut from $220</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Unit Cost</div><div class="brand-stat-value">$48</div><div class="brand-stat-sub">cheapest in portfolio</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Value Share</div><div class="brand-stat-value">5%</div><div class="brand-stat-sub">price war pressure</div></div>
+        </div>
+      </div>
+      <div class="brand-card">
+        <h3>TOHO · Sonites Shopper</h3>
+        <div class="brand-stats-grid">
+          <div class="brand-stat"><div class="brand-stat-label">CAM</div><div class="brand-stat-value">$4.9M</div><div class="brand-stat-sub">down from $5.96M</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Price →</div><div class="brand-stat-value">$210</div><div class="brand-stat-sub">cut from $235</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Volume</div><div class="brand-stat-value">174K</div><div class="brand-stat-sub">sold out again</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Value Share</div><div class="brand-stat-value">6%</div><div class="brand-stat-sub">flat</div></div>
+        </div>
+      </div>
+      <div class="brand-card">
+        <h3>TERRA · Vodite Innovator</h3>
+        <div class="brand-stats-grid">
+          <div class="brand-stat"><div class="brand-stat-label">CAM</div><div class="brand-stat-value">$3.3M</div><div class="brand-stat-sub">still subdued</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Sold / Made</div><div class="brand-stat-value">37K / 16K</div><div class="brand-stat-sub">27K still unsold at close</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Price →</div><div class="brand-stat-value">$710</div><div class="brand-stat-sub">cut from $740</div></div>
+          <div class="brand-stat"><div class="brand-stat-label">Vodite Share</div><div class="brand-stat-value">9%</div><div class="brand-stat-sub">overtaken by our own TECHNO</div></div>
+        </div>
+      </div>
+      <div class="brand-card" style="border-color:#cbd5e1; background:#f8fafc;">
+        <h3 style="color:#475569;">Portfolio takeaway</h3>
+        <p style="font-size:14px; color:#475569; margin-top:6px;">Five brands, none above 16% in its own market. We spread one budget across five sub-scale offerings. Snipers ran <strong>three</strong> brands — two focused Sonites plus the dominant Vodite (SESENEW, 54%) — and earned <strong>2.3× our net contribution</strong>. Concentration beat diversification.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post-mortem -->
+  <section>
+    <div class="section-tag">POST-MORTEM</div>
+    <h2>What Won, What Lost</h2>
+    <div class="pm-grid">
+      <div class="pm-card win">
+        <h3>✓ What we got right (P1–P4)</h3>
+        <ul>
+          <li><strong>Vodite entry timing.</strong> Followed Snipers by one period with TERRA; captured 47.6% at launch. A textbook scenario-planning bet.</li>
+          <li><strong>TOHO turnaround.</strong> A Question Mark driven to a profitable Star via production scale + experience curve (−$1.95M → +$2.57M).</li>
+          <li><strong>POTONECRP3 cost-reduction.</strong> $100K of R&amp;D cut TONE's unit cost 27% and doubled its CAM — proof we understood the highest-ROI lever.</li>
+          <li><strong>Segmentation discipline.</strong> Non-overlapping Sonite targets (Savers / Shoppers / Pros) avoided cannibalisation through P4.</li>
+        </ul>
+      </div>
+      <div class="pm-card loss">
+        <h3>✗ What cost us the podium (P5–P6)</h3>
+        <ul>
+          <li><strong>R&amp;D went to $0</strong> for two periods. The planned POTOPS cost-reduction was never funded; we ended with a $19/unit cost gap vs Snipers' SOLO.</li>
+          <li><strong>Over-extension into a 5th brand.</strong> A second Vodite brand split our own franchise; combined Vodite share fell 48% → 25%.</li>
+          <li><strong>Over-production.</strong> ~95K unsold Vodite units in P5 → $1.9M inventory cost, forcing P6 price cuts.</li>
+          <li><strong>Harvested too early.</strong> Cut prices and coasted on the brand equity we'd built, instead of re-investing to defend #2.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitive close -->
+  <section>
+    <div class="section-tag">HOW THE WINNER WON</div>
+    <h2>Snipers: Fewer Brands, More Focus, Relentless Compounding</h2>
+    <div class="card">
+      <h3>Final-Period (P6) Net Contribution by Firm</h3>
+      <table>
+        <thead><tr><th>Firm</th><th class="num">Revenue</th><th class="num">Net Contribution</th><th class="num"># Brands</th><th class="num">Final SPI</th></tr></thead>
+        <tbody>
+          <tr class="threat"><td>Snipers 🏆</td><td class="num">$209.4M</td><td class="num"><strong>$108.9M</strong></td><td class="num">3</td><td class="num"><strong>2,667</strong></td></tr>
+          <tr><td>Marvels</td><td class="num">$125.6M</td><td class="num">$57.3M</td><td class="num">3</td><td class="num">1,740</td></tr>
+          <tr class="us"><td>Titans (us)</td><td class="num">$132.9M</td><td class="num">$47.2M</td><td class="num">5</td><td class="num">1,707</td></tr>
+          <tr><td>Rocket</td><td class="num">$109.8M</td><td class="num">$51.2M</td><td class="num">3</td><td class="num">1,563</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px; font-size:14px; color:#475569;">We posted the <strong>second-highest revenue</strong> but the <strong>lowest net contribution</strong> of the four firms — the clearest possible signal that our problem was margin and focus, not demand. Snipers turned a single dominant Vodite (SESENEW) and two disciplined Sonites into more than double our contribution, while carrying fewer brands and zero inventory glut.</p>
+    </div>
+  </section>
+
+  <!-- For the report -->
+  <section>
+    <div class="section-tag">FOR THE FINAL REPORT</div>
+    <h2>The Frameworks This Season Hands Us</h2>
+    <div class="insight">
+      <div class="insight-title"><span class="framework-tag">Experience Curve</span><span class="framework-tag">Porter</span>The R&amp;D we diagnosed but didn't fund</div>
+      <p>We <em>wrote</em> the highest-ROI move in the game (POTOPS cost-reduction, ~2-month payback) and then didn't execute it for two periods, ending with a structural $19/unit cost disadvantage. Formulation ≠ execution — and the simulation graded execution.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-title"><span class="framework-tag">BCG</span><span class="framework-tag">STP</span>Concentration vs over-extension</div>
+      <p>Five sub-scale brands lost to three focused ones. BCG prescribes concentrating investment behind Stars; we diluted it. The second Vodite brand cannibalised the first rather than expanding the pie.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-title"><span class="framework-tag">Diffusion</span><span class="framework-tag">First-Mover</span>The lock-out that wasn't</div>
+      <p>Our P4 "duopoly lock-out" read inverted: as diffusion moved from Innovators to the larger Follower wave, late entrant Marvels (MEME, $660) went 2% → 20%, overtaking our two premium $710 brands. First-mover advantage protects only the segment you entered on.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-title"><span class="framework-tag">Scenario Planning</span>The scenario we stopped generating</div>
+      <p>We scenario-planned the entry question well, then reverted to a single-point forecast ("we keep 48% Vodite share") and committed production to it. When the competitive-response scenario hit, we had no contingency. Schoemaker (1995), exactly: keep generating scenarios even after the first uncertainty resolves in your favour.</p>
+    </div>
+  </section>
+
+  <footer>
+    Final Results &amp; Post-Mortem · Team Titans · Imperial College Business School · ESB Corporate Strategy &amp; Economics Simulation 2026 · data from official TeamExport Periods 0–6
+  </footer>
+
+</div>
+</body>
+</html>

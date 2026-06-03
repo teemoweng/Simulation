@@ -7,17 +7,24 @@
 
 ---
 
-## 🎯 Current Standing (end of Period 4)
+## 🏁 FINAL Standing (end of Period 6 — simulation complete)
 
-| Rank | Firm | SPI | Δ vs Round 4 |
+| Rank | Firm | Final SPI | Δ vs P5 |
 |---|---|---|---|
-| 1 | Snipers | 1,912 | +196 |
-| **2** | **Titans (us)** | **1,870** | **+331** ⭐ biggest gain |
-| 3 | Rocket | 1,522 | +111 |
-| 4 | Marvels | 1,357 | -81 |
+| 1 | Snipers 🏆 | 2,667 | +495 |
+| 2 | Marvels | 1,740 | +229 |
+| **3** | **Titans (us)** | **1,707** | **−72** |
+| 4 | Rocket | 1,563 | +64 |
 
-**Gap to leader:** 42 SPI points · **Rounds remaining:** Round 5 (this round) + Round 6 (final).
-**Next-period budget:** $18,700K (Round 5 authorized).
+**We finished 3rd of 4.** Held #2 for five straight periods (P1–P5), peaked at P4 (1,870, −42 to leader), then declined two rounds running and were overtaken by Marvels by 33 points in the final period. Snipers ran away to a ~960-point lead.
+
+**Why we plateaued (full diagnosis in `report/Report_Source_Material.md`):**
+1. **R&D zeroed in P5 & P6** — the planned $2.8M restart (POTOPS cost-reduction + upgrades) was never funded; ended with a $19/unit cost gap vs Snipers' SOLO.
+2. **Over-extension into a 5th brand** — a second Vodite (TECHNO) cannibalised TERRA; combined Vodite share fell 48% → 25%.
+3. **Vodite over-production** → $1.9M inventory cost in P5, forcing across-the-board price cuts in P6.
+4. **The SPI-vs-profit paradox** — revenue/EBT rose but contribution flat-lined while rivals compounded, so the *relative* SPI kept falling.
+
+**Six-period cumulative EBT:** $222M (profitable every period). The fundamentals were sound; the *trajectory* in the final third is the story.
 
 ---
 
@@ -136,4 +143,4 @@ BCG Matrix · STP · Diffusion of Innovation · Experience Curve · Scenario Pla
 
 ---
 
-*Last updated: 2026-05-20 (after Round 5 prep, before Round 5 submission)*
+*Last updated: 2026-06-03 — all 6 periods complete (final rank #3). P5/P6 actuals filled into `report/Report_Source_Material.md`; Round 5 & 6 results-analysis HTMLs published; index hub updated to final state. Remaining work: the ≤2,000-word final report (due 8 Jun 2026).*
