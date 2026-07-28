@@ -2,7 +2,7 @@
 type: Operating Rules
 title: Markstrat Simulation（Corporate Strategy & Economics）— Claude 操作规则
 description: Markstrat 营销仿真小组作业的决策流程、数据组织与最终报告规则
-tags: [workspace-meta, reference, how-to, Markstrat, 营销仿真, 小组作业, TITANS, Sonite, Vodite, 帝国理工]
+tags: [coursework, workspace-meta, reference, how-to, Markstrat, 营销仿真, 小组作业, TITANS, Sonite, Vodite, 帝国理工]
 ---
 
 # CLAUDE.md
