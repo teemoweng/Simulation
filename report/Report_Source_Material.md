@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Final Report Source Material · Team TITANS"
+description: "按 7 个战略框架预先归档的逐轮证据（预测 vs 实际），供最终报告直接取用。"
+tags: [coursework, deliverable, Markstrat, 期末报告, 素材库, 预测与实际的差距, 战略框架, 2000字报告, 写报告找证据]
+status: stable
+---
+
 # Final Report Source Material · Team TITANS
 
 > **Purpose:** Pre-organized by framework. Each framework has per-round evidence cells (predicted vs actual). At report-writing time (June 1-8), pull bullets directly from here instead of digging through 6 HTMLs.

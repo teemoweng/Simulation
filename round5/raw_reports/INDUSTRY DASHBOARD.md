@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "INDUSTRY DASHBOARD"
 source: "https://markstrat7.stratxsimulations.com/Analyze/IndustryDashboard"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的行业仪表盘原始导出（四家公司横向对比）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "行业仪表盘"
+  - "竞品对比"
+  - "四家公司"
+  - "行业份额"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Industry Dashboard – Firm Titans – Period 4
 

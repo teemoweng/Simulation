@@ -1,3 +1,11 @@
+---
+type: Plan
+title: "Round 4 决策分析与建议 · Titans"
+description: "Round 4 五模块完整决策建议与数字推演：TERRA 首发、TOHO 扩产、TONE 降本，应对 ROCK $200 价格战。"
+tags: [coursework, decision, Markstrat, 第四轮, 决策推演, 新品首发, 降价应对, 价格战, 产能扩张, 决策前分析]
+status: stable
+---
+
 # Round 4 决策分析与建议 · Titans
 
 > **预算：** ~$13,100K | **通胀：** 4% | **核心任务：** TERRA 首发 + TOHO 扩产 + TONE 切换降本 + 应对 ROCK $200 威胁

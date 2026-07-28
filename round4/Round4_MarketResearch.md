@@ -1,3 +1,11 @@
+---
+type: Reference
+title: "Round 4 Market Research · Titans"
+description: "Period 4 市场调研数据整理（品牌认知度、语义量表、广告实验、市场预测、研发）。"
+tags: [coursework, source, Markstrat, 第四轮, 市场调研整合, 品牌认知度, 语义量表, 广告实验, 调研数据怎么读]
+status: stable
+---
+
 # Round 4 Market Research · Titans
 
 > **数据源：** `round5/raw_reports/CONSUMER SURVEY & PANEL.md` · `SEMANTIC SCALES.md` · `EXPERIMENTS - Markstrat.md` · `MARKET FORECAST.md` · `R&D REPORT.md`

@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "CONSUMER SURVEY & PANEL"
 source: "https://markstrat7.stratxsimulations.com/Analyze/ConsumerSurveyPanel"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的消费者调研与零售面板原始导出。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "消费者调研"
+  - "品牌认知度"
+  - "购买意向"
+  - "渠道铺货"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Consumer Survey – Sonites Market – Period 4
 

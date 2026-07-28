@@ -1,12 +1,22 @@
 ---
+type: Source Material
 title: "MARKET FORECAST"
 source: "https://markstrat7.stratxsimulations.com/Analyze/Forecast"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的市场预测原始导出（需求与增长预测）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "市场预测"
+  - "需求预测"
+  - "增长率"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Market Forecast – Sonites Market – Period 4
 

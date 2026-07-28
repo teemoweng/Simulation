@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 4 Results · Titans"
+description: "Period 4 期末结果汇总（SPI 冲到 1,870，+331 为全程最大单轮涨幅）。"
+tags: [coursework, log, Markstrat, 第四轮结果, Period 4, SPI, 最好的一轮, 复盘洞察]
+status: stable
+---
+
 # Round 4 Results · Titans
 
 > **数据源：** `round5/` 14 个原始 dump 文件（Period 4 期末快照）

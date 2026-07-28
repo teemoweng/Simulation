@@ -1,3 +1,11 @@
+---
+type: Reference
+title: "Round 3 Market Research — Consolidated Reference (Period 3)"
+description: "Period 3 全部 8 项 Market Research 数据的整合参考；数值不可跨轮复用，但表格与分析框架可作模板。"
+tags: [coursework, source, Markstrat, 第三轮, 市场调研整合, 语义量表, 消费者调研, 感知图, 调研数据怎么读, 分析模板]
+status: stable
+---
+
 # Round 3 Market Research — Consolidated Reference (Period 3)
 
 > **用途说明**：本文件整合了 Period 3 全部 8 项 Market Research 研究的数据。每一轮 Market Research 数据会随市场变化更新，不可跨轮复用具体数值，但表格结构和分析框架可作模板。

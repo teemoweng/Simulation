@@ -1,3 +1,11 @@
+---
+type: Reference
+title: "Markstrat — Key Parameter Reference（考试与报告速查）"
+description: "Markstrat 世界的关键参数速查（成本下限、通胀、渠道、研发规则），并标注官方手册与 Challenge PPT 的冲突处。"
+tags: [coursework, concept, Markstrat, 参数速查, 单位成本下限, 通胀, 研发规则, Sonite, Vodite, 数字对不上, 官方手册为准]
+status: stable
+---
+
 # Markstrat — Key Parameter Reference (考试 & 报告速查)
 
 > 来源：交叉对比 `Participant-Handbook.pdf`（StratX 官方手册，权威）与 `Markstrat7_Challenge1_MS7-SM-B2C-DG.pdf`（介绍 PPT）。两者冲突时以 Handbook 为准。

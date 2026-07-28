@@ -1,3 +1,11 @@
+---
+type: Reference
+title: "Markstrat Simulation · Team TITANS"
+description: "TITANS 队 6 轮模拟的状态总览：最终排名、SPI 走势、各轮文件入口。"
+tags: [coursework, log, Markstrat, 商业模拟, SPI, 股价指数, 最终排名, 六轮结果, 项目现状, 打到第几名]
+status: stable
+---
+
 # Markstrat Simulation · Team TITANS
 
 > Imperial College Business School · ESB Programme · Corporate Strategy & Economics Simulation 2026

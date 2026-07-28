@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 2 结果（Period 2）· Firm Titans"
+description: "Period 2 全量数据记录 + 对 Round 3 及之后决策有用的洞察。"
+tags: [coursework, log, Markstrat, 第二轮结果, Period 2, SPI, 损益表, 市场份额, 复盘洞察]
+status: stable
+---
+
 # Round 2 结果（Period 2）· Firm Titans
 
 > **公司名：** TITANS · **行业：** Sonites · **回合：** Period 2 结果（决策于 Round 2 提交）

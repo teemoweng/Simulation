@@ -1,12 +1,22 @@
 ---
+type: Source Material
 title: "R&D REPORT"
 source: "https://markstrat7.stratxsimulations.com/Analyze/RnDReport"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的研发报告原始导出（在研项目与单位成本）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "研发报告"
+  - "研发项目"
+  - "单位成本"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## R&D Report – Firm Titans – Sonites Market – Period 4
 

@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 1 最终决策记录 · Firm Titans"
+description: "Round 1 实际提交的全部决策与 $6,991K 预算分配。"
+tags: [coursework, decision, Markstrat, 第一轮, 提交决策, 预算分配, 广告投入, 销售团队, 决策留档]
+status: stable
+---
+
 # Round 1 最终决策记录 · Firm Titans
 
 > **公司名：** TITANS

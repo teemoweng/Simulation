@@ -1,3 +1,11 @@
+---
+type: Framework
+title: "Markstrat 决策框架（可复用模板）"
+description: "每轮决策前的结构化清单，覆盖 R&D / 品牌组合 / 营销组合 / 商业团队 / 市场调研五个模块。"
+tags: [coursework, framework, Markstrat, 决策框架, 每轮该做什么, 研发决策, 营销组合, 商业团队, 市场调研预算, 别漏项, 可复用模板]
+status: stable
+---
+
 # Markstrat 决策框架（可复用模板）
 
 > **用途：** 每轮决策前，用本文件作为结构化框架，确保不遗漏任何决策模块。

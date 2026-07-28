@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "INDUSTRY INFORMATION"
 source: "https://markstrat7.stratxsimulations.com/Analyze/IndustryInformation"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的行业信息原始导出（通胀、市场规模等宏观参数）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "行业信息"
+  - "通胀率"
+  - "市场规模"
+  - "宏观参数"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Industry Information – Period 4
 

@@ -1,12 +1,22 @@
 ---
+type: Source Material
 title: "INDUSTRY BENCHMARKING"
 source: "https://markstrat7.stratxsimulations.com/Analyze/IndustryBenchmarking"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的行业标杆对比原始导出（对手财务与效率指标）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "行业标杆"
+  - "对手财务对比"
+  - "效率指标"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Industry Benchmarking – Period 4
 

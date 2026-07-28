@@ -1,3 +1,11 @@
+---
+type: Plan
+title: "Round 1 行动计划 · Firm T"
+description: "Round 1（Period 0 → 1）决策前的局势判断与行动计划。"
+tags: [coursework, decision, Markstrat, 第一轮, 行动计划, 开局策略, TONE, TOPS, 决策前推演]
+status: stable
+---
+
 # Round 1 行动计划 · Firm T
 
 > **决策回合：** Round 1 (Period 0 → Period 1)

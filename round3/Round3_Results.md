@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 3 结果（Period 3）· Firm Titans"
+description: "Period 3 全量数据记录 + 对 Round 4 及之后决策有用的洞察。"
+tags: [coursework, log, Markstrat, 第三轮结果, Period 3, SPI, 损益表, Vodite, 复盘洞察]
+status: stable
+---
+
 # Round 3 结果（Period 3）· Firm Titans
 
 > **公司名：** TITANS · **行业：** Sonites + Vodites · **回合：** Period 3 结果

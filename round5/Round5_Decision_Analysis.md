@@ -1,3 +1,11 @@
+---
+type: Plan
+title: "Round 5 决策分析 · Titans"
+description: "Round 5 完整内部推理（v2，按真实决策面板对齐）：$18,700K 预算下追赶 Snipers 42 点 SPI 差距。"
+tags: [coursework, decision, Markstrat, 第五轮, 决策推演, 追赶对手, 研发排期, TECHNO, 预算分配, 决策前分析]
+status: stable
+---
+
 # Round 5 决策分析 · Titans
 
 > **本文档：** Round 5 内部完整推理，对齐已部署的 `Round5_Decision_Guide_EN.html`。

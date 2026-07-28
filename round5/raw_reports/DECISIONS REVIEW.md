@@ -1,12 +1,24 @@
 ---
+type: Source Material
 title: "DECISIONS REVIEW"
 source: "https://markstrat7.stratxsimulations.com/Analyze/DecisionReview"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的决策回顾（Decision Review）原始导出，记录实际提交的全部决策。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "决策回顾"
+  - "实际提交决策"
+  - "预算分配"
+  - "广告投放"
+  - "销售团队配置"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Decision Review – Firm Titans – Sonites Market – Period 4
 

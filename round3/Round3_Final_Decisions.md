@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 3 最终决策记录 · Firm Titans"
+description: "Round 3 提交决策：Sonites + Vodites 双线共 ~$18,031K，超预算约 $5,600K 的经过与备注。"
+tags: [coursework, decision, Markstrat, 第三轮, 提交决策, 超预算, Vodite 进入, 双市场, 决策留档]
+status: stable
+---
+
 # Round 3 最终决策记录 · Firm Titans
 
 > **公司名：** TITANS · **回合：** Round 3（生效于 Period 3）

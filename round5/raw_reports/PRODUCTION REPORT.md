@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "PRODUCTION REPORT"
 source: "https://markstrat7.stratxsimulations.com/Analyze/ProductionReport"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的生产报告原始导出（产能、库存、缺货）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "生产报告"
+  - "产能"
+  - "库存"
+  - "缺货"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Production Report – Firm Titans – Period 4
 

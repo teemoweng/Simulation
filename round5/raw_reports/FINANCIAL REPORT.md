@@ -1,12 +1,24 @@
 ---
+type: Source Material
 title: "FINANCIAL REPORT"
 source: "https://markstrat7.stratxsimulations.com/Analyze/FinancialReport"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的财务报表原始导出。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "财务报表"
+  - "损益表"
+  - "毛利"
+  - "净贡献"
+  - "营销预算"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Financial Report – Firm Titans – Period 4
 

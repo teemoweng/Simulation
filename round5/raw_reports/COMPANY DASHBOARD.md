@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "COMPANY DASHBOARD"
 source: "https://markstrat7.stratxsimulations.com/Analyze/CompanyDashboard"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的公司仪表盘（Firm Titans）原始导出。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "公司仪表盘"
+  - "品牌业绩"
+  - "市场份额"
+  - "营销模拟原始数据"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Company Dashboard – Firm Titans – Period 4
 

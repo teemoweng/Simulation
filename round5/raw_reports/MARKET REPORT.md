@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "MARKET REPORT"
 source: "https://markstrat7.stratxsimulations.com/Analyze/MarketReport"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的市场报告原始导出（销量、零售额、细分份额）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "市场报告"
+  - "销量"
+  - "零售额"
+  - "细分市场份额"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Market Report – Sonites Market – Period 4
 

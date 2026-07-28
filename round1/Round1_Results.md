@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 1 结果（Period 1）· Firm Titans"
+description: "Period 1 全量数据记录 + 对后续各轮决策有用的洞察提取。"
+tags: [coursework, log, Markstrat, 第一轮结果, Period 1, SPI, 损益表, 市场份额, 复盘洞察]
+status: stable
+---
+
 # Round 1 结果（Period 1）· Firm Titans
 
 > **公司名：** TITANS · **行业：** Sonites · **回合：** Period 1 结果（决策于 2026-05-01 提交）

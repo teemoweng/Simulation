@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 2 最终决策记录 · Firm Titans"
+description: "Round 2 实际提交的决策与 $8,182K 分配（对预算余 ~$418K headroom）。"
+tags: [coursework, decision, Markstrat, 第二轮, 提交决策, 预算分配, Sonites, 决策留档]
+status: stable
+---
+
 # Round 2 最终决策记录 · Firm Titans
 
 > **公司名：** TITANS · **回合：** Round 2（生效于 Period 2）

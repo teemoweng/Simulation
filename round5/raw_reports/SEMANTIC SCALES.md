@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "SEMANTIC SCALES"
 source: "https://markstrat7.stratxsimulations.com/Analyze/SemanticScales"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的语义量表原始导出（品牌属性感知评分与理想点）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "语义量表"
+  - "品牌感知"
+  - "属性评分"
+  - "理想点"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Semantic Scales – Sonites Market – Period 4
 

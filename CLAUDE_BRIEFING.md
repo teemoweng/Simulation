@@ -1,3 +1,11 @@
+---
+type: Operating Rules
+title: "Markstrat Coursework — Briefing for Claude"
+description: "给后续 Claude 会话的 Markstrat 作业完整背景：课程、评分构成、模拟机制、团队分工。"
+tags: [coursework, how-to, Markstrat, 商业模拟, 帝国理工, 考核构成, 会话背景交接, 模拟机制, 怎么打这个模拟, SPI]
+status: stable
+---
+
 # Markstrat Coursework — Briefing for Claude
 
 > **Purpose of this file:** Persistent context for any future Claude session helping Teemo with the *Corporate Strategy and Economics Simulation* coursework at Imperial College Business School. Read this first before answering questions about the project.

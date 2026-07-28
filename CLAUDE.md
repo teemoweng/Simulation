@@ -1,3 +1,10 @@
+---
+type: Operating Rules
+title: Markstrat Simulation（Corporate Strategy & Economics）— Claude 操作规则
+description: Markstrat 营销仿真小组作业的决策流程、数据组织与最终报告规则
+tags: [workspace-meta, reference, how-to, Markstrat, 营销仿真, 小组作业, TITANS, Sonite, Vodite, 帝国理工]
+---
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -146,5 +153,6 @@ Validated across multiple rounds — treat as standing rules unless new data con
 
 ---
 
-*Schema 版本：v1.0 — 2026-05-20*
+*Schema 版本：v1.1 — 2026-07-28*
+*v1.1 变更：新增 OKF frontmatter（type: Operating Rules），配合全库 OKF（Open Knowledge Format v0.2）改造；约定见根 `CLAUDE.md`「OKF 知识格式约定」+ `.claude/okf-convention.md`。正文规则一字未改。*
 *v1.0 初版：项目级 Claude 操作规则*

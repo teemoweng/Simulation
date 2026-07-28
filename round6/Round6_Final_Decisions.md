@@ -1,3 +1,11 @@
+---
+type: Coursework
+title: "Round 6 实际提交决策（Period 6 · Final）"
+description: "末轮决策（由官方 TeamExport 反推）：维持 + 清库存 + 全线降价，EBT 回升到 $47.2M 但 SPI 跌到第 3。"
+tags: [coursework, decision, Markstrat, 第六轮, 末轮, 清库存, 全线降价, 维持策略, 为什么最后掉到第三]
+status: stable
+---
+
 # Round 6 实际提交决策（Period 6 · Final）
 
 > **来源：** 官方 `TeamExport ... Period 6.xlsx`（Firm 表 + 分品牌 Product Contribution）反推。

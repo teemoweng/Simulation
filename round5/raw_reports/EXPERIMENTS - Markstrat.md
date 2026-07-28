@@ -1,12 +1,22 @@
 ---
+type: Source Material
 title: "EXPERIMENTS - Markstrat"
 source: "https://markstrat7.stratxsimulations.com/Analyze/Experiment"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的广告实验（Advertising Experiment）原始导出。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "广告实验"
+  - "广告弹性"
+  - "增量投放效果"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Advertising Experiment – Sonites Market – Period 4
 

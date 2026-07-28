@@ -1,12 +1,23 @@
 ---
+type: Source Material
 title: "COMPETITIVE INTELLIGENCE"
 source: "https://markstrat7.stratxsimulations.com/Analyze/CompetitiveIntelligence"
 author:
 published:
 created: 2026-05-18
-description:
+description: "Markstrat Period 4 的竞争情报原始导出（对手预算与投放明细）。"
 tags:
   - "clippings"
+  - "coursework"
+  - "source"
+  - "Markstrat"
+  - "竞争情报"
+  - "对手预算"
+  - "竞品广告"
+  - "竞品定价"
+  - "系统导出"
+  - "Period 4"
+status: stable
 ---
 ## Competitive Intelligence – Sonites Market – Period 4
 
